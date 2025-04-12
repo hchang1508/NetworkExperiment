@@ -1,0 +1,170 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww28040\viewh15920\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 02012022:\
+\
+1. Acquire data from dataverse;\
+2. Use Stata to output CSV files;  Network from \'930422allinforawnet.dta\'94, covar data from \'93\'940422analysis.dta\'94\
+3. For some households, the network information are not included. Those households are dropped. \
+For really empirical analysis this is a problem. But not if we are doing simulations.\
+4. Some households have survey information missing, those are dropped (not necessary for our simulation)\
+5. There exists self-loop and parallel edges, suspecting input problems. Those pairs are removed. \
+\
+Script: \'93data_preprocessing.R\'94\
+\
+Output: covar.csv; network.csv\
+\
+02022022:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1 \cf0 1. Plotted graph structures; \'a1\'b0\'a1\'b1kamadakawai\'a1\'b1 algorithm works better than fruchtermanreingold\
+2. 36 compoents \
+3. Directed has  max degree 5; Undirected has max degree 40. 
+\f0 \
+For the simulation probably directed one is better. People ask advice unilaterally\
+4. Plotted graph per components; two components have size 2\
+5. Coded a preliminary version of exposure mapping\
+\
+Script: \'93graph_visualization.R\'94, \'93component_analysis.R\'94\
+\
+Note the dependence between scripts\
+\
+Output: \'93directed_graph_all_villages.png\'94, \'93undirected_graph_all_villages.png\'94
+\f1 , \'a1\'b0directed_graphs_per_component.pdf\'a1\'b1\
+\
+02042022:\
+\
+1. Tried k-core algorithms on Component 14, nothing particular. \
+2. For the network data, modularity using village returns 0.9649432. A very high number, suggesting most edges are within village.\
+3. How should I think of dropped edges. Dropped around 6248 relations, around 30% of the edge data\
+\
+02052022:\
+1. Try different centrality measure; eigen centrality very special\
+2. Importing outcome and covariate data. Used their do files to understand data strcucture\
+3. Implemented a experimental version of exposure mapping\
+4. Implemented Welford Online algorithm for computing first order and second moments\
+\
+Script: 
+\f0 data_preprocessing.R, \'91\'92test_cases_exposure_mapping.R
+\f1 \'a1\'b1, \'a1\'b0welford_online.R\'a1\'b1\
+ Output: \'a1\'aecompare_cent.pdf\'a1\'af,\
+\
+\
+02082022\
+1. Need a workflow for simulation. This involves canned functions. I need:\
+\
+a. Functions to calculate exposure mapping, this is user defined \'a3\'a8done)\
+b. Functions to simulate treatment assignment; do it by components (need to drop some one) (done)\
+c. Functions to compute various estimates and save \
+\
+d. Function to compute second order matrices\
+   -> Check first order assignment probabilities? Are there small ones?\
+   -> Check second order assignment probability. What\'a1\'afs a good measure? \
+\
+2. Finished coding first order and second order matrix calculations. Problem involves for calculating FOSO for large matrices i.e. 10000^2. Also coded the analytical form. \
+\
+3. Without pruning the graph, largest SO matrix is of order 50000 * 50000. But it is sparse. What should we do? \
+a. Different way of computation \'a1\'aa> egocentric and use one-hop structure. Potentially a good way. \
+b. Conclusion, make sense to consider arm-pari SOs. This reduce storage burden\
+c. Boya suggested save everything into csv and import one by one\
+4. Find a weirdly large degree nodes \'a1\'aa> realized it\'a1\'afs missing value\
+\
+Feb 09:\
+\
+Estimation Simulates:\
+1. Simulations with HT and HA\
+\
+	a. Need to be careful with units for whom some exposure mappings are not defined;\
+	b. For HA, there can be 0 denominator problems? Rerandomization?\
+\
+2. Simulation for OLS and WLS\
+	\
+	a. Need to deal with missing values \'a1\'aa> used Green\'a1\'afs lab\'a1\'afs recommendation\
+	b. Make sure pretreatment covariates are 0 centered\
+	c. Tried variable effect Y_add = degree, OLS and WLS does not differ much\
+\
+3. Simulation for Logit\
+\
+Feb 10:\
+\
+1. Var estimation a little off, suspected reason:\
+\
+a. Wrong implementation -> check estimated OLS coefficient and if they agree with the population version\
+   a1. Checked OLS and WLS with arm 1 and 2; looks alright. Could arm 1 and arm2 be special? As the ass-prob is uniform\
+\
+b. Numerical instability: small sample size\
+c. Joel\'a1\'afs second paper\
+\
+One reason: Glm-predict requires very specific inputs, otherwise spills out garbage\
+\
+OLS is off but feel like acceptable. Logit model still a little off. Sample size problem (no, see Feb 11)? \
+\
+\
+2. Smaller categories?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+Feb 11:\
+\
+1. Wrong Var problem, two reasons:\
+\
+a. The Glm-predict requires very specific inputs, otherwise spills out garbage\
+b. Forgot to code contrast vector for the logic case\
+\
+2. Starting AS bound \
+\
+2. Now Let\'a1\'afs scale it (weight until all is good)
+\f0 \
+\
+\
+Feb 13:\
+Impleted OLS var\
+Can we speed up computation by interpolation or better programming\
+Need to double check \
+\
+Feb14\
+\
+1. Compared Variance bound for Arm 1-2 (Bernoulli) the variance bound matches under the sharp null assumption.\
+2.  Compared Variance bound for Arm 4-5 (Arbitrary Correlation) the all returned variance bounds are bigger than the actual one by about 0.002 \
+\
+3. Simulation for computing the variances is slow, due to dimensionality. Should one consider sparse matrix formulation?\
+4. The simulated variance estimator works \'93fine\'94 for Arm 1-2 case. Work for HT, HA and Logit with 10000 simulations. OLS it misses quite a lot. Why?\
+5. Run the simulation again, OLS still off check. -> coding error, problem fixed\
+\
+\
+Feb 15:\
+1. Make a table for Thursday\'92s meeting\
+2. Dealing with non-identification issue (Trying out)\
+3. Try alternative outcomes \
+4. Scale it up\
+\
+\
+Feb 17:\
+1. Prepare data for unredacted whole network\
+2. Read clustering graph assignment (Done)\
+3. Rewrite the paper to get rid of the n part. (Thinking)\
+\
+Feb19:\
+1. The HT estimator of the full version does not work well \'97> suspect problem of the SO matrix.\
+\
+Feb 24:\
+1. Sometimes there are negative numbers \'97> symmetrize\
+ \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

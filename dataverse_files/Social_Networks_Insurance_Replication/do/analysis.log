@@ -1,0 +1,206 @@
+-------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insur
+> ance_Replication/do/analysis.log
+  log type:  text
+ opened on:   1 Feb 2022, 22:42:42
+
+. 
+. cd "/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Re
+> plication/Data/"
+/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replicat
+> ion/Data
+
+. 
+. clear
+
+. 
+. *************************1. Generate basic social network variables*********************
+. use 0422allinforawnet, replace
+
+. *dropped 331 households
+. drop if network_missname == 1 & network_id == .
+(331 observations deleted)
+
+. d,s
+
+Contains data from 0422allinforawnet.dta
+ Observations:        22,912                  
+    Variables:            12                  27 Aug 2021 12:06
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. codebook id
+
+-------------------------------------------------------------------------------------------------------------------------------
+id                                                                                                                 Household ID
+-------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [1111031,1.120e+09]           Units: 1
+         Unique values: 4,662                     Missing .: 0/22,912
+
+                  Mean: 4.1e+07
+             Std. dev.: 1.8e+08
+
+           Percentiles:     10%       25%       50%       75%       90%
+                        1.1e+06   1.1e+06   1.1e+07   1.1e+07   3.3e+07
+
+. 
+. *Define Network size
+. bysort id: gen network_obs = _N
+
+. tab network_obs
+
+network_obs |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         23        0.10        0.10
+          2 |         58        0.25        0.35
+          3 |        162        0.71        1.06
+          4 |        444        1.94        3.00
+          5 |     22,225       97.00      100.00
+------------+-----------------------------------
+      Total |     22,912      100.00
+
+. *Define friends in first round intensive session
+. gen network_pre_intensive = .
+(22,912 missing values generated)
+
+. replace network_pre_intensive = 1 if delay == 0 & intensive == 1
+(3,766 real changes made)
+
+. *Define friends in first round session
+. gen network_presession = .
+(22,912 missing values generated)
+
+. replace network_presession = 1 if delay == 0
+(7,686 real changes made)
+
+. bysort id: egen network_sum_preintensive = sum(network_pre_intensive)
+
+. bysort id: egen network_sum_presession = sum(network_presession)
+
+. *Define fiends' take-up rate in first round sessions
+. gen network_pretakeup = .
+(22,912 missing values generated)
+
+. replace network_pretakeup = 1 if network_presession == 1 & takeup_survey == 1
+(3,455 real changes made)
+
+. gen flag = 1 if network_presession == 1 & takeup_survey ~= .
+(15,453 missing values generated)
+
+. bysort id: egen flag_sum = sum(flag)
+
+. bysort id: egen network_sum_pretakeup = sum(network_pretakeup)
+
+. replace network_sum_pretakeup = . if flag_sum == 0
+(4,377 real changes made, 4,377 to missing)
+
+. gen network_rate_preintensive = network_sum_preintensive/network_obs
+
+. gen network_rate_presession = network_sum_presession/network_obs
+
+. gen network_rate_pretakeup = network_sum_pretakeup/network_sum_presession
+(4,377 missing values generated)
+
+. *Define friends in first round simple session
+. gen network_rate_presimple = network_rate_presession - network_rate_preintensive
+
+. sum network_rate_presimple, d
+
+                   network_rate_presimple
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs              22,912
+25%            0              0       Sum of wgt.      22,912
+
+50%           .2                      Mean           .1710894
+                        Largest       Std. dev.       .193083
+75%           .2              1
+90%           .4              1       Variance       .0372811
+95%           .6              1       Skewness       1.318047
+99%           .8              1       Kurtosis       5.122986
+
+. *Define first-round friends' average insurance knowledge
+. bysort id: egen knowledge_network_temp = mean(understanding) if delay == 0
+(15,330 missing values generated)
+
+. bysort id: egen knowledge_network = mean(knowledge_network_temp)
+(4,315 missing values generated)
+
+. 
+. *Generate dummies of number of friends
+. forvalues i = 1(1)5{
+  2.   gen friend`i'=0 if network_obs ~= .
+  3.   replace friend`i' = 1 if network_obs == `i'
+  4. }
+(23 real changes made)
+(58 real changes made)
+(162 real changes made)
+(444 real changes made)
+(22,225 real changes made)
+
+. *l friend1 friend2 friend3 friend4 friend5 network_obs in 1/10
+. 
+. *Define number of friends in first round intensive session
+. gen network_onlyone = 0 if network_rate_preintensive ~= .
+
+. gen network_onlytwo = 0 if network_rate_preintensive ~= .
+
+. gen network_twomore = 0 if network_rate_preintensive ~= .
+
+. gen number_preintensive = network_rate_preintensive*network_obs
+
+. tab number_preintensive
+
+number_prei |
+   ntensive |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     10,247       44.72       44.72
+          1 |      8,303       36.24       80.96
+          2 |      3,165       13.81       94.78
+          3 |        882        3.85       98.63
+          4 |        230        1.00       99.63
+          5 |         85        0.37      100.00
+------------+-----------------------------------
+      Total |     22,912      100.00
+
+. replace network_onlyone = 1 if number_preintensive == 1
+(8,303 real changes made)
+
+. replace network_onlytwo = 1 if number_preintensive == 2
+(3,165 real changes made)
+
+. replace network_twomore = 1 if number_preintensive ~= . & number_preintensive > 1
+(4,362 real changes made)
+
+. 
+end of do-file
+
+. use "/Users/haoge/Downloads/dataverse_files/Social_Networks_Insurance_Replication/Data/0422survey.dta", clear
+
+. unique id
+Number of unique values of id is  4902
+Number of records is  4902
+
+. export delimited using "/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/covar.csv", re
+> place
+(file /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/covar.csv not found)
+file /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/covar.csv saved
+
+. use "/Users/haoge/Desktop/dataverse_files/Social_Networks_Insurance_Replication/Data/0422allinforawnet.dta"
+
+. use "/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_R
+> eplication/Data/0422allinforawnet.dta"
+
+. use "/Users/haoge/Downloads/dataverse_files/Social_Networks_Insurance_Replication/Data/0422allinforawnet.dta"
+
+. export delimited using "/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/network.csv", 
+> replace
+(file /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/network.csv not found)
+file /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/Ranalysis/network.csv saved
+

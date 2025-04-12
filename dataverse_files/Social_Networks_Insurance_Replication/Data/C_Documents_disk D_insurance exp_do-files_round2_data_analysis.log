@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Ne
+> tworks_Insurance_Replication/Data/C:\Documents\disk D\insurance exp\do-files_round2_data\analysis.log
+  log type:  text
+ opened on:   7 Jun 2022, 15:02:02
+
+. cd "C:\Documents\disk D\insurance exp\data_round2\final\"
+unable to change to C:\Documents\disk D\insurance exp\data_round2\final\
+r(170);
+
+end of do-file
+
+r(170);
+
+. do "/var/folders/rm/qbmlbj5d61773r61stz5_wdh0000gn/T//SD00397.000000"
+
+. clear matrix 
+
+. clear
+
+. set more off
+
+. set mem 300m
+set memory ignored.
+    Memory no longer needs to be set in modern Statas; memory adjustments are performed on the fly automatically.
+
+. set matsize 800
+set matsize ignored.
+    Matrix sizes are no longer limited by c(matsize) in modern Statas.  Matrix sizes are now limited by edition
+    of Stata.  See limits for more details.
+
+. set seed 123456789
+
+. capture log close

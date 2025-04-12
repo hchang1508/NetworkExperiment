@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww20980\viewh17860\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 A. The replication data file is accessed from https://www.openicpsr.org/openicpsr/project/113593/version/V1/view\
+\
+B. Data used in this folder is included in the folder FinalData, which includes\
+\
+    \'97>  0422allinforawnet.csv: this dataset contains social network information\
+    \'97>  0422survey.csv: this is the main dataset used in Cai et al. (2015)\
+\
+\
+DESCRIPTION OF SCRIPTS in the folder *Final Code*\
+\
+1. 1_data_cleaning.R: This file cleans the dataset and select target population based on the availability of covariate information (ricearea2010 and agpop)\
+\
+We start with 4902 households in the survey.dta dataset (hereafter \\textit\{survey\} dataset) and 4984 households in the 0422allinfoawnet.dta dataset (hereafter \\textit\{network\} dataset). \
+\
+   a. In the \\textit\{survey\} dataset, we drop households with missing household sizes (\\textit\{agpop\}) or rice production areas (\\textit\{ricearea2010\}) information. The two variables are used for stratification. After this step, we are left with 4876 households in the \\textit\{survey\} dataset.\
+   b. In the \\textit\{network\} dataset, we drop rows with empty/missing \\textit\{network\\_id\} columns. These rows correspond to the cases where households do not nominate friends. After this step, we are left with 4661 households in the network dataset.\
+   c. In the \\textit\{network\} dataset, we also remove rows where households nominate themselves as friends or nominate the same friends multiple times. After this step, we are left with 4661 households in the \\textit\{network\} dataset.\
+   d. In the \\textit\{network\} dataset, we remove households (both in \\textit\{id\} and \\textit\{network\\_id\} columns) with no match from the \\textit\{survey\} dataset. This is because defining strata requires household sizes (\\textit\{agpop\}) and rice production areas (\\textit\{ricearea2010\}) information, which is in the \\textit\{survey\} dataset. After this step, we are left with 4587 households in the \\textit\{network\} dataset.\\footnote\{This step drops many rows (5896 rows out of 22756 rows) in the \\textit\{network\} dataset. Most dropped households (2546 out of 2757 dropped) have no treatment assignment information in the dataset. We end up with 4832 household units for the experiment. The number is similar to the number of households units (4902 units) reported in Figure 1.1 of the paper. Nevertheless, our created network may be sparser compared with the one used in paper.  \
+   e. The 4509 households with friendship network information are our population of interest. Together with their friends, there are a total of 4806 units that are randomly assigned to different treatment arms.\
+\
+    f. We also extract the sample used in Table 2 (2)-(5) of Cai et al. (2015). The sample is then filtered again acoording to the availability of covariate information.\
+\
+    This program takes survey.dta and 0422allinfoawnet.dta as inputs, and output all_info.csv, data_table2.csv, network_info.csv and target_info.csv as outputs.\
+\
+\
+2. 2_data_visualizations.R: plotting networks (for the whole graph and the largest clusters). It also calculates some network statistics.\
+\
+    \
+    This program takes network_info.csv and all_info.csv as inputs, and output pdf files \'93Friendships_Complete_Village_Info.pdf\'94 and \'93graph_second_largest_component.pdf\'94\
+\
+3. 2_generate_net_1.R: generate a network object implementing finely-stratified village level randomization\
+   \
+    This program takes network_info.csv and all_info.csv as inputs, and output all_info2.csv and net_complete.RData \
+\
+4. 2_generate_net_2.R: generate a network object implementing village level randomization\
+\
+    This program takes network_info.csv and all_info.csv as inputs, and output all_info2_nat.csv and net_complete_natvillage.RData \
+\
+5. 3_impute_missing_cov_net1.R\
+\
+    This program takes net_complete.RData and target_info.csv as inputs, and output net_complete.RData\
+\
+6. 3_impute_missing_cov_net2.R\
+\
+    This program takes net_complete.RData and target_info.csv as inputs, and output net_complete.RData\
+\
+\
+\
+}

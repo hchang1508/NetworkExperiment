@@ -1,0 +1,490 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/haoge/Dropbox/Research/AnalysisExperiment/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/do.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Mar 2025, 15:23:53
+
+{com}. cd "/Users/haoge/Dropbox/Research/AnalysisExperiment/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/do"
+{res}/Users/haoge/Dropbox/Research/AnalysisExperiment/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/do
+
+{com}. clear
+
+. 
+. use 0422analysis, replace
+{err}{p 0 4 2}
+file {bf:{err}0422analysis.dta}
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}. 
+. cd "/Users/haoge/Dropbox/Research/AnalysisExperiment/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"
+{res}/Users/haoge/Dropbox/Research/AnalysisExperiment/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data
+
+{com}. 
+. use 0422analysis, replace
+
+. 
+. tab network_obs
+
+{txt}network_obs {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}         21        0.46        0.46
+{txt}          2 {c |}{res}         27        0.59        1.05
+{txt}          3 {c |}{res}         52        1.13        2.18
+{txt}          4 {c |}{res}        106        2.31        4.49
+{txt}          5 {c |}{res}      4,382       95.51      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,588      100.00
+
+{com}. keep if network_obs==5
+{txt}(520 observations deleted)
+
+{com}. egen vilid = group(village)
+
+. sum vilid, d
+
+                       {txt}group(village)
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        2              1
+{txt} 5%    {res}        6              1
+{txt}10%    {res}        8              1       {txt}Obs         {res}      4,382
+{txt}25%    {res}       12              1       {txt}Sum of wgt. {res}      4,382
+
+{txt}50%    {res}       21                      {txt}Mean          {res} 24.20584
+                        {txt}Largest       Std. dev.     {res} 13.45387
+{txt}75%    {res}       37             47
+{txt}90%    {res}       45             47       {txt}Variance      {res} 181.0067
+{txt}95%    {res}       46             47       {txt}Skewness      {res} .2357223
+{txt}99%    {res}       47             47       {txt}Kurtosis      {res} 1.756797
+
+{com}. xi i.vilid
+{txt}i.vilid{col 19}_Ivilid_1-47{col 39}(naturally coded; _Ivilid_1 omitted)
+
+{com}. tabstat male age agpop educ ricearea_2010 rice_inc disaster_yes disaster_loss risk_averse disaster_prob understanding, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+      male       age     agpop      educ  ric~2010  rice_inc  disas~es  disas~ss  risk_a~e
+{hline 9}{c +}{hline 90}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4375      4377      4378      4335      4368      4283      4231      2396      4382
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res} .9138286  51.03404   4.92645  1.209919  13.97078  74.88186  .6348381  27.39023   .167047
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} .2806491  11.55351  2.074923  .8469623  20.45353  27.77423  .4815324  18.05327  .3026934
+{txt}{hline 9}{c BT}{hline 90}
+
+   Stats {...}
+{c |}{...}
+  disast~b  unders~g
+{hline 9}{c +}{hline 20}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4382      4348
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res}  33.6422  .4573137
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} 16.93099  .2996653
+{txt}{hline 9}{c BT}{hline 20}
+
+{com}. 
+. tabstat network_obs network_rate_preintensive network_twoside network_second, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+  netwo~bs  netwo~ve  netwo~de  networ~d
+{hline 9}{c +}{hline 40}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4382      4382      4382      4327
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res}        5  .1639434  .0415792  .1678881
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res}        0  .1850267  .0963903  .1148852
+{txt}{hline 9}{c BT}{hline 40}
+
+{com}. 
+. tabstat indegree path_out_ind eigenvector, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+  indegree  path_o~d  eigenv~r
+{hline 9}{c +}{hline 30}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4382      4382      4382
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res} 3.261158  2.677751  .1456432
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} 1.918924  .8498604  .0831393
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. 
+. tabstat takeup_survey, stats (count mean sd)
+
+{txt}{ralign 12:Variable} {...}
+{c |}         N      Mean        SD
+{hline 13}{c +}{hline 30}
+{ralign 12:takeup_sur~y} {...}
+{c |}{...}
+ {res}     4382  .4509356  .4976437
+{txt}{hline 13}{c BT}{hline 30}
+
+{com}. 
+. gen session = 0
+
+. replace session = 11 if delay == 0 & intensive == 0
+{txt}(921 real changes made)
+
+{com}. replace session = 12 if delay == 0 & intensive == 1
+{txt}(951 real changes made)
+
+{com}. replace session = 21 if delay == 1 & intensive == 0
+{txt}(1,263 real changes made)
+
+{com}. replace session = 22 if delay == 1 & intensive == 1
+{txt}(1,247 real changes made)
+
+{com}. tab session
+
+    {txt}session {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         11 {c |}{res}        921       21.02       21.02
+{txt}         12 {c |}{res}        951       21.70       42.72
+{txt}         21 {c |}{res}      1,263       28.82       71.54
+{txt}         22 {c |}{res}      1,247       28.46      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,382      100.00
+
+{com}. tabstat takeup_survey if info_none == 1, stats (count mean sd) by(session) 
+
+{txt}Summary for variables: takeup_survey
+Group variable: session 
+
+{ralign 8:session} {...}
+{c |}         N      Mean        SD
+{hline 9}{c +}{hline 30}
+{ralign 8:11} {...}
+{c |}{...}
+ {res}      921  .3843648  .4867091
+{txt}{ralign 8:12} {...}
+{c |}{...}
+ {res}      951   .553102  .4974338
+{txt}{ralign 8:21} {...}
+{c |}{...}
+ {res}      620  .4258065  .4948639
+{txt}{ralign 8:22} {...}
+{c |}{...}
+ {res}      627  .4513557  .4980254
+{txt}{hline 9}{c +}{hline 30}
+{ralign 8:Total} {...}
+{c |}{...}
+ {res}     3119  .4575184  .4982719
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. 
+. *2. Table A1, Check randomization by sessions
+
+. foreach x in male age agpop educ ricearea_2010 rice_inc disaster_yes disaster_loss{c -(}
+{txt}  2{com}. oneway `x' session, b t
+{txt}  3{com}. {c )-} 
+
+            {txt}{c |}        Summary of Household
+            {c |}     Characteristics: Gender of
+            {c |}  Household Head, 1=male, 0=female
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} .90445168   .29413053         921
+  {txt}       12 {c |}  {res}  .9251844   .26323229         949
+  {txt}       21 {c |}  {res} .90880254   .28800393       1,261
+  {txt}       22 {c |}  {res} .91720257   .27568661       1,244
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} .91382857    .2806491       4,375
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} .249373816      3   .083124605      1.06     0.3668
+{txt} Within groups     {res} 344.263998   4371   .078760924
+{txt}{hline 72}
+    Total          {res} 344.513371   4374   .078763917
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res} 14.1330{txt}    Prob>chi2 = {res}0.003
+
+                                {txt}Comparison of
+    Household Characteristics: Gender of Household Head, 1=male, 0=female
+                                  by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .020733
+         {txt}{c |}  {res}    0.662
+         {txt}{c |}
+      21 {c |}   {res} .004351   -.016382
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .012751   -.007982      .0084
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}        Characteristics - Age
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 50.640608   11.144312         921
+  {txt}       12 {c |}  {res} 50.409905   11.600667         949
+  {txt}       21 {c |}  {res} 51.356295   11.723629       1,263
+  {txt}       22 {c |}  {res} 51.474277   11.623906       1,244
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 51.034042   11.553507       4,377
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 884.495346      3   294.831782      2.21     0.0848
+{txt} Within groups     {res} 583239.432   4373   133.372841
+{txt}{hline 72}
+    Total          {res} 584123.928   4376    133.48353
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  3.0016{txt}    Prob>chi2 = {res}0.391
+
+           {txt}Comparison of Household Characteristics - Age by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-.230703
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .715687    .946389
+         {txt}{c |}  {res}    0.916      0.339
+         {txt}{c |}
+      22 {c |}   {res} .833668    1.06437    .117982
+         {txt}{c |}  {res}    0.581      0.195      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}  Characteristics - Household Size
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 4.9576547   2.0766163         921
+  {txt}       12 {c |}  {res} 4.8422713   1.9559197         951
+  {txt}       21 {c |}  {res} 4.9350238   2.1547344       1,262
+  {txt}       22 {c |}  {res} 4.9590032   2.0802309       1,244
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 4.9264504   2.0749227       4,378
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 9.04669826      3   3.01556609      0.70     0.5518
+{txt} Within groups     {res} 18835.2703   4374   4.30618892
+{txt}{hline 72}
+    Total          {res}  18844.317   4377   4.30530433
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res} 10.0730{txt}    Prob>chi2 = {res}0.018
+
+     {txt}Comparison of Household Characteristics - Household Size by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-.115383
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-.022631    .092752
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .001348    .116732    .023979
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}     Characteristics - Level of
+            {c |} Education, 0=illiteracy, 1=primary,
+            {c |}               2=secon
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 1.2247807    .8439882         912
+  {txt}       12 {c |}  {res} 1.2409766   .83894214         942
+  {txt}       21 {c |}  {res} 1.2030376   .85903595       1,251
+  {txt}       22 {c |}  {res} 1.1821138   .84291259       1,230
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 1.2099193   .84696225       4,335
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 2.12025282      3   .706750939      0.99     0.3986
+{txt} Within groups     {res} 3106.85322   4331   .717352394
+{txt}{hline 72}
+    Total          {res} 3108.97347   4334   .717345056
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  0.7534{txt}    Prob>chi2 = {res}0.861
+
+                                {txt}Comparison of
+Household Characteristics - Level of Education, 0=illiteracy, 1=primary, 2=secon
+                                  by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .016196
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-.021743   -.037939
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res}-.042667   -.058863   -.020924
+         {txt}{c |}  {res}    1.000      0.651      1.000
+
+            {txt}{c |} Summary of Area of Rice Production
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 14.230577   15.714905         918
+  {txt}       12 {c |}  {res} 15.411842   27.373463         950
+  {txt}       21 {c |}  {res} 13.328712   14.399458       1,258
+  {txt}       22 {c |}  {res} 13.326844   22.453598       1,242
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 13.970783   20.453528       4,368
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res}  3068.3989      3   1022.79963      2.45     0.0619
+{txt} Within groups     {res} 1823852.08   4364   417.931275
+{txt}{hline 72}
+    Total          {res} 1826920.48   4367   418.346802
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}576.4344{txt}    Prob>chi2 = {res}0.000
+
+               {txt}Comparison of Area of Rice Production by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} 1.18126
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-.901865   -2.08313
+         {txt}{c |}  {res}    1.000      0.107
+         {txt}{c |}
+      22 {c |}   {res}-.903734     -2.085   -.001868
+         {txt}{c |}  {res}    1.000      0.108      1.000
+
+            {txt}{c |}  Summary of % of Household Income
+            {c |}        from Rice Production
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 77.187845   26.291845         905
+  {txt}       12 {c |}  {res} 75.824223   26.932461         933
+  {txt}       21 {c |}  {res} 73.672386   28.476204       1,224
+  {txt}       22 {c |}  {res} 73.665029    28.64812       1,221
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 74.881859   27.774229       4,283
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 9239.35819      3   3079.78606      4.00     0.0074
+{txt} Within groups     {res} 3293928.86   4279   769.789405
+{txt}{hline 72}
+    Total          {res} 3303168.22   4282   771.407805
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res} 10.9023{txt}    Prob>chi2 = {res}0.012
+
+     {txt}Comparison of % of Household Income from Rice Production by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-1.36362
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-3.51546   -2.15184
+         {txt}{c |}  {res}    0.023      0.446
+         {txt}{c |}
+      22 {c |}   {res}-3.52282   -2.15919   -.007357
+         {txt}{c |}  {res}    0.023      0.441      1.000
+
+            {txt}{c |}  Summary of Any Disaster Happened
+            {c |}       Last Year, 1=yes, 0=no
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} .63507625   .48167119         918
+  {txt}       12 {c |}  {res} .63481953    .4817365         942
+  {txt}       21 {c |}  {res}  .6394958   .48034864       1,190
+  {txt}       22 {c |}  {res}  .6299746   .48301568       1,181
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res}  .6348381   .48153244       4,231
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} .053803398      3   .017934466      0.08     0.9723
+{txt} Within groups     {res} 980.771061   4227   .232025328
+{txt}{hline 72}
+    Total          {res} 980.824864   4230    .23187349
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  0.0363{txt}    Prob>chi2 = {res}0.998
+
+    {txt}Comparison of Any Disaster Happened Last Year, 1=yes, 0=no by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-.000257
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}  .00442    .004676
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res}-.005102   -.004845   -.009521
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}   Summary of Loss in Yield Due to
+            {c |}         Disaster Last Year
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 27.125461   18.510499         542
+  {txt}       12 {c |}  {res} 27.208547    17.50081         585
+  {txt}       21 {c |}  {res} 27.558462   18.405226         650
+  {txt}       22 {c |}  {res} 27.617124   17.826395         619
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 27.390234   18.053275       2,396
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 107.568627      3   35.8562088      0.11     0.9543
+{txt} Within groups     {res} 780472.563   2392   326.284516
+{txt}{hline 72}
+    Total          {res} 780580.131   2395   325.920723
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  2.4765{txt}    Prob>chi2 = {res}0.480
+
+       {txt}Comparison of Loss in Yield Due to Disaster Last Year by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .083086
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}    .433    .349915
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .491663    .408577    .058663
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+{com}. 

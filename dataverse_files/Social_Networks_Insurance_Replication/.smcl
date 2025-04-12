@@ -1,0 +1,1715 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/haoge/Google Drive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 8 Jun 2022, 10:20:53
+{txt}
+{com}. cd "/Users/haoge/Google Drive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"
+{res}/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/rm/qbmlbj5d61773r61stz5_wdh0000gn/T//SD07304.000000"
+{txt}
+{com}. clear
+{txt}
+{com}. 
+. use 0422analysis, replace
+{txt}
+{com}. egen vilid = group(village)
+{txt}
+{com}. sum vilid, d
+
+                       {txt}group(village)
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        2              1
+{txt} 5%    {res}        6              1
+{txt}10%    {res}        8              1       {txt}Obs         {res}      4,902
+{txt}25%    {res}       12              1       {txt}Sum of wgt. {res}      4,902
+
+{txt}50%    {res}       21                      {txt}Mean          {res} 24.26377
+                        {txt}Largest       Std. dev.     {res} 13.49663
+{txt}75%    {res}       37             47
+{txt}90%    {res}       45             47       {txt}Variance      {res} 182.1591
+{txt}95%    {res}       46             47       {txt}Skewness      {res} .2309132
+{txt}99%    {res}       47             47       {txt}Kurtosis      {res} 1.748195
+{txt}
+{com}. xi i.vilid
+{txt}i.vilid{col 19}_Ivilid_1-47{col 39}(naturally coded; _Ivilid_1 omitted)
+
+{com}. 
+. 
+. **********************************************************1. Summary statistics************************************************************
+. *1. Table 1, Mean and std 
+. tabstat male age agpop educ ricearea_2010 rice_inc disaster_yes disaster_loss risk_averse disaster_prob understanding, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+      male       age     agpop      educ  ric~2010  rice_inc  disas~es  disas~ss  risk_a~e  disast~b  unders~g
+{hline 9}{c +}{hline 110}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4894      4893      4893      4841      4883      4789      4453      2518      4902      4902      4723
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res} .9139763  51.49438  4.915185  1.191902  13.62975  74.11861  .6328318  27.50675  .1888209  33.63282  .4572518
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} .2804277  12.03191  2.133418  .8533748  19.50735  27.67502   .482087  18.19906  .3133002  16.61935  .3030129
+{txt}{hline 9}{c BT}{hline 110}
+
+{com}. tabstat network_obs network_rate_preintensive network_twoside network_second, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+  netwo~bs  netwo~ve  netwo~de  networ~d
+{hline 9}{c +}{hline 40}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4588      4588      4588      4521
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res} 4.918265  .1649738  .0416921  .1678984
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res}  .433588  .1896223   .098993   .117462
+{txt}{hline 9}{c BT}{hline 40}
+
+{com}. tabstat indegree path_out_ind eigenvector, stats (count mean sd)
+
+{txt}   Stats {...}
+{c |}{...}
+  indegree  path_o~d  eigenv~r
+{hline 9}{c +}{hline 30}
+{ralign 8:N} {...}
+{c |}{...}
+ {res}     4588      4588      4588
+{txt}{ralign 8:Mean} {...}
+{c |}{...}
+ {res} 3.244182  2.672834  .1437882
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} 1.912167  .8662739  .0831853
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. tabstat takeup_survey, stats (count mean sd)
+
+{txt}{ralign 12:Variable} {...}
+{c |}         N      Mean        SD
+{hline 13}{c +}{hline 30}
+{ralign 12:takeup_sur~y} {...}
+{c |}{...}
+ {res}     4902  .4455324  .4970751
+{txt}{hline 13}{c BT}{hline 30}
+
+{com}. gen session = 0
+{txt}
+{com}. replace session = 11 if delay == 0 & intensive == 0
+{txt}(1,079 real changes made)
+
+{com}. replace session = 12 if delay == 0 & intensive == 1
+{txt}(1,096 real changes made)
+
+{com}. replace session = 21 if delay == 1 & intensive == 0
+{txt}(1,374 real changes made)
+
+{com}. replace session = 22 if delay == 1 & intensive == 1
+{txt}(1,353 real changes made)
+
+{com}. tab session
+
+    {txt}session {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         11 {c |}{res}      1,079       22.01       22.01
+{txt}         12 {c |}{res}      1,096       22.36       44.37
+{txt}         21 {c |}{res}      1,374       28.03       72.40
+{txt}         22 {c |}{res}      1,353       27.60      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,902      100.00
+{txt}
+{com}. tabstat takeup_survey if info_none == 1, stats (count mean sd) by(session) 
+
+{txt}Summary for variables: takeup_survey
+Group variable: session 
+
+{ralign 8:session} {...}
+{c |}         N      Mean        SD
+{hline 9}{c +}{hline 30}
+{ralign 8:11} {...}
+{c |}{...}
+ {res}     1079  .3521779  .4778706
+{txt}{ralign 8:12} {...}
+{c |}{...}
+ {res}     1096  .5036496  .5002149
+{txt}{ralign 8:21} {...}
+{c |}{...}
+ {res}      657  .4429224  .4971099
+{txt}{ralign 8:22} {...}
+{c |}{...}
+ {res}      660  .4651515  .4991624
+{txt}{hline 9}{c +}{hline 30}
+{ralign 8:Total} {...}
+{c |}{...}
+ {res}     3492  .4381443  .4962302
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. 
+. *2. Table A1, Check randomization by sessions
+. foreach x in male age agpop educ ricearea_2010 rice_inc disaster_yes disaster_loss{c -(}
+{txt}  2{com}.         oneway `x' session, b t
+{txt}  3{com}. {c )-} 
+
+            {txt}{c |}        Summary of Household
+            {c |}     Characteristics: Gender of
+            {c |}  Household Head, 1=male, 0=female
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} .90824838   .28880887       1,079
+  {txt}       12 {c |}  {res} .92321755   .26636772       1,094
+  {txt}       21 {c |}  {res} .91034985   .28578405       1,372
+  {txt}       22 {c |}  {res} .91475167   .27935444       1,349
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res}  .9139763    .2804277       4,894
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} .147683714      3   .049227905      0.63     0.5982
+{txt} Within groups     {res} 384.636338   4890   .078657738
+{txt}{hline 72}
+    Total          {res} 384.784021   4893   .078639694
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  8.5282{txt}    Prob>chi2 = {res}0.036
+
+                                {txt}Comparison of
+    Household Characteristics: Gender of Household Head, 1=male, 0=female
+                                  by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .014969
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .002101   -.012868
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .006503   -.008466    .004402
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}        Characteristics - Age
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 51.489322   11.879081       1,077
+  {txt}       12 {c |}  {res} 51.091408   12.173301       1,094
+  {txt}       21 {c |}  {res} 51.723962    12.22709       1,373
+  {txt}       22 {c |}  {res} 51.591549   11.841308       1,349
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res}  51.49438   12.031907       4,893
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 262.783697      3   87.5945657      0.60     0.6118
+{txt} Within groups     {res} 707936.312   4889   144.801864
+{txt}{hline 72}
+    Total          {res} 708199.095   4892   144.766782
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  2.0469{txt}    Prob>chi2 = {res}0.563
+
+           {txt}Comparison of Household Characteristics - Age by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-.397915
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}  .23464    .632554
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .102227    .500142   -.132413
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}  Characteristics - Household Size
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 4.9024164    2.122472       1,076
+  {txt}       12 {c |}  {res} 4.8558394   2.0935261       1,096
+  {txt}       21 {c |}  {res} 4.9431901    2.202829       1,373
+  {txt}       22 {c |}  {res} 4.9451039   2.1034736       1,348
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res}  4.915185    2.133418       4,893
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 6.31889956      3   2.10629985      0.46     0.7084
+{txt} Within groups     {res} 22259.4829   4889   4.55297256
+{txt}{hline 72}
+    Total          {res} 22265.8018   4892   4.55147215
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  4.2326{txt}    Prob>chi2 = {res}0.237
+
+     {txt}Comparison of Household Characteristics - Household Size by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}-.046577
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .040774    .087351
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .042688    .089264    .001914
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}        Summary of Household
+            {c |}     Characteristics - Level of
+            {c |} Education, 0=illiteracy, 1=primary,
+            {c |}               2=secon
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 1.1926692   .85852639       1,064
+  {txt}       12 {c |}  {res} 1.2149446    .8502446       1,084
+  {txt}       21 {c |}  {res} 1.1941176   .86581421       1,360
+  {txt}       22 {c |}  {res} 1.1702926   .83932244       1,333
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 1.1919025   .85337475       4,841
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 1.20533468      3   .401778226      0.55     0.6471
+{txt} Within groups     {res} 3523.51724   4837    .72845095
+{txt}{hline 72}
+    Total          {res} 3524.72258   4840   .728248467
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  1.4069{txt}    Prob>chi2 = {res}0.704
+
+                                {txt}Comparison of
+Household Characteristics - Level of Education, 0=illiteracy, 1=primary, 2=secon
+                                  by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .022275
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .001448   -.020827
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res}-.022377   -.044652   -.023825
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |} Summary of Area of Rice Production
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 13.667786   14.850037       1,075
+  {txt}       12 {c |}  {res}  14.81074   25.653105       1,094
+  {txt}       21 {c |}  {res} 13.041243   13.982457       1,368
+  {txt}       22 {c |}  {res} 13.237623   21.680085       1,346
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 13.629752   19.507349       4,883
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 2208.15948      3   736.053161      1.94     0.1216
+{txt} Within groups     {res} 1855571.81   4879    380.31806
+{txt}{hline 72}
+    Total          {res} 1857779.97   4882    380.53666
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}610.5654{txt}    Prob>chi2 = {res}0.000
+
+               {txt}Comparison of Area of Rice Production by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} 1.14295
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-.626543    -1.7695
+         {txt}{c |}  {res}    1.000      0.152
+         {txt}{c |}
+      22 {c |}   {res}-.430163   -1.57312     .19638
+         {txt}{c |}  {res}    1.000      0.285      1.000
+
+            {txt}{c |}  Summary of % of Household Income
+            {c |}        from Rice Production
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 75.476865   26.745602       1,059
+  {txt}       12 {c |}  {res} 74.766945   26.740674       1,077
+  {txt}       21 {c |}  {res} 73.051128   28.465238       1,330
+  {txt}       22 {c |}  {res}  73.57672   28.313366       1,323
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 74.118605   27.675017       4,789
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 4310.45957      3   1436.81986      1.88     0.1312
+{txt} Within groups     {res} 3662850.17   4785    765.48593
+{txt}{hline 72}
+    Total          {res} 3667160.63   4788   765.906565
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  8.4344{txt}    Prob>chi2 = {res}0.038
+
+     {txt}Comparison of % of Household Income from Rice Production by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} -.70992
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res}-2.42574   -1.71582
+         {txt}{c |}  {res}    0.200      0.782
+         {txt}{c |}
+      22 {c |}   {res}-1.90015   -1.19023    .525592
+         {txt}{c |}  {res}    0.575      1.000      1.000
+
+            {txt}{c |}  Summary of Any Disaster Happened
+            {c |}       Last Year, 1=yes, 0=no
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} .62613982   .48407247         987
+  {txt}       12 {c |}  {res} .63509472   .48164375       1,003
+  {txt}       21 {c |}  {res} .63754045   .48090512       1,236
+  {txt}       22 {c |}  {res} .63162184   .48256137       1,227
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res}  .6328318   .48208703       4,453
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} .078536798      3   .026178933      0.11     0.9528
+{txt} Within groups     {res} 1034.60145   4449   .232546967
+{txt}{hline 72}
+    Total          {res} 1034.67999   4452   .232407905
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  0.0515{txt}    Prob>chi2 = {res}0.997
+
+    {txt}Comparison of Any Disaster Happened Last Year, 1=yes, 0=no by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res} .008955
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .011401    .002446
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .005482   -.003473   -.005919
+         {txt}{c |}  {res}    1.000      1.000      1.000
+
+            {txt}{c |}   Summary of Loss in Yield Due to
+            {c |}         Disaster Last Year
+    session {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         11 {c |}  {res} 27.041812    18.49829         574
+  {txt}       12 {c |}  {res} 27.682692   18.116316         624
+  {txt}       21 {c |}  {res}  27.60119   18.374037         672
+  {txt}       22 {c |}  {res} 27.651235   17.861185         648
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} 27.506751   18.199065       2,518
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 162.917574      3   54.3058579      0.16     0.9208
+{txt} Within groups     {res} 833482.468   2514   331.536383
+{txt}{hline 72}
+    Total          {res} 833645.385   2517   331.205954
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  0.9046{txt}    Prob>chi2 = {res}0.824
+
+       {txt}Comparison of Loss in Yield Due to Disaster Last Year by session
+                                (Bonferroni)
+Row Mean-{c |}
+Col Mean {c |}         11         12         21
+{hline 9}{c +}{hline 33}
+      12 {c |}   {res}  .64088
+         {txt}{c |}  {res}    1.000
+         {txt}{c |}
+      21 {c |}   {res} .559379   -.081502
+         {txt}{c |}  {res}    1.000      1.000
+         {txt}{c |}
+      22 {c |}   {res} .609423   -.031458    .050044
+         {txt}{c |}  {res}    1.000      1.000      1.000
+{txt}
+{com}. 
+. **********************************************************2.Intensive session effect************************************************************
+. gen inter_intensive_educ = intensive*educ_good
+{txt}
+{com}. gen inter_intensive_age = intensive*age
+{txt}(9 missing values generated)
+
+{com}. gen inter_intensive_exp = intensive*insurance_repay
+{txt}
+{com}. gen inter_intensive_risk = intensive*risk_averse
+{txt}
+{com}. gen inter_intensive_day = intensive*day 
+{txt}
+{com}. 
+. local outputfile0 Table2.xls
+{txt}
+{com}. *intensive session effect: table2, col 1
+. reg takeup_survey intensive male age agpop ricearea_2010 literacy _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,137
+                                                {txt}{help j_robustsingular:F(48, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1251
+                                                {txt}Root MSE          =    {res} .46905
+
+{txt}{ralign 79:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 15}{c |}{col 27}    Robust
+{col 1}takeup_survey{col 15}{c |} Coefficient{col 27}  std. err.{col 39}      t{col 47}   P>|t|{col 55}     [95% con{col 68}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}intensive {c |}{col 15}{res}{space 2} .1408242{col 27}{space 2} .0260309{col 38}{space 1}    5.41{col 47}{space 3}0.000{col 55}{space 4} .0894431{col 68}{space 3} .1922054
+{txt}{space 9}male {c |}{col 15}{res}{space 2} .0407053{col 27}{space 2} .0474814{col 38}{space 1}    0.86{col 47}{space 3}0.392{col 55}{space 4}-.0530159{col 68}{space 3} .1344265
+{txt}{space 10}age {c |}{col 15}{res}{space 2} .0017669{col 27}{space 2} .0010681{col 38}{space 1}    1.65{col 47}{space 3}0.100{col 55}{space 4}-.0003415{col 68}{space 3} .0038752
+{txt}{space 8}agpop {c |}{col 15}{res}{space 2}-.0029449{col 27}{space 2} .0051839{col 38}{space 1}   -0.57{col 47}{space 3}0.571{col 55}{space 4}-.0131771{col 68}{space 3} .0072873
+{txt}ricearea_2010 {c |}{col 15}{res}{space 2} .0007886{col 27}{space 2} .0007542{col 38}{space 1}    1.05{col 47}{space 3}0.297{col 55}{space 4}   -.0007{col 68}{space 3} .0022772
+{txt}{space 5}literacy {c |}{col 15}{res}{space 2}  .083205{col 27}{space 2} .0269222{col 38}{space 1}    3.09{col 47}{space 3}0.002{col 55}{space 4} .0300646{col 68}{space 3} .1363454
+{txt}{space 4}_Ivilid_2 {c |}{col 15}{res}{space 2}-.4123784{col 27}{space 2}  .105623{col 38}{space 1}   -3.90{col 47}{space 3}0.000{col 55}{space 4}-.6208625{col 68}{space 3}-.2038943
+{txt}{space 4}_Ivilid_3 {c |}{col 15}{res}{space 2}-.1940895{col 27}{space 2} .0321591{col 38}{space 1}   -6.04{col 47}{space 3}0.000{col 55}{space 4}-.2575668{col 68}{space 3}-.1306122
+{txt}{space 4}_Ivilid_4 {c |}{col 15}{res}{space 2}-.2424232{col 27}{space 2} .0365943{col 38}{space 1}   -6.62{col 47}{space 3}0.000{col 55}{space 4} -.314655{col 68}{space 3}-.1701914
+{txt}{space 4}_Ivilid_5 {c |}{col 15}{res}{space 2}-.1673066{col 27}{space 2} .1532014{col 38}{space 1}   -1.09{col 47}{space 3}0.276{col 55}{space 4}-.4697034{col 68}{space 3} .1350903
+{txt}{space 4}_Ivilid_6 {c |}{col 15}{res}{space 2}  .233148{col 27}{space 2}  .027189{col 38}{space 1}    8.58{col 47}{space 3}0.000{col 55}{space 4} .1794809{col 68}{space 3} .2868151
+{txt}{space 4}_Ivilid_7 {c |}{col 15}{res}{space 2}-.2599335{col 27}{space 2} .0585243{col 38}{space 1}   -4.44{col 47}{space 3}0.000{col 55}{space 4}-.3754518{col 68}{space 3}-.1444152
+{txt}{space 4}_Ivilid_8 {c |}{col 15}{res}{space 2}-.2345645{col 27}{space 2}  .095587{col 38}{space 1}   -2.45{col 47}{space 3}0.015{col 55}{space 4}-.4232391{col 68}{space 3}  -.04589
+{txt}{space 4}_Ivilid_9 {c |}{col 15}{res}{space 2}-.2557939{col 27}{space 2} .0970368{col 38}{space 1}   -2.64{col 47}{space 3}0.009{col 55}{space 4}-.4473302{col 68}{space 3}-.0642576
+{txt}{space 3}_Ivilid_10 {c |}{col 15}{res}{space 2}-.2849145{col 27}{space 2} .1163177{col 38}{space 1}   -2.45{col 47}{space 3}0.015{col 55}{space 4}-.5145083{col 68}{space 3}-.0553206
+{txt}{space 3}_Ivilid_11 {c |}{col 15}{res}{space 2}-.1285052{col 27}{space 2} .0833695{col 38}{space 1}   -1.54{col 47}{space 3}0.125{col 55}{space 4}-.2930644{col 68}{space 3} .0360539
+{txt}{space 3}_Ivilid_12 {c |}{col 15}{res}{space 2} .0229908{col 27}{space 2} .1127212{col 38}{space 1}    0.20{col 47}{space 3}0.839{col 55}{space 4}-.1995041{col 68}{space 3} .2454857
+{txt}{space 3}_Ivilid_13 {c |}{col 15}{res}{space 2} .0009335{col 27}{space 2} .0830125{col 38}{space 1}    0.01{col 47}{space 3}0.991{col 55}{space 4}-.1629208{col 68}{space 3} .1647878
+{txt}{space 3}_Ivilid_14 {c |}{col 15}{res}{space 2}-.1539832{col 27}{space 2} .1051269{col 38}{space 1}   -1.46{col 47}{space 3}0.145{col 55}{space 4}-.3614882{col 68}{space 3} .0535219
+{txt}{space 3}_Ivilid_15 {c |}{col 15}{res}{space 2} .1156739{col 27}{space 2} .0673712{col 38}{space 1}    1.72{col 47}{space 3}0.088{col 55}{space 4}-.0173068{col 68}{space 3} .2486546
+{txt}{space 3}_Ivilid_16 {c |}{col 15}{res}{space 2}-.5002053{col 27}{space 2} .0111914{col 38}{space 1}  -44.70{col 47}{space 3}0.000{col 55}{space 4}-.5222955{col 68}{space 3} -.478115
+{txt}{space 3}_Ivilid_17 {c |}{col 15}{res}{space 2}-.4074481{col 27}{space 2} .0673014{col 38}{space 1}   -6.05{col 47}{space 3}0.000{col 55}{space 4}-.5402911{col 68}{space 3}-.2746051
+{txt}{space 3}_Ivilid_18 {c |}{col 15}{res}{space 2}-.0584232{col 27}{space 2} .1461399{col 38}{space 1}   -0.40{col 47}{space 3}0.690{col 55}{space 4}-.3468818{col 68}{space 3} .2300355
+{txt}{space 3}_Ivilid_19 {c |}{col 15}{res}{space 2}-.2921655{col 27}{space 2} .0701459{col 38}{space 1}   -4.17{col 47}{space 3}0.000{col 55}{space 4}-.4306232{col 68}{space 3}-.1537078
+{txt}{space 3}_Ivilid_20 {c |}{col 15}{res}{space 2}-.1324631{col 27}{space 2} .1225829{col 38}{space 1}   -1.08{col 47}{space 3}0.281{col 55}{space 4}-.3744236{col 68}{space 3} .1094973
+{txt}{space 3}_Ivilid_21 {c |}{col 15}{res}{space 2}-.2456389{col 27}{space 2} .0579806{col 38}{space 1}   -4.24{col 47}{space 3}0.000{col 55}{space 4}-.3600841{col 68}{space 3}-.1311937
+{txt}{space 3}_Ivilid_22 {c |}{col 15}{res}{space 2}-.2850252{col 27}{space 2} .1693864{col 38}{space 1}   -1.68{col 47}{space 3}0.094{col 55}{space 4} -.619369{col 68}{space 3} .0493186
+{txt}{space 3}_Ivilid_23 {c |}{col 15}{res}{space 2}-.2555737{col 27}{space 2} .1073237{col 38}{space 1}   -2.38{col 47}{space 3}0.018{col 55}{space 4}-.4674148{col 68}{space 3}-.0437327
+{txt}{space 3}_Ivilid_24 {c |}{col 15}{res}{space 2}-.1181014{col 27}{space 2} .0655432{col 38}{space 1}   -1.80{col 47}{space 3}0.073{col 55}{space 4} -.247474{col 68}{space 3} .0112711
+{txt}{space 3}_Ivilid_25 {c |}{col 15}{res}{space 2} .0228554{col 27}{space 2} .0748461{col 38}{space 1}    0.31{col 47}{space 3}0.760{col 55}{space 4}-.1248798{col 68}{space 3} .1705905
+{txt}{space 3}_Ivilid_26 {c |}{col 15}{res}{space 2}   .09435{col 27}{space 2} .1124886{col 38}{space 1}    0.84{col 47}{space 3}0.403{col 55}{space 4}-.1276859{col 68}{space 3} .3163858
+{txt}{space 3}_Ivilid_27 {c |}{col 15}{res}{space 2}-.1907178{col 27}{space 2} .0958798{col 38}{space 1}   -1.99{col 47}{space 3}0.048{col 55}{space 4}-.3799704{col 68}{space 3}-.0014651
+{txt}{space 3}_Ivilid_28 {c |}{col 15}{res}{space 2} .0683045{col 27}{space 2} .0835142{col 38}{space 1}    0.82{col 47}{space 3}0.415{col 55}{space 4}-.0965402{col 68}{space 3} .2331492
+{txt}{space 3}_Ivilid_29 {c |}{col 15}{res}{space 2} -.381898{col 27}{space 2} .0797254{col 38}{space 1}   -4.79{col 47}{space 3}0.000{col 55}{space 4}-.5392642{col 68}{space 3}-.2245319
+{txt}{space 3}_Ivilid_30 {c |}{col 15}{res}{space 2}-.2715477{col 27}{space 2} .0871399{col 38}{space 1}   -3.12{col 47}{space 3}0.002{col 55}{space 4} -.443549{col 68}{space 3}-.0995464
+{txt}{space 3}_Ivilid_31 {c |}{col 15}{res}{space 2} .0914096{col 27}{space 2} .0185407{col 38}{space 1}    4.93{col 47}{space 3}0.000{col 55}{space 4}  .054813{col 68}{space 3} .1280062
+{txt}{space 3}_Ivilid_32 {c |}{col 15}{res}{space 2} .2450654{col 27}{space 2} .1094809{col 38}{space 1}    2.24{col 47}{space 3}0.026{col 55}{space 4} .0289662{col 68}{space 3} .4611645
+{txt}{space 3}_Ivilid_33 {c |}{col 15}{res}{space 2} .0920943{col 27}{space 2} .1357091{col 38}{space 1}    0.68{col 47}{space 3}0.498{col 55}{space 4}-.1757754{col 68}{space 3} .3599641
+{txt}{space 3}_Ivilid_34 {c |}{col 15}{res}{space 2}-.2613101{col 27}{space 2} .2199718{col 38}{space 1}   -1.19{col 47}{space 3}0.237{col 55}{space 4} -.695502{col 68}{space 3} .1728818
+{txt}{space 3}_Ivilid_35 {c |}{col 15}{res}{space 2}-.1738035{col 27}{space 2} .0143662{col 38}{space 1}  -12.10{col 47}{space 3}0.000{col 55}{space 4}-.2021604{col 68}{space 3}-.1454467
+{txt}{space 3}_Ivilid_36 {c |}{col 15}{res}{space 2}-.1826537{col 27}{space 2} .0427178{col 38}{space 1}   -4.28{col 47}{space 3}0.000{col 55}{space 4}-.2669723{col 68}{space 3}-.0983351
+{txt}{space 3}_Ivilid_37 {c |}{col 15}{res}{space 2}-.2841952{col 27}{space 2} .0867025{col 38}{space 1}   -3.28{col 47}{space 3}0.001{col 55}{space 4}-.4553332{col 68}{space 3}-.1130573
+{txt}{space 3}_Ivilid_38 {c |}{col 15}{res}{space 2} .0587897{col 27}{space 2} .0270967{col 38}{space 1}    2.17{col 47}{space 3}0.031{col 55}{space 4} .0053048{col 68}{space 3} .1122745
+{txt}{space 3}_Ivilid_39 {c |}{col 15}{res}{space 2}-.4263741{col 27}{space 2} .0295278{col 38}{space 1}  -14.44{col 47}{space 3}0.000{col 55}{space 4}-.4846575{col 68}{space 3}-.3680907
+{txt}{space 3}_Ivilid_40 {c |}{col 15}{res}{space 2}-.1489744{col 27}{space 2} .1066803{col 38}{space 1}   -1.40{col 47}{space 3}0.164{col 55}{space 4}-.3595456{col 68}{space 3} .0615967
+{txt}{space 3}_Ivilid_41 {c |}{col 15}{res}{space 2}-.0932542{col 27}{space 2}  .024823{col 38}{space 1}   -3.76{col 47}{space 3}0.000{col 55}{space 4}-.1422511{col 68}{space 3}-.0442574
+{txt}{space 3}_Ivilid_42 {c |}{col 15}{res}{space 2}-.3919875{col 27}{space 2} .0352782{col 38}{space 1}  -11.11{col 47}{space 3}0.000{col 55}{space 4}-.4616214{col 68}{space 3}-.3223535
+{txt}{space 3}_Ivilid_43 {c |}{col 15}{res}{space 2}-.1611961{col 27}{space 2} .0503166{col 38}{space 1}   -3.20{col 47}{space 3}0.002{col 55}{space 4}-.2605136{col 68}{space 3}-.0618786
+{txt}{space 3}_Ivilid_44 {c |}{col 15}{res}{space 2}-.4803191{col 27}{space 2} .0483564{col 38}{space 1}   -9.93{col 47}{space 3}0.000{col 55}{space 4}-.5757674{col 68}{space 3}-.3848708
+{txt}{space 3}_Ivilid_45 {c |}{col 15}{res}{space 2}-.0252228{col 27}{space 2} .0967524{col 38}{space 1}   -0.26{col 47}{space 3}0.795{col 55}{space 4}-.2161977{col 68}{space 3} .1657521
+{txt}{space 3}_Ivilid_46 {c |}{col 15}{res}{space 2}-.3062709{col 27}{space 2} .0642418{col 38}{space 1}   -4.77{col 47}{space 3}0.000{col 55}{space 4}-.4330747{col 68}{space 3} -.179467
+{txt}{space 3}_Ivilid_47 {c |}{col 15}{res}{space 2}-.2889457{col 27}{space 2} .1000622{col 38}{space 1}   -2.89{col 47}{space 3}0.004{col 55}{space 4}-.4864536{col 68}{space 3}-.0914378
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2} .3634212{col 27}{space 2} .0863035{col 38}{space 1}    4.21{col 47}{space 3}0.000{col 55}{space 4} .1930709{col 68}{space 3} .5337714
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. local outputfile1 TableA3.xls
+{txt}
+{com}. *heterogeneity: table A3
+. reg takeup_survey intensive inter_intensive_age male age agpop ricearea_2010 literacy _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,137
+                                                {txt}{help j_robustsingular:F(49, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1251
+                                                {txt}Root MSE          =    {res} .46916
+
+{txt}{ralign 85:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 21}{c |}{col 33}    Robust
+{col 1}      takeup_survey{col 21}{c |} Coefficient{col 33}  std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}intensive {c |}{col 21}{res}{space 2}  .135688{col 33}{space 2} .0965379{col 44}{space 1}    1.41{col 53}{space 3}0.162{col 61}{space 4}-.0548635{col 74}{space 3} .3262395
+{txt}inter_intensive_age {c |}{col 21}{res}{space 2} .0001001{col 33}{space 2} .0018819{col 44}{space 1}    0.05{col 53}{space 3}0.958{col 61}{space 4}-.0036145{col 74}{space 3} .0038147
+{txt}{space 15}male {c |}{col 21}{res}{space 2} .0407791{col 33}{space 2} .0475616{col 44}{space 1}    0.86{col 53}{space 3}0.392{col 61}{space 4}-.0531004{col 74}{space 3} .1346587
+{txt}{space 16}age {c |}{col 21}{res}{space 2} .0017156{col 33}{space 2} .0014195{col 44}{space 1}    1.21{col 53}{space 3}0.228{col 61}{space 4}-.0010864{col 74}{space 3} .0045175
+{txt}{space 14}agpop {c |}{col 21}{res}{space 2} -.002945{col 33}{space 2} .0051857{col 44}{space 1}   -0.57{col 53}{space 3}0.571{col 61}{space 4}-.0131808{col 74}{space 3} .0072909
+{txt}{space 6}ricearea_2010 {c |}{col 21}{res}{space 2} .0007894{col 33}{space 2} .0007554{col 44}{space 1}    1.05{col 53}{space 3}0.297{col 61}{space 4}-.0007016{col 74}{space 3} .0022803
+{txt}{space 11}literacy {c |}{col 21}{res}{space 2} .0831936{col 33}{space 2}  .026953{col 44}{space 1}    3.09{col 53}{space 3}0.002{col 61}{space 4} .0299924{col 74}{space 3} .1363947
+{txt}{space 10}_Ivilid_2 {c |}{col 21}{res}{space 2} -.412183{col 33}{space 2} .1054812{col 44}{space 1}   -3.91{col 53}{space 3}0.000{col 61}{space 4}-.6203872{col 74}{space 3}-.2039788
+{txt}{space 10}_Ivilid_3 {c |}{col 21}{res}{space 2} -.194016{col 33}{space 2}  .032196{col 44}{space 1}   -6.03{col 53}{space 3}0.000{col 61}{space 4}-.2575661{col 74}{space 3}-.1304658
+{txt}{space 10}_Ivilid_4 {c |}{col 21}{res}{space 2}-.2422795{col 33}{space 2} .0368003{col 44}{space 1}   -6.58{col 53}{space 3}0.000{col 61}{space 4}-.3149178{col 74}{space 3}-.1696411
+{txt}{space 10}_Ivilid_5 {c |}{col 21}{res}{space 2}-.1673056{col 33}{space 2} .1532209{col 44}{space 1}   -1.09{col 53}{space 3}0.276{col 61}{space 4}-.4697409{col 74}{space 3} .1351297
+{txt}{space 10}_Ivilid_6 {c |}{col 21}{res}{space 2} .2330991{col 33}{space 2} .0272657{col 44}{space 1}    8.55{col 53}{space 3}0.000{col 61}{space 4} .1792807{col 74}{space 3} .2869175
+{txt}{space 10}_Ivilid_7 {c |}{col 21}{res}{space 2}-.2598394{col 33}{space 2} .0583748{col 44}{space 1}   -4.45{col 53}{space 3}0.000{col 61}{space 4}-.3750627{col 74}{space 3}-.1446162
+{txt}{space 10}_Ivilid_8 {c |}{col 21}{res}{space 2}-.2344689{col 33}{space 2} .0956022{col 44}{space 1}   -2.45{col 53}{space 3}0.015{col 61}{space 4}-.4231735{col 74}{space 3}-.0457643
+{txt}{space 10}_Ivilid_9 {c |}{col 21}{res}{space 2}-.2558067{col 33}{space 2} .0971018{col 44}{space 1}   -2.63{col 53}{space 3}0.009{col 61}{space 4}-.4474713{col 74}{space 3}-.0641421
+{txt}{space 9}_Ivilid_10 {c |}{col 21}{res}{space 2}-.2849409{col 33}{space 2} .1162989{col 44}{space 1}   -2.45{col 53}{space 3}0.015{col 61}{space 4}-.5144976{col 74}{space 3}-.0553841
+{txt}{space 9}_Ivilid_11 {c |}{col 21}{res}{space 2}-.1285413{col 33}{space 2} .0834029{col 44}{space 1}   -1.54{col 53}{space 3}0.125{col 61}{space 4}-.2931663{col 74}{space 3} .0360837
+{txt}{space 9}_Ivilid_12 {c |}{col 21}{res}{space 2} .0229836{col 33}{space 2} .1127764{col 44}{space 1}    0.20{col 53}{space 3}0.839{col 61}{space 4}-.1996204{col 74}{space 3} .2455875
+{txt}{space 9}_Ivilid_13 {c |}{col 21}{res}{space 2} .0009829{col 33}{space 2} .0829497{col 44}{space 1}    0.01{col 53}{space 3}0.991{col 61}{space 4}-.1627475{col 74}{space 3} .1647133
+{txt}{space 9}_Ivilid_14 {c |}{col 21}{res}{space 2}-.1538872{col 33}{space 2} .1051765{col 44}{space 1}   -1.46{col 53}{space 3}0.145{col 61}{space 4}-.3614902{col 74}{space 3} .0537157
+{txt}{space 9}_Ivilid_15 {c |}{col 21}{res}{space 2} .1154904{col 33}{space 2} .0672117{col 44}{space 1}    1.72{col 53}{space 3}0.088{col 61}{space 4}-.0171756{col 74}{space 3} .2481564
+{txt}{space 9}_Ivilid_16 {c |}{col 21}{res}{space 2}-.5002982{col 33}{space 2} .0112172{col 44}{space 1}  -44.60{col 53}{space 3}0.000{col 61}{space 4}-.5224393{col 74}{space 3}-.4781572
+{txt}{space 9}_Ivilid_17 {c |}{col 21}{res}{space 2}-.4074899{col 33}{space 2}  .067471{col 44}{space 1}   -6.04{col 53}{space 3}0.000{col 61}{space 4}-.5406676{col 74}{space 3}-.2743122
+{txt}{space 9}_Ivilid_18 {c |}{col 21}{res}{space 2}-.0584891{col 33}{space 2} .1461442{col 44}{space 1}   -0.40{col 53}{space 3}0.689{col 61}{space 4}-.3469561{col 74}{space 3} .2299779
+{txt}{space 9}_Ivilid_19 {c |}{col 21}{res}{space 2}-.2922491{col 33}{space 2} .0703526{col 44}{space 1}   -4.15{col 53}{space 3}0.000{col 61}{space 4}-.4311146{col 74}{space 3}-.1533835
+{txt}{space 9}_Ivilid_20 {c |}{col 21}{res}{space 2}-.1323332{col 33}{space 2} .1227509{col 44}{space 1}   -1.08{col 53}{space 3}0.283{col 61}{space 4}-.3746253{col 74}{space 3}  .109959
+{txt}{space 9}_Ivilid_21 {c |}{col 21}{res}{space 2}-.2457448{col 33}{space 2} .0580445{col 44}{space 1}   -4.23{col 53}{space 3}0.000{col 61}{space 4} -.360316{col 74}{space 3}-.1311737
+{txt}{space 9}_Ivilid_22 {c |}{col 21}{res}{space 2}-.2852809{col 33}{space 2} .1692708{col 44}{space 1}   -1.69{col 53}{space 3}0.094{col 61}{space 4}-.6193964{col 74}{space 3} .0488347
+{txt}{space 9}_Ivilid_23 {c |}{col 21}{res}{space 2}-.2557373{col 33}{space 2} .1070938{col 44}{space 1}   -2.39{col 53}{space 3}0.018{col 61}{space 4}-.4671246{col 74}{space 3}-.0443501
+{txt}{space 9}_Ivilid_24 {c |}{col 21}{res}{space 2}-.1180182{col 33}{space 2} .0658386{col 44}{space 1}   -1.79{col 53}{space 3}0.075{col 61}{space 4}-.2479739{col 74}{space 3} .0119375
+{txt}{space 9}_Ivilid_25 {c |}{col 21}{res}{space 2} .0227171{col 33}{space 2} .0748459{col 44}{space 1}    0.30{col 53}{space 3}0.762{col 61}{space 4}-.1250176{col 74}{space 3} .1704519
+{txt}{space 9}_Ivilid_26 {c |}{col 21}{res}{space 2} .0942708{col 33}{space 2} .1124979{col 44}{space 1}    0.84{col 53}{space 3}0.403{col 61}{space 4}-.1277835{col 74}{space 3}  .316325
+{txt}{space 9}_Ivilid_27 {c |}{col 21}{res}{space 2}-.1904067{col 33}{space 2} .0953666{col 44}{space 1}   -2.00{col 53}{space 3}0.047{col 61}{space 4}-.3786463{col 74}{space 3}-.0021672
+{txt}{space 9}_Ivilid_28 {c |}{col 21}{res}{space 2} .0682927{col 33}{space 2} .0835144{col 44}{space 1}    0.82{col 53}{space 3}0.415{col 61}{space 4}-.0965524{col 74}{space 3} .2331378
+{txt}{space 9}_Ivilid_29 {c |}{col 21}{res}{space 2}-.3820367{col 33}{space 2} .0798811{col 44}{space 1}   -4.78{col 53}{space 3}0.000{col 61}{space 4}-.5397102{col 74}{space 3}-.2243632
+{txt}{space 9}_Ivilid_30 {c |}{col 21}{res}{space 2}-.2714478{col 33}{space 2} .0872485{col 44}{space 1}   -3.11{col 53}{space 3}0.002{col 61}{space 4}-.4436634{col 74}{space 3}-.0992322
+{txt}{space 9}_Ivilid_31 {c |}{col 21}{res}{space 2} .0915044{col 33}{space 2} .0186823{col 44}{space 1}    4.90{col 53}{space 3}0.000{col 61}{space 4} .0546283{col 74}{space 3} .1283805
+{txt}{space 9}_Ivilid_32 {c |}{col 21}{res}{space 2} .2451799{col 33}{space 2} .1095363{col 44}{space 1}    2.24{col 53}{space 3}0.026{col 61}{space 4} .0289714{col 74}{space 3} .4613883
+{txt}{space 9}_Ivilid_33 {c |}{col 21}{res}{space 2}  .092161{col 33}{space 2} .1357802{col 44}{space 1}    0.68{col 53}{space 3}0.498{col 61}{space 4} -.175849{col 74}{space 3}  .360171
+{txt}{space 9}_Ivilid_34 {c |}{col 21}{res}{space 2}-.2613916{col 33}{space 2} .2201255{col 44}{space 1}   -1.19{col 53}{space 3}0.237{col 61}{space 4}-.6958868{col 74}{space 3} .1731035
+{txt}{space 9}_Ivilid_35 {c |}{col 21}{res}{space 2}-.1734935{col 33}{space 2} .0152506{col 44}{space 1}  -11.38{col 53}{space 3}0.000{col 61}{space 4} -.203596{col 74}{space 3} -.143391
+{txt}{space 9}_Ivilid_36 {c |}{col 21}{res}{space 2}-.1826065{col 33}{space 2} .0428126{col 44}{space 1}   -4.27{col 53}{space 3}0.000{col 61}{space 4}-.2671123{col 74}{space 3}-.0981007
+{txt}{space 9}_Ivilid_37 {c |}{col 21}{res}{space 2}-.2842094{col 33}{space 2} .0866775{col 44}{space 1}   -3.28{col 53}{space 3}0.001{col 61}{space 4} -.455298{col 74}{space 3}-.1131208
+{txt}{space 9}_Ivilid_38 {c |}{col 21}{res}{space 2} .0586903{col 33}{space 2} .0271162{col 44}{space 1}    2.16{col 53}{space 3}0.032{col 61}{space 4} .0051669{col 74}{space 3} .1122136
+{txt}{space 9}_Ivilid_39 {c |}{col 21}{res}{space 2}-.4264652{col 33}{space 2} .0294898{col 44}{space 1}  -14.46{col 53}{space 3}0.000{col 61}{space 4}-.4846736{col 74}{space 3}-.3682567
+{txt}{space 9}_Ivilid_40 {c |}{col 21}{res}{space 2}-.1489666{col 33}{space 2} .1066756{col 44}{space 1}   -1.40{col 53}{space 3}0.164{col 61}{space 4}-.3595285{col 74}{space 3} .0615952
+{txt}{space 9}_Ivilid_41 {c |}{col 21}{res}{space 2}-.0932067{col 33}{space 2} .0247556{col 44}{space 1}   -3.77{col 53}{space 3}0.000{col 61}{space 4}-.1420706{col 74}{space 3}-.0443429
+{txt}{space 9}_Ivilid_42 {c |}{col 21}{res}{space 2}-.3919683{col 33}{space 2} .0353037{col 44}{space 1}  -11.10{col 53}{space 3}0.000{col 61}{space 4}-.4616525{col 74}{space 3}-.3222841
+{txt}{space 9}_Ivilid_43 {c |}{col 21}{res}{space 2}-.1611158{col 33}{space 2} .0502621{col 44}{space 1}   -3.21{col 53}{space 3}0.002{col 61}{space 4}-.2603257{col 74}{space 3}-.0619058
+{txt}{space 9}_Ivilid_44 {c |}{col 21}{res}{space 2}-.4803038{col 33}{space 2} .0483521{col 44}{space 1}   -9.93{col 53}{space 3}0.000{col 61}{space 4}-.5757436{col 74}{space 3}-.3848639
+{txt}{space 9}_Ivilid_45 {c |}{col 21}{res}{space 2}-.0251455{col 33}{space 2} .0967891{col 44}{space 1}   -0.26{col 53}{space 3}0.795{col 61}{space 4}-.2161929{col 74}{space 3}  .165902
+{txt}{space 9}_Ivilid_46 {c |}{col 21}{res}{space 2}-.3061741{col 33}{space 2} .0644698{col 44}{space 1}   -4.75{col 53}{space 3}0.000{col 61}{space 4} -.433428{col 74}{space 3}-.1789203
+{txt}{space 9}_Ivilid_47 {c |}{col 21}{res}{space 2}-.2890293{col 33}{space 2} .1000066{col 44}{space 1}   -2.89{col 53}{space 3}0.004{col 61}{space 4}-.4864275{col 74}{space 3}-.0916311
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .3659834{col 33}{space 2} .0965421{col 44}{space 1}    3.79{col 53}{space 3}0.000{col 61}{space 4} .1754236{col 74}{space 3} .5565431
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test intensive inter_intensive_age
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_intensive_age = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   14.86
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. outreg2 using `outputfile1'
+{txt}{browse `"TableA3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "TableA3.txt""':seeout}
+
+{com}. reg takeup_survey intensive inter_intensive_educ male age agpop ricearea_2010 educ_good _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,161
+                                                {txt}{help j_robustsingular:F(49, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1279
+                                                {txt}Root MSE          =    {res}  .4682
+
+{txt}{ralign 86:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 21}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 22}{c |}{col 34}    Robust
+{col 1}       takeup_survey{col 22}{c |} Coefficient{col 34}  std. err.{col 46}      t{col 54}   P>|t|{col 62}     [95% con{col 75}f. interval]
+{hline 21}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}intensive {c |}{col 22}{res}{space 2} .1510852{col 34}{space 2} .0346826{col 45}{space 1}    4.36{col 54}{space 3}0.000{col 62}{space 4} .0826269{col 75}{space 3} .2195435
+{txt}inter_intensive_educ {c |}{col 22}{res}{space 2}-.0210208{col 34}{space 2} .0480495{col 45}{space 1}   -0.44{col 54}{space 3}0.662{col 62}{space 4}-.1158635{col 75}{space 3} .0738218
+{txt}{space 16}male {c |}{col 22}{res}{space 2} .0439415{col 34}{space 2} .0469062{col 45}{space 1}    0.94{col 54}{space 3}0.350{col 62}{space 4}-.0486444{col 75}{space 3} .1365274
+{txt}{space 17}age {c |}{col 22}{res}{space 2} .0018527{col 34}{space 2} .0010408{col 45}{space 1}    1.78{col 54}{space 3}0.077{col 62}{space 4}-.0002016{col 75}{space 3}  .003907
+{txt}{space 15}agpop {c |}{col 22}{res}{space 2} -.002155{col 34}{space 2} .0053718{col 45}{space 1}   -0.40{col 54}{space 3}0.689{col 62}{space 4}-.0127582{col 75}{space 3} .0084482
+{txt}{space 7}ricearea_2010 {c |}{col 22}{res}{space 2} .0007734{col 34}{space 2} .0007665{col 45}{space 1}    1.01{col 54}{space 3}0.314{col 62}{space 4}-.0007396{col 75}{space 3} .0022864
+{txt}{space 11}educ_good {c |}{col 22}{res}{space 2} .0938914{col 34}{space 2} .0342651{col 45}{space 1}    2.74{col 54}{space 3}0.007{col 62}{space 4} .0262573{col 75}{space 3} .1615256
+{txt}{space 11}_Ivilid_2 {c |}{col 22}{res}{space 2}-.3924125{col 34}{space 2} .1010118{col 45}{space 1}   -3.88{col 54}{space 3}0.000{col 62}{space 4}-.5917949{col 75}{space 3}  -.19303
+{txt}{space 11}_Ivilid_3 {c |}{col 22}{res}{space 2}-.1828188{col 34}{space 2} .0328747{col 45}{space 1}   -5.56{col 54}{space 3}0.000{col 62}{space 4}-.2477087{col 75}{space 3} -.117929
+{txt}{space 11}_Ivilid_4 {c |}{col 22}{res}{space 2}-.2470334{col 34}{space 2} .0457009{col 45}{space 1}   -5.41{col 54}{space 3}0.000{col 62}{space 4}-.3372401{col 75}{space 3}-.1568266
+{txt}{space 11}_Ivilid_5 {c |}{col 22}{res}{space 2}-.1664581{col 34}{space 2} .1473993{col 45}{space 1}   -1.13{col 54}{space 3}0.260{col 62}{space 4}-.4574025{col 75}{space 3} .1244864
+{txt}{space 11}_Ivilid_6 {c |}{col 22}{res}{space 2} .2263846{col 34}{space 2} .0213732{col 45}{space 1}   10.59{col 54}{space 3}0.000{col 62}{space 4}  .184197{col 75}{space 3} .2685721
+{txt}{space 11}_Ivilid_7 {c |}{col 22}{res}{space 2}-.2635023{col 34}{space 2}  .058089{col 45}{space 1}   -4.54{col 54}{space 3}0.000{col 62}{space 4}-.3781614{col 75}{space 3}-.1488432
+{txt}{space 11}_Ivilid_8 {c |}{col 22}{res}{space 2}-.2400628{col 34}{space 2} .0962245{col 45}{space 1}   -2.49{col 54}{space 3}0.014{col 62}{space 4}-.4299958{col 75}{space 3}-.0501299
+{txt}{space 11}_Ivilid_9 {c |}{col 22}{res}{space 2} -.264666{col 34}{space 2} .0934788{col 45}{space 1}   -2.83{col 54}{space 3}0.005{col 62}{space 4}-.4491793{col 75}{space 3}-.0801528
+{txt}{space 10}_Ivilid_10 {c |}{col 22}{res}{space 2}-.2782901{col 34}{space 2} .1129773{col 45}{space 1}   -2.46{col 54}{space 3}0.015{col 62}{space 4}-.5012906{col 75}{space 3}-.0552896
+{txt}{space 10}_Ivilid_11 {c |}{col 22}{res}{space 2}-.1278523{col 34}{space 2} .0823421{col 45}{space 1}   -1.55{col 54}{space 3}0.122{col 62}{space 4}-.2903835{col 75}{space 3} .0346789
+{txt}{space 10}_Ivilid_12 {c |}{col 22}{res}{space 2} .0299951{col 34}{space 2} .1152061{col 45}{space 1}    0.26{col 54}{space 3}0.795{col 62}{space 4}-.1974047{col 75}{space 3} .2573949
+{txt}{space 10}_Ivilid_13 {c |}{col 22}{res}{space 2} .0005866{col 34}{space 2} .0854602{col 45}{space 1}    0.01{col 54}{space 3}0.995{col 62}{space 4}-.1680991{col 75}{space 3} .1692723
+{txt}{space 10}_Ivilid_14 {c |}{col 22}{res}{space 2}-.1493379{col 34}{space 2} .1045371{col 45}{space 1}   -1.43{col 54}{space 3}0.155{col 62}{space 4}-.3556787{col 75}{space 3}  .057003
+{txt}{space 10}_Ivilid_15 {c |}{col 22}{res}{space 2}  .109511{col 34}{space 2} .0705583{col 45}{space 1}    1.55{col 54}{space 3}0.122{col 62}{space 4}-.0297606{col 75}{space 3} .2487826
+{txt}{space 10}_Ivilid_16 {c |}{col 22}{res}{space 2}-.5003261{col 34}{space 2} .0117232{col 45}{space 1}  -42.68{col 54}{space 3}0.000{col 62}{space 4} -.523466{col 75}{space 3}-.4771861
+{txt}{space 10}_Ivilid_17 {c |}{col 22}{res}{space 2}-.3987804{col 34}{space 2} .0689677{col 45}{space 1}   -5.78{col 54}{space 3}0.000{col 62}{space 4}-.5349124{col 75}{space 3}-.2626484
+{txt}{space 10}_Ivilid_18 {c |}{col 22}{res}{space 2}  -.05636{col 34}{space 2} .1396582{col 45}{space 1}   -0.40{col 54}{space 3}0.687{col 62}{space 4}-.3320246{col 75}{space 3} .2193047
+{txt}{space 10}_Ivilid_19 {c |}{col 22}{res}{space 2} -.291899{col 34}{space 2} .0672791{col 45}{space 1}   -4.34{col 54}{space 3}0.000{col 62}{space 4}-.4246981{col 75}{space 3}   -.1591
+{txt}{space 10}_Ivilid_20 {c |}{col 22}{res}{space 2} -.120443{col 34}{space 2} .1205155{col 45}{space 1}   -1.00{col 54}{space 3}0.319{col 62}{space 4}-.3583227{col 75}{space 3} .1174367
+{txt}{space 10}_Ivilid_21 {c |}{col 22}{res}{space 2}-.2370603{col 34}{space 2} .0584211{col 45}{space 1}   -4.06{col 54}{space 3}0.000{col 62}{space 4}-.3523749{col 75}{space 3}-.1217456
+{txt}{space 10}_Ivilid_22 {c |}{col 22}{res}{space 2}-.2773728{col 34}{space 2} .1708986{col 45}{space 1}   -1.62{col 54}{space 3}0.106{col 62}{space 4}-.6147014{col 75}{space 3} .0599558
+{txt}{space 10}_Ivilid_23 {c |}{col 22}{res}{space 2}-.2283365{col 34}{space 2} .1226803{col 45}{space 1}   -1.86{col 54}{space 3}0.064{col 62}{space 4}-.4704894{col 75}{space 3} .0138163
+{txt}{space 10}_Ivilid_24 {c |}{col 22}{res}{space 2}-.1246784{col 34}{space 2} .0631782{col 45}{space 1}   -1.97{col 54}{space 3}0.050{col 62}{space 4}-.2493828{col 75}{space 3} .0000261
+{txt}{space 10}_Ivilid_25 {c |}{col 22}{res}{space 2} .0202698{col 34}{space 2} .0774014{col 45}{space 1}    0.26{col 54}{space 3}0.794{col 62}{space 4} -.132509{col 75}{space 3} .1730487
+{txt}{space 10}_Ivilid_26 {c |}{col 22}{res}{space 2} .0900335{col 34}{space 2} .1100005{col 45}{space 1}    0.82{col 54}{space 3}0.414{col 62}{space 4}-.1270912{col 75}{space 3} .3071583
+{txt}{space 10}_Ivilid_27 {c |}{col 22}{res}{space 2}-.1937836{col 34}{space 2} .0935729{col 45}{space 1}   -2.07{col 54}{space 3}0.040{col 62}{space 4}-.3784828{col 75}{space 3}-.0090844
+{txt}{space 10}_Ivilid_28 {c |}{col 22}{res}{space 2} .0676231{col 34}{space 2} .0748222{col 45}{space 1}    0.90{col 54}{space 3}0.367{col 62}{space 4}-.0800649{col 75}{space 3} .2153111
+{txt}{space 10}_Ivilid_29 {c |}{col 22}{res}{space 2}-.3610157{col 34}{space 2}  .088833{col 45}{space 1}   -4.06{col 54}{space 3}0.000{col 62}{space 4} -.536359{col 75}{space 3}-.1856725
+{txt}{space 10}_Ivilid_30 {c |}{col 22}{res}{space 2}-.2768951{col 34}{space 2} .0880994{col 45}{space 1}   -3.14{col 54}{space 3}0.002{col 62}{space 4}-.4507903{col 75}{space 3}-.1029999
+{txt}{space 10}_Ivilid_31 {c |}{col 22}{res}{space 2} .1158721{col 34}{space 2} .0205359{col 45}{space 1}    5.64{col 54}{space 3}0.000{col 62}{space 4} .0753373{col 75}{space 3}  .156407
+{txt}{space 10}_Ivilid_32 {c |}{col 22}{res}{space 2} .2410382{col 34}{space 2} .1062964{col 45}{space 1}    2.27{col 54}{space 3}0.025{col 62}{space 4} .0312249{col 75}{space 3} .4508515
+{txt}{space 10}_Ivilid_33 {c |}{col 22}{res}{space 2} .0672735{col 34}{space 2} .1323426{col 45}{space 1}    0.51{col 54}{space 3}0.612{col 62}{space 4}-.1939513{col 75}{space 3} .3284983
+{txt}{space 10}_Ivilid_34 {c |}{col 22}{res}{space 2}-.2633949{col 34}{space 2} .2278987{col 45}{space 1}   -1.16{col 54}{space 3}0.249{col 62}{space 4}-.7132333{col 75}{space 3} .1864434
+{txt}{space 10}_Ivilid_35 {c |}{col 22}{res}{space 2}-.1762989{col 34}{space 2} .0142781{col 45}{space 1}  -12.35{col 54}{space 3}0.000{col 62}{space 4}-.2044817{col 75}{space 3} -.148116
+{txt}{space 10}_Ivilid_36 {c |}{col 22}{res}{space 2}-.1748299{col 34}{space 2} .0352656{col 45}{space 1}   -4.96{col 54}{space 3}0.000{col 62}{space 4} -.244439{col 75}{space 3}-.1052207
+{txt}{space 10}_Ivilid_37 {c |}{col 22}{res}{space 2}-.2791964{col 34}{space 2} .0863922{col 45}{space 1}   -3.23{col 54}{space 3}0.001{col 62}{space 4}-.4497218{col 75}{space 3} -.108671
+{txt}{space 10}_Ivilid_38 {c |}{col 22}{res}{space 2} .0577737{col 34}{space 2}  .027181{col 45}{space 1}    2.13{col 54}{space 3}0.035{col 62}{space 4} .0041224{col 75}{space 3} .1114251
+{txt}{space 10}_Ivilid_39 {c |}{col 22}{res}{space 2}-.4030645{col 34}{space 2} .0646689{col 45}{space 1}   -6.23{col 54}{space 3}0.000{col 62}{space 4}-.5307113{col 75}{space 3}-.2754177
+{txt}{space 10}_Ivilid_40 {c |}{col 22}{res}{space 2}-.1403773{col 34}{space 2} .1056811{col 45}{space 1}   -1.33{col 54}{space 3}0.186{col 62}{space 4}-.3489761{col 75}{space 3} .0682216
+{txt}{space 10}_Ivilid_41 {c |}{col 22}{res}{space 2}-.0939161{col 34}{space 2} .0228419{col 45}{space 1}   -4.11{col 54}{space 3}0.000{col 62}{space 4}-.1390026{col 75}{space 3}-.0488297
+{txt}{space 10}_Ivilid_42 {c |}{col 22}{res}{space 2}-.3804682{col 34}{space 2} .0377401{col 45}{space 1}  -10.08{col 54}{space 3}0.000{col 62}{space 4}-.4549617{col 75}{space 3}-.3059747
+{txt}{space 10}_Ivilid_43 {c |}{col 22}{res}{space 2}  -.16672{col 34}{space 2} .0477162{col 45}{space 1}   -3.49{col 54}{space 3}0.001{col 62}{space 4}-.2609048{col 75}{space 3}-.0725352
+{txt}{space 10}_Ivilid_44 {c |}{col 22}{res}{space 2}-.4787976{col 34}{space 2} .0476459{col 45}{space 1}  -10.05{col 54}{space 3}0.000{col 62}{space 4}-.5728435{col 75}{space 3}-.3847517
+{txt}{space 10}_Ivilid_45 {c |}{col 22}{res}{space 2}-.0199414{col 34}{space 2} .1002981{col 45}{space 1}   -0.20{col 54}{space 3}0.843{col 62}{space 4} -.217915{col 75}{space 3} .1780323
+{txt}{space 10}_Ivilid_46 {c |}{col 22}{res}{space 2}-.3025909{col 34}{space 2} .0645808{col 45}{space 1}   -4.69{col 54}{space 3}0.000{col 62}{space 4}-.4300639{col 75}{space 3} -.175118
+{txt}{space 10}_Ivilid_47 {c |}{col 22}{res}{space 2}-.2712112{col 34}{space 2} .0957402{col 45}{space 1}   -2.83{col 54}{space 3}0.005{col 62}{space 4}-.4601882{col 75}{space 3}-.0822343
+{txt}{space 15}_cons {c |}{col 22}{res}{space 2} .3790967{col 34}{space 2} .0840263{col 45}{space 1}    4.51{col 54}{space 3}0.000{col 62}{space 4} .2132413{col 75}{space 3} .5449521
+{txt}{hline 21}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test intensive inter_intensive_educ
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_intensive_educ = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   15.39
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. outreg2 using `outputfile1'
+{txt}{browse `"TableA3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "TableA3.txt""':seeout}
+
+{com}. reg takeup_survey intensive inter_intensive_exp insurance_repay male age agpop ricearea_2010 literacy _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,137
+                                                {txt}{help j_robustsingular:F(50, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1269
+                                                {txt}Root MSE          =    {res} .46879
+
+{txt}{ralign 85:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 21}{c |}{col 33}    Robust
+{col 1}      takeup_survey{col 21}{c |} Coefficient{col 33}  std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}intensive {c |}{col 21}{res}{space 2}  .127858{col 33}{space 2} .0327611{col 44}{space 1}    3.90{col 53}{space 3}0.000{col 61}{space 4} .0631925{col 74}{space 3} .1925235
+{txt}inter_intensive_exp {c |}{col 21}{res}{space 2}  .033493{col 33}{space 2} .0455258{col 44}{space 1}    0.74{col 53}{space 3}0.463{col 61}{space 4}-.0563682{col 74}{space 3} .1233542
+{txt}{space 4}insurance_repay {c |}{col 21}{res}{space 2} .0237274{col 33}{space 2}  .032684{col 44}{space 1}    0.73{col 53}{space 3}0.469{col 61}{space 4}-.0407861{col 74}{space 3} .0882408
+{txt}{space 15}male {c |}{col 21}{res}{space 2} .0400201{col 33}{space 2} .0471824{col 44}{space 1}    0.85{col 53}{space 3}0.398{col 61}{space 4} -.053111{col 74}{space 3} .1331511
+{txt}{space 16}age {c |}{col 21}{res}{space 2} .0017503{col 33}{space 2}  .001075{col 44}{space 1}    1.63{col 53}{space 3}0.105{col 61}{space 4}-.0003715{col 74}{space 3} .0038721
+{txt}{space 14}agpop {c |}{col 21}{res}{space 2}-.0031501{col 33}{space 2} .0051945{col 44}{space 1}   -0.61{col 53}{space 3}0.545{col 61}{space 4}-.0134033{col 74}{space 3}  .007103
+{txt}{space 6}ricearea_2010 {c |}{col 21}{res}{space 2} .0007556{col 33}{space 2} .0007297{col 44}{space 1}    1.04{col 53}{space 3}0.302{col 61}{space 4}-.0006847{col 74}{space 3} .0021959
+{txt}{space 11}literacy {c |}{col 21}{res}{space 2} .0829524{col 33}{space 2} .0268016{col 44}{space 1}    3.10{col 53}{space 3}0.002{col 61}{space 4} .0300499{col 74}{space 3} .1358548
+{txt}{space 10}_Ivilid_2 {c |}{col 21}{res}{space 2}-.4107583{col 33}{space 2} .1090766{col 44}{space 1}   -3.77{col 53}{space 3}0.000{col 61}{space 4}-.6260592{col 74}{space 3}-.1954573
+{txt}{space 10}_Ivilid_3 {c |}{col 21}{res}{space 2}-.1914784{col 33}{space 2} .0343574{col 44}{space 1}   -5.57{col 53}{space 3}0.000{col 61}{space 4}-.2592948{col 74}{space 3} -.123662
+{txt}{space 10}_Ivilid_4 {c |}{col 21}{res}{space 2}-.2465776{col 33}{space 2} .0360918{col 44}{space 1}   -6.83{col 53}{space 3}0.000{col 61}{space 4}-.3178174{col 74}{space 3}-.1753377
+{txt}{space 10}_Ivilid_5 {c |}{col 21}{res}{space 2}-.1667951{col 33}{space 2} .1589223{col 44}{space 1}   -1.05{col 53}{space 3}0.295{col 61}{space 4}-.4804842{col 74}{space 3} .1468941
+{txt}{space 10}_Ivilid_6 {c |}{col 21}{res}{space 2} .2298177{col 33}{space 2} .0326422{col 44}{space 1}    7.04{col 53}{space 3}0.000{col 61}{space 4} .1653868{col 74}{space 3} .2942486
+{txt}{space 10}_Ivilid_7 {c |}{col 21}{res}{space 2}-.2664594{col 33}{space 2} .0594588{col 44}{space 1}   -4.48{col 53}{space 3}0.000{col 61}{space 4}-.3838222{col 74}{space 3}-.1490965
+{txt}{space 10}_Ivilid_8 {c |}{col 21}{res}{space 2}-.2404683{col 33}{space 2} .0962192{col 44}{space 1}   -2.50{col 53}{space 3}0.013{col 61}{space 4}-.4303907{col 74}{space 3}-.0505459
+{txt}{space 10}_Ivilid_9 {c |}{col 21}{res}{space 2}-.2604943{col 33}{space 2} .0934967{col 44}{space 1}   -2.79{col 53}{space 3}0.006{col 61}{space 4} -.445043{col 74}{space 3}-.0759455
+{txt}{space 9}_Ivilid_10 {c |}{col 21}{res}{space 2}-.2895084{col 33}{space 2} .1160684{col 44}{space 1}   -2.49{col 53}{space 3}0.014{col 61}{space 4}-.5186102{col 74}{space 3}-.0604066
+{txt}{space 9}_Ivilid_11 {c |}{col 21}{res}{space 2}-.1302685{col 33}{space 2} .0833145{col 44}{space 1}   -1.56{col 53}{space 3}0.120{col 61}{space 4} -.294719{col 74}{space 3} .0341821
+{txt}{space 9}_Ivilid_12 {c |}{col 21}{res}{space 2} .0171495{col 33}{space 2} .1132497{col 44}{space 1}    0.15{col 53}{space 3}0.880{col 61}{space 4}-.2063888{col 74}{space 3} .2406877
+{txt}{space 9}_Ivilid_13 {c |}{col 21}{res}{space 2}-.0016364{col 33}{space 2} .0822256{col 44}{space 1}   -0.02{col 53}{space 3}0.984{col 61}{space 4}-.1639376{col 74}{space 3} .1606647
+{txt}{space 9}_Ivilid_14 {c |}{col 21}{res}{space 2}-.1534508{col 33}{space 2} .1060719{col 44}{space 1}   -1.45{col 53}{space 3}0.150{col 61}{space 4} -.362821{col 74}{space 3} .0559194
+{txt}{space 9}_Ivilid_15 {c |}{col 21}{res}{space 2} .1013376{col 33}{space 2} .0690912{col 44}{space 1}    1.47{col 53}{space 3}0.144{col 61}{space 4}-.0350382{col 74}{space 3} .2377134
+{txt}{space 9}_Ivilid_16 {c |}{col 21}{res}{space 2}-.5141202{col 33}{space 2} .0158828{col 44}{space 1}  -32.37{col 53}{space 3}0.000{col 61}{space 4}-.5454704{col 74}{space 3}  -.48277
+{txt}{space 9}_Ivilid_17 {c |}{col 21}{res}{space 2}-.4052326{col 33}{space 2} .0693938{col 44}{space 1}   -5.84{col 53}{space 3}0.000{col 61}{space 4}-.5422057{col 74}{space 3}-.2682594
+{txt}{space 9}_Ivilid_18 {c |}{col 21}{res}{space 2}-.0632822{col 33}{space 2} .1436794{col 44}{space 1}   -0.44{col 53}{space 3}0.660{col 61}{space 4}-.3468841{col 74}{space 3} .2203198
+{txt}{space 9}_Ivilid_19 {c |}{col 21}{res}{space 2}-.2894079{col 33}{space 2} .0726712{col 44}{space 1}   -3.98{col 53}{space 3}0.000{col 61}{space 4}  -.43285{col 74}{space 3}-.1459657
+{txt}{space 9}_Ivilid_20 {c |}{col 21}{res}{space 2}-.1235664{col 33}{space 2} .1222996{col 44}{space 1}   -1.01{col 53}{space 3}0.314{col 61}{space 4}-.3649678{col 74}{space 3}  .117835
+{txt}{space 9}_Ivilid_21 {c |}{col 21}{res}{space 2}-.2362791{col 33}{space 2} .0596984{col 44}{space 1}   -3.96{col 53}{space 3}0.000{col 61}{space 4} -.354115{col 74}{space 3}-.1184432
+{txt}{space 9}_Ivilid_22 {c |}{col 21}{res}{space 2}-.2838984{col 33}{space 2}  .167139{col 44}{space 1}   -1.70{col 53}{space 3}0.091{col 61}{space 4}-.6138061{col 74}{space 3} .0460093
+{txt}{space 9}_Ivilid_23 {c |}{col 21}{res}{space 2}-.2629378{col 33}{space 2} .1106788{col 44}{space 1}   -2.38{col 53}{space 3}0.019{col 61}{space 4}-.4814014{col 74}{space 3}-.0444743
+{txt}{space 9}_Ivilid_24 {c |}{col 21}{res}{space 2}-.1200624{col 33}{space 2} .0675166{col 44}{space 1}   -1.78{col 53}{space 3}0.077{col 61}{space 4}-.2533301{col 74}{space 3} .0132053
+{txt}{space 9}_Ivilid_25 {c |}{col 21}{res}{space 2} .0124229{col 33}{space 2} .0753865{col 44}{space 1}    0.16{col 53}{space 3}0.869{col 61}{space 4}-.1363789{col 74}{space 3} .1612247
+{txt}{space 9}_Ivilid_26 {c |}{col 21}{res}{space 2} .0873795{col 33}{space 2}  .114238{col 44}{space 1}    0.76{col 53}{space 3}0.445{col 61}{space 4}-.1381094{col 74}{space 3} .3128684
+{txt}{space 9}_Ivilid_27 {c |}{col 21}{res}{space 2}-.1986934{col 33}{space 2} .1000027{col 44}{space 1}   -1.99{col 53}{space 3}0.049{col 61}{space 4} -.396084{col 74}{space 3}-.0013028
+{txt}{space 9}_Ivilid_28 {c |}{col 21}{res}{space 2} .0704438{col 33}{space 2} .0824269{col 44}{space 1}    0.85{col 53}{space 3}0.394{col 61}{space 4}-.0922547{col 74}{space 3} .2331424
+{txt}{space 9}_Ivilid_29 {c |}{col 21}{res}{space 2}-.3768161{col 33}{space 2}  .079414{col 44}{space 1}   -4.74{col 53}{space 3}0.000{col 61}{space 4}-.5335676{col 74}{space 3}-.2200646
+{txt}{space 9}_Ivilid_30 {c |}{col 21}{res}{space 2}-.2713781{col 33}{space 2} .0877751{col 44}{space 1}   -3.09{col 53}{space 3}0.002{col 61}{space 4}-.4446332{col 74}{space 3} -.098123
+{txt}{space 9}_Ivilid_31 {c |}{col 21}{res}{space 2}  .079448{col 33}{space 2} .0216503{col 44}{space 1}    3.67{col 53}{space 3}0.000{col 61}{space 4} .0367134{col 74}{space 3} .1221826
+{txt}{space 9}_Ivilid_32 {c |}{col 21}{res}{space 2} .2304637{col 33}{space 2} .1126863{col 44}{space 1}    2.05{col 53}{space 3}0.042{col 61}{space 4} .0080376{col 74}{space 3} .4528899
+{txt}{space 9}_Ivilid_33 {c |}{col 21}{res}{space 2} .0845458{col 33}{space 2} .1326105{col 44}{space 1}    0.64{col 53}{space 3}0.525{col 61}{space 4}-.1772077{col 74}{space 3} .3462993
+{txt}{space 9}_Ivilid_34 {c |}{col 21}{res}{space 2} -.264365{col 33}{space 2} .2183171{col 44}{space 1}   -1.21{col 53}{space 3}0.228{col 61}{space 4}-.6952906{col 74}{space 3} .1665607
+{txt}{space 9}_Ivilid_35 {c |}{col 21}{res}{space 2}-.1784256{col 33}{space 2} .0148203{col 44}{space 1}  -12.04{col 53}{space 3}0.000{col 61}{space 4}-.2076788{col 74}{space 3}-.1491725
+{txt}{space 9}_Ivilid_36 {c |}{col 21}{res}{space 2} -.185717{col 33}{space 2} .0434438{col 44}{space 1}   -4.27{col 53}{space 3}0.000{col 61}{space 4}-.2714686{col 74}{space 3}-.0999655
+{txt}{space 9}_Ivilid_37 {c |}{col 21}{res}{space 2}-.2812058{col 33}{space 2} .0876131{col 44}{space 1}   -3.21{col 53}{space 3}0.002{col 61}{space 4}-.4541412{col 74}{space 3}-.1082705
+{txt}{space 9}_Ivilid_38 {c |}{col 21}{res}{space 2} .0542065{col 33}{space 2} .0277862{col 44}{space 1}    1.95{col 53}{space 3}0.053{col 61}{space 4}-.0006394{col 74}{space 3} .1090524
+{txt}{space 9}_Ivilid_39 {c |}{col 21}{res}{space 2}-.4257215{col 33}{space 2} .0306013{col 44}{space 1}  -13.91{col 53}{space 3}0.000{col 61}{space 4} -.486124{col 74}{space 3} -.365319
+{txt}{space 9}_Ivilid_40 {c |}{col 21}{res}{space 2}-.1438472{col 33}{space 2} .1082382{col 44}{space 1}   -1.33{col 53}{space 3}0.186{col 61}{space 4}-.3574934{col 74}{space 3}  .069799
+{txt}{space 9}_Ivilid_41 {c |}{col 21}{res}{space 2}-.0831759{col 33}{space 2} .0231377{col 44}{space 1}   -3.59{col 53}{space 3}0.000{col 61}{space 4}-.1288463{col 74}{space 3}-.0375054
+{txt}{space 9}_Ivilid_42 {c |}{col 21}{res}{space 2}-.3855601{col 33}{space 2} .0369485{col 44}{space 1}  -10.44{col 53}{space 3}0.000{col 61}{space 4}-.4584909{col 74}{space 3}-.3126294
+{txt}{space 9}_Ivilid_43 {c |}{col 21}{res}{space 2} -.166166{col 33}{space 2} .0546469{col 44}{space 1}   -3.04{col 53}{space 3}0.003{col 61}{space 4} -.274031{col 74}{space 3} -.058301
+{txt}{space 9}_Ivilid_44 {c |}{col 21}{res}{space 2}-.4836683{col 33}{space 2} .0472747{col 44}{space 1}  -10.23{col 53}{space 3}0.000{col 61}{space 4}-.5769815{col 74}{space 3} -.390355
+{txt}{space 9}_Ivilid_45 {c |}{col 21}{res}{space 2}-.0243233{col 33}{space 2}  .098387{col 44}{space 1}   -0.25{col 53}{space 3}0.805{col 61}{space 4}-.2185247{col 74}{space 3} .1698782
+{txt}{space 9}_Ivilid_46 {c |}{col 21}{res}{space 2}-.3051374{col 33}{space 2}  .064385{col 44}{space 1}   -4.74{col 53}{space 3}0.000{col 61}{space 4}-.4322238{col 74}{space 3}-.1780509
+{txt}{space 9}_Ivilid_47 {c |}{col 21}{res}{space 2}-.2843394{col 33}{space 2} .1016203{col 44}{space 1}   -2.80{col 53}{space 3}0.006{col 61}{space 4}-.4849228{col 74}{space 3} -.083756
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .3570586{col 33}{space 2} .0871084{col 44}{space 1}    4.10{col 53}{space 3}0.000{col 61}{space 4} .1851195{col 74}{space 3} .5289977
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test intensive inter_intensive_exp
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_intensive_exp = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   15.32
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. outreg2 using `outputfile1'
+{txt}{browse `"TableA3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "TableA3.txt""':seeout}
+
+{com}. reg takeup_survey intensive inter_intensive_risk risk_averse male age agpop ricearea_2010 literacy _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,137
+                                                {txt}{help j_robustsingular:F(50, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1254
+                                                {txt}Root MSE          =    {res} .46921
+
+{txt}{ralign 86:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 21}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 22}{c |}{col 34}    Robust
+{col 1}       takeup_survey{col 22}{c |} Coefficient{col 34}  std. err.{col 46}      t{col 54}   P>|t|{col 62}     [95% con{col 75}f. interval]
+{hline 21}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}intensive {c |}{col 22}{res}{space 2} .1308669{col 34}{space 2} .0303061{col 45}{space 1}    4.32{col 54}{space 3}0.000{col 62}{space 4} .0710471{col 75}{space 3} .1906868
+{txt}inter_intensive_risk {c |}{col 22}{res}{space 2}  .048197{col 34}{space 2}  .070155{col 45}{space 1}    0.69{col 54}{space 3}0.493{col 62}{space 4}-.0902786{col 75}{space 3} .1866726
+{txt}{space 9}risk_averse {c |}{col 22}{res}{space 2} -.021768{col 34}{space 2} .0483363{col 45}{space 1}   -0.45{col 54}{space 3}0.653{col 62}{space 4}-.1171767{col 75}{space 3} .0736407
+{txt}{space 16}male {c |}{col 22}{res}{space 2}  .040878{col 34}{space 2} .0474395{col 45}{space 1}    0.86{col 54}{space 3}0.390{col 62}{space 4}-.0527606{col 75}{space 3} .1345166
+{txt}{space 17}age {c |}{col 22}{res}{space 2}  .001785{col 34}{space 2}  .001058{col 45}{space 1}    1.69{col 54}{space 3}0.093{col 62}{space 4}-.0003033{col 75}{space 3} .0038732
+{txt}{space 15}agpop {c |}{col 22}{res}{space 2} -.003089{col 34}{space 2} .0052036{col 45}{space 1}   -0.59{col 54}{space 3}0.554{col 62}{space 4}-.0133602{col 75}{space 3} .0071821
+{txt}{space 7}ricearea_2010 {c |}{col 22}{res}{space 2} .0007857{col 34}{space 2}  .000754{col 45}{space 1}    1.04{col 54}{space 3}0.299{col 62}{space 4}-.0007026{col 75}{space 3}  .002274
+{txt}{space 12}literacy {c |}{col 22}{res}{space 2} .0836422{col 34}{space 2} .0269633{col 45}{space 1}    3.10{col 54}{space 3}0.002{col 62}{space 4} .0304207{col 75}{space 3} .1368637
+{txt}{space 11}_Ivilid_2 {c |}{col 22}{res}{space 2}-.4145949{col 34}{space 2}  .106718{col 45}{space 1}   -3.88{col 54}{space 3}0.000{col 62}{space 4}-.6252406{col 75}{space 3}-.2039493
+{txt}{space 11}_Ivilid_3 {c |}{col 22}{res}{space 2}-.1933038{col 34}{space 2} .0321582{col 45}{space 1}   -6.01{col 54}{space 3}0.000{col 62}{space 4}-.2567793{col 75}{space 3}-.1298284
+{txt}{space 11}_Ivilid_4 {c |}{col 22}{res}{space 2}-.2452053{col 34}{space 2} .0370455{col 45}{space 1}   -6.62{col 54}{space 3}0.000{col 62}{space 4}-.3183276{col 75}{space 3}-.1720829
+{txt}{space 11}_Ivilid_5 {c |}{col 22}{res}{space 2}-.1668373{col 34}{space 2} .1530659{col 45}{space 1}   -1.09{col 54}{space 3}0.277{col 62}{space 4}-.4689668{col 75}{space 3} .1352921
+{txt}{space 11}_Ivilid_6 {c |}{col 22}{res}{space 2} .2342821{col 34}{space 2} .0300929{col 45}{space 1}    7.79{col 54}{space 3}0.000{col 62}{space 4} .1748832{col 75}{space 3} .2936809
+{txt}{space 11}_Ivilid_7 {c |}{col 22}{res}{space 2} -.260182{col 34}{space 2} .0596918{col 45}{space 1}   -4.36{col 54}{space 3}0.000{col 62}{space 4}-.3780047{col 75}{space 3}-.1423592
+{txt}{space 11}_Ivilid_8 {c |}{col 22}{res}{space 2}-.2334797{col 34}{space 2} .0963776{col 45}{space 1}   -2.42{col 54}{space 3}0.016{col 62}{space 4}-.4237148{col 75}{space 3}-.0432446
+{txt}{space 11}_Ivilid_9 {c |}{col 22}{res}{space 2} -.255177{col 34}{space 2} .0957876{col 45}{space 1}   -2.66{col 54}{space 3}0.008{col 62}{space 4}-.4442476{col 75}{space 3}-.0661064
+{txt}{space 10}_Ivilid_10 {c |}{col 22}{res}{space 2}-.2837514{col 34}{space 2} .1173568{col 45}{space 1}   -2.42{col 54}{space 3}0.017{col 62}{space 4}-.5153964{col 75}{space 3}-.0521064
+{txt}{space 10}_Ivilid_11 {c |}{col 22}{res}{space 2}-.1284165{col 34}{space 2} .0821566{col 45}{space 1}   -1.56{col 54}{space 3}0.120{col 62}{space 4}-.2905814{col 75}{space 3} .0337484
+{txt}{space 10}_Ivilid_12 {c |}{col 22}{res}{space 2}  .022195{col 34}{space 2} .1136482{col 45}{space 1}    0.20{col 54}{space 3}0.845{col 62}{space 4}-.2021298{col 75}{space 3} .2465198
+{txt}{space 10}_Ivilid_13 {c |}{col 22}{res}{space 2} .0012985{col 34}{space 2} .0832527{col 45}{space 1}    0.02{col 54}{space 3}0.988{col 62}{space 4}  -.16303{col 75}{space 3}  .165627
+{txt}{space 10}_Ivilid_14 {c |}{col 22}{res}{space 2}-.1526796{col 34}{space 2} .1064636{col 45}{space 1}   -1.43{col 54}{space 3}0.153{col 62}{space 4}-.3628229{col 75}{space 3} .0574637
+{txt}{space 10}_Ivilid_15 {c |}{col 22}{res}{space 2} .1177303{col 34}{space 2} .0691396{col 45}{space 1}    1.70{col 54}{space 3}0.090{col 62}{space 4} -.018741{col 75}{space 3} .2542016
+{txt}{space 10}_Ivilid_16 {c |}{col 22}{res}{space 2}-.5006428{col 34}{space 2}  .014323{col 45}{space 1}  -34.95{col 54}{space 3}0.000{col 62}{space 4}-.5289142{col 75}{space 3}-.4723713
+{txt}{space 10}_Ivilid_17 {c |}{col 22}{res}{space 2}-.4069829{col 34}{space 2} .0676874{col 45}{space 1}   -6.01{col 54}{space 3}0.000{col 62}{space 4}-.5405879{col 75}{space 3}-.2733779
+{txt}{space 10}_Ivilid_18 {c |}{col 22}{res}{space 2}-.0565111{col 34}{space 2} .1464135{col 45}{space 1}   -0.39{col 54}{space 3}0.700{col 62}{space 4}-.3455098{col 75}{space 3} .2324875
+{txt}{space 10}_Ivilid_19 {c |}{col 22}{res}{space 2}-.2926953{col 34}{space 2} .0707314{col 45}{space 1}   -4.14{col 54}{space 3}0.000{col 62}{space 4}-.4323087{col 75}{space 3} -.153082
+{txt}{space 10}_Ivilid_20 {c |}{col 22}{res}{space 2}-.1320283{col 34}{space 2} .1223206{col 45}{space 1}   -1.08{col 54}{space 3}0.282{col 62}{space 4}-.3734711{col 75}{space 3} .1094144
+{txt}{space 10}_Ivilid_21 {c |}{col 22}{res}{space 2}-.2451061{col 34}{space 2} .0588311{col 45}{space 1}   -4.17{col 54}{space 3}0.000{col 62}{space 4}-.3612301{col 75}{space 3}-.1289822
+{txt}{space 10}_Ivilid_22 {c |}{col 22}{res}{space 2}-.2848646{col 34}{space 2} .1699676{col 45}{space 1}   -1.68{col 54}{space 3}0.096{col 62}{space 4}-.6203555{col 75}{space 3} .0506263
+{txt}{space 10}_Ivilid_23 {c |}{col 22}{res}{space 2}-.2520551{col 34}{space 2} .1062719{col 45}{space 1}   -2.37{col 54}{space 3}0.019{col 62}{space 4}-.4618201{col 75}{space 3}-.0422901
+{txt}{space 10}_Ivilid_24 {c |}{col 22}{res}{space 2}-.1183698{col 34}{space 2}  .065652{col 45}{space 1}   -1.80{col 54}{space 3}0.073{col 62}{space 4}-.2479571{col 75}{space 3} .0112176
+{txt}{space 10}_Ivilid_25 {c |}{col 22}{res}{space 2} .0251852{col 34}{space 2} .0742234{col 45}{space 1}    0.34{col 54}{space 3}0.735{col 62}{space 4}-.1213208{col 75}{space 3} .1716912
+{txt}{space 10}_Ivilid_26 {c |}{col 22}{res}{space 2} .0959508{col 34}{space 2} .1132528{col 45}{space 1}    0.85{col 54}{space 3}0.398{col 62}{space 4}-.1275934{col 75}{space 3}  .319495
+{txt}{space 10}_Ivilid_27 {c |}{col 22}{res}{space 2}-.1903185{col 34}{space 2} .0957209{col 45}{space 1}   -1.99{col 54}{space 3}0.048{col 62}{space 4}-.3792574{col 75}{space 3}-.0013797
+{txt}{space 10}_Ivilid_28 {c |}{col 22}{res}{space 2} .0697788{col 34}{space 2} .0839153{col 45}{space 1}    0.83{col 54}{space 3}0.407{col 62}{space 4}-.0958577{col 75}{space 3} .2354152
+{txt}{space 10}_Ivilid_29 {c |}{col 22}{res}{space 2}-.3819315{col 34}{space 2} .0821159{col 45}{space 1}   -4.65{col 54}{space 3}0.000{col 62}{space 4} -.544016{col 75}{space 3}-.2198469
+{txt}{space 10}_Ivilid_30 {c |}{col 22}{res}{space 2}-.2724462{col 34}{space 2} .0878759{col 45}{space 1}   -3.10{col 54}{space 3}0.002{col 62}{space 4}-.4459002{col 75}{space 3}-.0989923
+{txt}{space 10}_Ivilid_31 {c |}{col 22}{res}{space 2} .0916489{col 34}{space 2} .0204571{col 45}{space 1}    4.48{col 54}{space 3}0.000{col 62}{space 4} .0512697{col 75}{space 3} .1320281
+{txt}{space 10}_Ivilid_32 {c |}{col 22}{res}{space 2} .2417287{col 34}{space 2} .1113355{col 45}{space 1}    2.17{col 54}{space 3}0.031{col 62}{space 4} .0219688{col 75}{space 3} .4614885
+{txt}{space 10}_Ivilid_33 {c |}{col 22}{res}{space 2}  .093216{col 34}{space 2} .1355574{col 45}{space 1}    0.69{col 54}{space 3}0.493{col 62}{space 4}-.1743542{col 75}{space 3} .3607862
+{txt}{space 10}_Ivilid_34 {c |}{col 22}{res}{space 2}-.2625838{col 34}{space 2} .2203914{col 45}{space 1}   -1.19{col 54}{space 3}0.235{col 62}{space 4}-.6976037{col 75}{space 3} .1724362
+{txt}{space 10}_Ivilid_35 {c |}{col 22}{res}{space 2}-.1706294{col 34}{space 2} .0158532{col 45}{space 1}  -10.76{col 54}{space 3}0.000{col 62}{space 4}-.2019212{col 75}{space 3}-.1393375
+{txt}{space 10}_Ivilid_36 {c |}{col 22}{res}{space 2}-.1822766{col 34}{space 2} .0440481{col 45}{space 1}   -4.14{col 54}{space 3}0.000{col 62}{space 4} -.269221{col 75}{space 3}-.0953322
+{txt}{space 10}_Ivilid_37 {c |}{col 22}{res}{space 2}-.2834976{col 34}{space 2} .0872374{col 45}{space 1}   -3.25{col 54}{space 3}0.001{col 62}{space 4}-.4556914{col 75}{space 3}-.1113038
+{txt}{space 10}_Ivilid_38 {c |}{col 22}{res}{space 2}  .061783{col 34}{space 2} .0287699{col 45}{space 1}    2.15{col 54}{space 3}0.033{col 62}{space 4} .0049955{col 75}{space 3} .1185706
+{txt}{space 10}_Ivilid_39 {c |}{col 22}{res}{space 2}-.4253013{col 34}{space 2}  .029585{col 45}{space 1}  -14.38{col 54}{space 3}0.000{col 62}{space 4}-.4836978{col 75}{space 3}-.3669049
+{txt}{space 10}_Ivilid_40 {c |}{col 22}{res}{space 2}-.1489616{col 34}{space 2} .1075296{col 45}{space 1}   -1.39{col 54}{space 3}0.168{col 62}{space 4}-.3612091{col 75}{space 3} .0632859
+{txt}{space 10}_Ivilid_41 {c |}{col 22}{res}{space 2}-.0908835{col 34}{space 2} .0251546{col 45}{space 1}   -3.61{col 54}{space 3}0.000{col 62}{space 4}-.1405351{col 75}{space 3}-.0412319
+{txt}{space 10}_Ivilid_42 {c |}{col 22}{res}{space 2}-.3916204{col 34}{space 2} .0375276{col 45}{space 1}  -10.44{col 54}{space 3}0.000{col 62}{space 4}-.4656944{col 75}{space 3}-.3175465
+{txt}{space 10}_Ivilid_43 {c |}{col 22}{res}{space 2}-.1593396{col 34}{space 2} .0520894{col 45}{space 1}   -3.06{col 54}{space 3}0.003{col 62}{space 4}-.2621564{col 75}{space 3}-.0565227
+{txt}{space 10}_Ivilid_44 {c |}{col 22}{res}{space 2}-.4820108{col 34}{space 2} .0495546{col 45}{space 1}   -9.73{col 54}{space 3}0.000{col 62}{space 4}-.5798243{col 75}{space 3}-.3841973
+{txt}{space 10}_Ivilid_45 {c |}{col 22}{res}{space 2}-.0245082{col 34}{space 2} .0971386{col 45}{space 1}   -0.25{col 54}{space 3}0.801{col 62}{space 4}-.2162454{col 75}{space 3} .1672291
+{txt}{space 10}_Ivilid_46 {c |}{col 22}{res}{space 2}-.3069724{col 34}{space 2} .0651136{col 45}{space 1}   -4.71{col 54}{space 3}0.000{col 62}{space 4}-.4354969{col 75}{space 3}-.1784479
+{txt}{space 10}_Ivilid_47 {c |}{col 22}{res}{space 2}-.2873025{col 34}{space 2}  .101752{col 45}{space 1}   -2.82{col 54}{space 3}0.005{col 62}{space 4}-.4881459{col 75}{space 3}-.0864592
+{txt}{space 15}_cons {c |}{col 22}{res}{space 2} .3667824{col 34}{space 2} .0870733{col 45}{space 1}    4.21{col 54}{space 3}0.000{col 62}{space 4} .1949125{col 75}{space 3} .5386522
+{txt}{hline 21}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test intensive inter_intensive_risk
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_intensive_risk = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   15.01
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. outreg2 using `outputfile1'
+{txt}{browse `"TableA3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "TableA3.txt""':seeout}
+
+{com}. reg takeup_survey intensive inter_intensive_day day male age agpop ricearea_2010 literacy _Ivilid* if delay == 0, cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,137
+                                                {txt}{help j_robustsingular:F(50, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1274
+                                                {txt}Root MSE          =    {res} .46867
+
+{txt}{ralign 85:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 21}{c |}{col 33}    Robust
+{col 1}      takeup_survey{col 21}{c |} Coefficient{col 33}  std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}intensive {c |}{col 21}{res}{space 2} .1960568{col 33}{space 2}  .057646{col 44}{space 1}    3.40{col 53}{space 3}0.001{col 61}{space 4} .0822721{col 74}{space 3} .3098416
+{txt}inter_intensive_day {c |}{col 21}{res}{space 2}-.0027918{col 33}{space 2} .0023436{col 44}{space 1}   -1.19{col 53}{space 3}0.235{col 61}{space 4}-.0074177{col 74}{space 3} .0018341
+{txt}{space 16}day {c |}{col 21}{res}{space 2}-.0139064{col 33}{space 2} .0111612{col 44}{space 1}   -1.25{col 53}{space 3}0.214{col 61}{space 4} -.035937{col 74}{space 3} .0081242
+{txt}{space 15}male {c |}{col 21}{res}{space 2} .0355823{col 33}{space 2} .0475437{col 44}{space 1}    0.75{col 53}{space 3}0.455{col 61}{space 4}-.0582619{col 74}{space 3} .1294266
+{txt}{space 16}age {c |}{col 21}{res}{space 2} .0018364{col 33}{space 2}  .001061{col 44}{space 1}    1.73{col 53}{space 3}0.085{col 61}{space 4}-.0002578{col 74}{space 3} .0039305
+{txt}{space 14}agpop {c |}{col 21}{res}{space 2}  -.00329{col 33}{space 2} .0051889{col 44}{space 1}   -0.63{col 53}{space 3}0.527{col 61}{space 4}-.0135321{col 74}{space 3} .0069521
+{txt}{space 6}ricearea_2010 {c |}{col 21}{res}{space 2} .0008123{col 33}{space 2} .0007739{col 44}{space 1}    1.05{col 53}{space 3}0.295{col 61}{space 4}-.0007152{col 74}{space 3} .0023399
+{txt}{space 11}literacy {c |}{col 21}{res}{space 2} .0842239{col 33}{space 2} .0267662{col 44}{space 1}    3.15{col 53}{space 3}0.002{col 61}{space 4} .0313913{col 74}{space 3} .1370565
+{txt}{space 10}_Ivilid_2 {c |}{col 21}{res}{space 2}-.6675013{col 33}{space 2} .2147038{col 44}{space 1}   -3.11{col 53}{space 3}0.002{col 61}{space 4}-1.091295{col 74}{space 3}-.2437077
+{txt}{space 10}_Ivilid_3 {c |}{col 21}{res}{space 2}-.3609265{col 33}{space 2} .1263957{col 44}{space 1}   -2.86{col 53}{space 3}0.005{col 61}{space 4}-.6104131{col 74}{space 3}  -.11144
+{txt}{space 10}_Ivilid_4 {c |}{col 21}{res}{space 2}-.5926824{col 33}{space 2} .2567715{col 44}{space 1}   -2.31{col 53}{space 3}0.022{col 61}{space 4}-1.099511{col 74}{space 3}-.0858534
+{txt}{space 10}_Ivilid_5 {c |}{col 21}{res}{space 2}-.1518918{col 33}{space 2} .1522394{col 44}{space 1}   -1.00{col 53}{space 3}0.320{col 61}{space 4}-.4523899{col 74}{space 3} .1486062
+{txt}{space 10}_Ivilid_6 {c |}{col 21}{res}{space 2}  .295198{col 33}{space 2} .0520723{col 44}{space 1}    5.67{col 53}{space 3}0.000{col 61}{space 4} .1924149{col 74}{space 3} .3979811
+{txt}{space 10}_Ivilid_7 {c |}{col 21}{res}{space 2}-.1438379{col 33}{space 2} .0980409{col 44}{space 1}   -1.47{col 53}{space 3}0.144{col 61}{space 4}-.3373562{col 74}{space 3} .0496804
+{txt}{space 10}_Ivilid_8 {c |}{col 21}{res}{space 2}-.2812499{col 33}{space 2} .0979928{col 44}{space 1}   -2.87{col 53}{space 3}0.005{col 61}{space 4}-.4746733{col 74}{space 3}-.0878266
+{txt}{space 10}_Ivilid_9 {c |}{col 21}{res}{space 2}-.3287199{col 33}{space 2} .1114428{col 44}{space 1}   -2.95{col 53}{space 3}0.004{col 61}{space 4}-.5486914{col 74}{space 3}-.1087483
+{txt}{space 9}_Ivilid_10 {c |}{col 21}{res}{space 2}  .006914{col 33}{space 2} .2369532{col 44}{space 1}    0.03{col 53}{space 3}0.977{col 61}{space 4}-.4607966{col 74}{space 3} .4746245
+{txt}{space 9}_Ivilid_11 {c |}{col 21}{res}{space 2}-.5091777{col 33}{space 2} .2900389{col 44}{space 1}   -1.76{col 53}{space 3}0.081{col 61}{space 4}-1.081672{col 74}{space 3} .0633163
+{txt}{space 9}_Ivilid_12 {c |}{col 21}{res}{space 2}-.4046711{col 33}{space 2} .3339328{col 44}{space 1}   -1.21{col 53}{space 3}0.227{col 61}{space 4}-1.063805{col 74}{space 3} .2544629
+{txt}{space 9}_Ivilid_13 {c |}{col 21}{res}{space 2}-.0811732{col 33}{space 2} .1033786{col 44}{space 1}   -0.79{col 53}{space 3}0.433{col 61}{space 4}-.2852273{col 74}{space 3}  .122881
+{txt}{space 9}_Ivilid_14 {c |}{col 21}{res}{space 2}-.4096972{col 33}{space 2} .2186097{col 44}{space 1}   -1.87{col 53}{space 3}0.063{col 61}{space 4}-.8412005{col 74}{space 3}  .021806
+{txt}{space 9}_Ivilid_15 {c |}{col 21}{res}{space 2}-.0355061{col 33}{space 2} .1289692{col 44}{space 1}   -0.28{col 53}{space 3}0.783{col 61}{space 4}-.2900723{col 74}{space 3} .2190601
+{txt}{space 9}_Ivilid_16 {c |}{col 21}{res}{space 2}  -.51549{col 33}{space 2} .0157237{col 44}{space 1}  -32.78{col 53}{space 3}0.000{col 61}{space 4}-.5465264{col 74}{space 3}-.4844537
+{txt}{space 9}_Ivilid_17 {c |}{col 21}{res}{space 2}-.5902983{col 33}{space 2} .1523977{col 44}{space 1}   -3.87{col 53}{space 3}0.000{col 61}{space 4}-.8911088{col 74}{space 3}-.2894878
+{txt}{space 9}_Ivilid_18 {c |}{col 21}{res}{space 2} -.006259{col 33}{space 2} .1320735{col 44}{space 1}   -0.05{col 53}{space 3}0.962{col 61}{space 4}-.2669526{col 74}{space 3} .2544347
+{txt}{space 9}_Ivilid_19 {c |}{col 21}{res}{space 2}-.4140871{col 33}{space 2} .1055201{col 44}{space 1}   -3.92{col 53}{space 3}0.000{col 61}{space 4}-.6223682{col 74}{space 3}-.2058061
+{txt}{space 9}_Ivilid_20 {c |}{col 21}{res}{space 2}-.4520337{col 33}{space 2} .2626803{col 44}{space 1}   -1.72{col 53}{space 3}0.087{col 61}{space 4}-.9705257{col 74}{space 3} .0664583
+{txt}{space 9}_Ivilid_21 {c |}{col 21}{res}{space 2}-.4467304{col 33}{space 2} .1537418{col 44}{space 1}   -2.91{col 53}{space 3}0.004{col 61}{space 4} -.750194{col 74}{space 3}-.1432668
+{txt}{space 9}_Ivilid_22 {c |}{col 21}{res}{space 2}-.2203788{col 33}{space 2} .1809736{col 44}{space 1}   -1.22{col 53}{space 3}0.225{col 61}{space 4}-.5775939{col 74}{space 3} .1368362
+{txt}{space 9}_Ivilid_23 {c |}{col 21}{res}{space 2}-.6353559{col 33}{space 2} .2970019{col 44}{space 1}   -2.14{col 53}{space 3}0.034{col 61}{space 4}-1.221594{col 74}{space 3}-.0491181
+{txt}{space 9}_Ivilid_24 {c |}{col 21}{res}{space 2}-.2338178{col 33}{space 2} .1044211{col 44}{space 1}   -2.24{col 53}{space 3}0.026{col 61}{space 4}-.4399296{col 74}{space 3} -.027706
+{txt}{space 9}_Ivilid_25 {c |}{col 21}{res}{space 2}-.1136664{col 33}{space 2} .1237002{col 44}{space 1}   -0.92{col 53}{space 3}0.359{col 61}{space 4}-.3578322{col 74}{space 3} .1304995
+{txt}{space 9}_Ivilid_26 {c |}{col 21}{res}{space 2}  .198758{col 33}{space 2} .1317788{col 44}{space 1}    1.51{col 53}{space 3}0.133{col 61}{space 4}-.0613538{col 74}{space 3} .4588699
+{txt}{space 9}_Ivilid_27 {c |}{col 21}{res}{space 2} -.297662{col 33}{space 2} .1261444{col 44}{space 1}   -2.36{col 53}{space 3}0.019{col 61}{space 4}-.5466523{col 74}{space 3}-.0486716
+{txt}{space 9}_Ivilid_28 {c |}{col 21}{res}{space 2}-.0510531{col 33}{space 2} .1196616{col 44}{space 1}   -0.43{col 53}{space 3}0.670{col 61}{space 4}-.2872474{col 74}{space 3} .1851413
+{txt}{space 9}_Ivilid_29 {c |}{col 21}{res}{space 2}-.6095527{col 33}{space 2} .1839694{col 44}{space 1}   -3.31{col 53}{space 3}0.001{col 61}{space 4}-.9726811{col 74}{space 3}-.2464243
+{txt}{space 9}_Ivilid_30 {c |}{col 21}{res}{space 2}-.6799939{col 33}{space 2} .3107645{col 44}{space 1}   -2.19{col 53}{space 3}0.030{col 61}{space 4}-1.293397{col 74}{space 3}-.0665907
+{txt}{space 9}_Ivilid_31 {c |}{col 21}{res}{space 2}  .007281{col 33}{space 2} .0662187{col 44}{space 1}    0.11{col 53}{space 3}0.913{col 61}{space 4} -.123425{col 74}{space 3} .1379869
+{txt}{space 9}_Ivilid_32 {c |}{col 21}{res}{space 2} .5315253{col 33}{space 2} .2256122{col 44}{space 1}    2.36{col 53}{space 3}0.020{col 61}{space 4} .0862002{col 74}{space 3} .9768505
+{txt}{space 9}_Ivilid_33 {c |}{col 21}{res}{space 2}-.0785624{col 33}{space 2} .1789212{col 44}{space 1}   -0.44{col 53}{space 3}0.661{col 61}{space 4}-.4317263{col 74}{space 3} .2746016
+{txt}{space 9}_Ivilid_34 {c |}{col 21}{res}{space 2} -.237098{col 33}{space 2} .2257644{col 44}{space 1}   -1.05{col 53}{space 3}0.295{col 61}{space 4}-.6827235{col 74}{space 3} .2085276
+{txt}{space 9}_Ivilid_35 {c |}{col 21}{res}{space 2} .1127069{col 33}{space 2} .1998872{col 44}{space 1}    0.56{col 53}{space 3}0.574{col 61}{space 4} -.281841{col 74}{space 3} .5072547
+{txt}{space 9}_Ivilid_36 {c |}{col 21}{res}{space 2}-.5810176{col 33}{space 2} .2908487{col 44}{space 1}   -2.00{col 53}{space 3}0.047{col 61}{space 4} -1.15511{col 74}{space 3}-.0069253
+{txt}{space 9}_Ivilid_37 {c |}{col 21}{res}{space 2}-.5718707{col 33}{space 2} .2274989{col 44}{space 1}   -2.51{col 53}{space 3}0.013{col 61}{space 4} -1.02092{col 74}{space 3}-.1228216
+{txt}{space 9}_Ivilid_38 {c |}{col 21}{res}{space 2} .0908056{col 33}{space 2} .0360795{col 44}{space 1}    2.52{col 53}{space 3}0.013{col 61}{space 4} .0195901{col 74}{space 3} .1620211
+{txt}{space 9}_Ivilid_39 {c |}{col 21}{res}{space 2}-.7744335{col 33}{space 2} .2568377{col 44}{space 1}   -3.02{col 53}{space 3}0.003{col 61}{space 4}-1.281393{col 74}{space 3}-.2674739
+{txt}{space 9}_Ivilid_40 {c |}{col 21}{res}{space 2}-.2521779{col 33}{space 2} .1272456{col 44}{space 1}   -1.98{col 53}{space 3}0.049{col 61}{space 4} -.503342{col 74}{space 3}-.0010138
+{txt}{space 9}_Ivilid_41 {c |}{col 21}{res}{space 2}-.0921565{col 33}{space 2} .0241005{col 44}{space 1}   -3.82{col 53}{space 3}0.000{col 61}{space 4}-.1397272{col 74}{space 3}-.0445857
+{txt}{space 9}_Ivilid_42 {c |}{col 21}{res}{space 2}-.4964573{col 33}{space 2} .0855612{col 44}{space 1}   -5.80{col 53}{space 3}0.000{col 61}{space 4}-.6653425{col 74}{space 3}-.3275722
+{txt}{space 9}_Ivilid_43 {c |}{col 21}{res}{space 2}-.1892049{col 33}{space 2} .0557122{col 44}{space 1}   -3.40{col 53}{space 3}0.001{col 61}{space 4}-.2991725{col 74}{space 3}-.0792373
+{txt}{space 9}_Ivilid_44 {c |}{col 21}{res}{space 2}-.4370667{col 33}{space 2} .0493147{col 44}{space 1}   -8.86{col 53}{space 3}0.000{col 61}{space 4}-.5344066{col 74}{space 3}-.3397268
+{txt}{space 9}_Ivilid_45 {c |}{col 21}{res}{space 2} .0762798{col 33}{space 2} .1288051{col 44}{space 1}    0.59{col 53}{space 3}0.554{col 61}{space 4}-.1779625{col 74}{space 3}  .330522
+{txt}{space 9}_Ivilid_46 {c |}{col 21}{res}{space 2}-.6627834{col 33}{space 2} .2589636{col 44}{space 1}   -2.56{col 53}{space 3}0.011{col 61}{space 4}-1.173939{col 74}{space 3}-.1516277
+{txt}{space 9}_Ivilid_47 {c |}{col 21}{res}{space 2}-.5284339{col 33}{space 2} .2001188{col 44}{space 1}   -2.64{col 53}{space 3}0.009{col 61}{space 4}-.9234388{col 74}{space 3} -.133429
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .7946497{col 33}{space 2} .3499352{col 44}{space 1}    2.27{col 53}{space 3}0.024{col 61}{space 4} .1039294{col 74}{space 3}  1.48537
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. test intensive inter_intensive_day
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_intensive_day = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   15.02
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. outreg2 using `outputfile1'
+{txt}{browse `"TableA3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "TableA3.txt""':seeout}
+
+{com}. 
+. **********************************************************3. Social Network effect************************************************************
+. gen inter_network_educ = network_rate_preintensive*intensive
+{txt}(314 missing values generated)
+
+{com}. gen inter_network_educ1 = network_onlyone*intensive
+{txt}(314 missing values generated)
+
+{com}. gen inter_network_educ2 = network_onlytwo*intensive
+{txt}(314 missing values generated)
+
+{com}. gen inter_network_educ3 = network_twomore*intensive
+{txt}(314 missing values generated)
+
+{com}. gen inter_inten_delay = intensive*delay
+{txt}
+{com}. 
+. *2.1. Network rate - all sample
+. *table 2, columns 2-5
+. **check robustness by adding spillover effect from simple session**
+. reg takeup_survey network_rate_preintensive male age agpop ricearea_2010 literacy intensive risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_27} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,255
+                                                {txt}{help j_robustsingular:F(51, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1193
+                                                {txt}Root MSE          =    {res}  .4759
+
+{txt}{ralign 91:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 26}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 27}{c |}{col 39}    Robust
+{col 1}            takeup_survey{col 27}{c |} Coefficient{col 39}  std. err.{col 51}      t{col 59}   P>|t|{col 67}     [95% con{col 80}f. interval]
+{hline 26}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_rate_preintensive {c |}{col 27}{res}{space 2} .2911852{col 39}{space 2} .0820022{col 50}{space 1}    3.55{col 59}{space 3}0.001{col 67}{space 4} .1292763{col 80}{space 3} .4530942
+{txt}{space 21}male {c |}{col 27}{res}{space 2} .0156732{col 39}{space 2} .0737808{col 50}{space 1}    0.21{col 59}{space 3}0.832{col 67}{space 4}-.1300031{col 80}{space 3} .1613494
+{txt}{space 22}age {c |}{col 27}{res}{space 2} .0045023{col 39}{space 2} .0012086{col 50}{space 1}    3.73{col 59}{space 3}0.000{col 67}{space 4} .0021161{col 80}{space 3} .0068886
+{txt}{space 20}agpop {c |}{col 27}{res}{space 2}-.0101567{col 39}{space 2} .0068682{col 50}{space 1}   -1.48{col 59}{space 3}0.141{col 67}{space 4}-.0237175{col 80}{space 3} .0034041
+{txt}{space 12}ricearea_2010 {c |}{col 27}{res}{space 2} .0043143{col 39}{space 2}  .001025{col 50}{space 1}    4.21{col 59}{space 3}0.000{col 67}{space 4} .0022904{col 80}{space 3} .0063382
+{txt}{space 17}literacy {c |}{col 27}{res}{space 2} .0874332{col 39}{space 2}  .032683{col 50}{space 1}    2.68{col 59}{space 3}0.008{col 67}{space 4} .0229025{col 80}{space 3} .1519639
+{txt}{space 16}intensive {c |}{col 27}{res}{space 2} .0298357{col 39}{space 2} .0332218{col 50}{space 1}    0.90{col 59}{space 3}0.370{col 67}{space 4} -.035759{col 80}{space 3} .0954303
+{txt}{space 14}risk_averse {c |}{col 27}{res}{space 2} .1091701{col 39}{space 2} .0489645{col 50}{space 1}    2.23{col 59}{space 3}0.027{col 67}{space 4} .0124924{col 80}{space 3} .2058478
+{txt}{space 12}disaster_prob {c |}{col 27}{res}{space 2} .0019402{col 39}{space 2} .0008009{col 50}{space 1}    2.42{col 59}{space 3}0.017{col 67}{space 4} .0003588{col 80}{space 3} .0035216
+{txt}{space 18}friend1 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend2 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend3 {c |}{col 27}{res}{space 2} .1210273{col 39}{space 2} .2237249{col 50}{space 1}    0.54{col 59}{space 3}0.589{col 67}{space 4}-.3207053{col 80}{space 3} .5627599
+{txt}{space 18}friend4 {c |}{col 27}{res}{space 2} .1813803{col 39}{space 2} .1294373{col 50}{space 1}    1.40{col 59}{space 3}0.163{col 67}{space 4}-.0741867{col 80}{space 3} .4369473
+{txt}{space 18}friend5 {c |}{col 27}{res}{space 2} .3201854{col 39}{space 2} .0648817{col 50}{space 1}    4.93{col 59}{space 3}0.000{col 67}{space 4} .1920799{col 80}{space 3} .4482908
+{txt}{space 16}_Ivilid_2 {c |}{col 27}{res}{space 2}-.4624467{col 39}{space 2}  .143032{col 50}{space 1}   -3.23{col 59}{space 3}0.001{col 67}{space 4}-.7448556{col 80}{space 3}-.1800378
+{txt}{space 16}_Ivilid_3 {c |}{col 27}{res}{space 2}-.2993164{col 39}{space 2} .0652264{col 50}{space 1}   -4.59{col 59}{space 3}0.000{col 67}{space 4}-.4281023{col 80}{space 3}-.1705306
+{txt}{space 16}_Ivilid_4 {c |}{col 27}{res}{space 2}-.1577358{col 39}{space 2} .0550264{col 50}{space 1}   -2.87{col 59}{space 3}0.005{col 67}{space 4}-.2663826{col 80}{space 3}-.0490891
+{txt}{space 16}_Ivilid_5 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 16}_Ivilid_6 {c |}{col 27}{res}{space 2} .0563637{col 39}{space 2} .1465408{col 50}{space 1}    0.38{col 59}{space 3}0.701{col 67}{space 4}-.2329731{col 80}{space 3} .3457006
+{txt}{space 16}_Ivilid_7 {c |}{col 27}{res}{space 2}-.1299139{col 39}{space 2} .0731729{col 50}{space 1}   -1.78{col 59}{space 3}0.078{col 67}{space 4}-.2743899{col 80}{space 3}  .014562
+{txt}{space 16}_Ivilid_8 {c |}{col 27}{res}{space 2}-.0961288{col 39}{space 2} .0790676{col 50}{space 1}   -1.22{col 59}{space 3}0.226{col 67}{space 4}-.2522435{col 80}{space 3} .0599859
+{txt}{space 16}_Ivilid_9 {c |}{col 27}{res}{space 2}-.2133536{col 39}{space 2} .1395284{col 50}{space 1}   -1.53{col 59}{space 3}0.128{col 67}{space 4}-.4888448{col 80}{space 3} .0621376
+{txt}{space 15}_Ivilid_10 {c |}{col 27}{res}{space 2}-.1302201{col 39}{space 2} .0835006{col 50}{space 1}   -1.56{col 59}{space 3}0.121{col 67}{space 4}-.2950876{col 80}{space 3} .0346473
+{txt}{space 15}_Ivilid_11 {c |}{col 27}{res}{space 2}-.2074857{col 39}{space 2} .0647209{col 50}{space 1}   -3.21{col 59}{space 3}0.002{col 67}{space 4}-.3352736{col 80}{space 3}-.0796978
+{txt}{space 15}_Ivilid_12 {c |}{col 27}{res}{space 2}-.0153145{col 39}{space 2} .1037764{col 50}{space 1}   -0.15{col 59}{space 3}0.883{col 67}{space 4}-.2202153{col 80}{space 3} .1895864
+{txt}{space 15}_Ivilid_13 {c |}{col 27}{res}{space 2}-.0521824{col 39}{space 2} .0644859{col 50}{space 1}   -0.81{col 59}{space 3}0.420{col 67}{space 4}-.1795062{col 80}{space 3} .0751414
+{txt}{space 15}_Ivilid_14 {c |}{col 27}{res}{space 2}-.2995046{col 39}{space 2} .0844105{col 50}{space 1}   -3.55{col 59}{space 3}0.001{col 67}{space 4}-.4661686{col 80}{space 3}-.1328406
+{txt}{space 15}_Ivilid_15 {c |}{col 27}{res}{space 2} .1254477{col 39}{space 2} .1080595{col 50}{space 1}    1.16{col 59}{space 3}0.247{col 67}{space 4}-.0879098{col 80}{space 3} .3388053
+{txt}{space 15}_Ivilid_16 {c |}{col 27}{res}{space 2}-.0233146{col 39}{space 2} .0225019{col 50}{space 1}   -1.04{col 59}{space 3}0.302{col 67}{space 4}-.0677433{col 80}{space 3} .0211142
+{txt}{space 15}_Ivilid_17 {c |}{col 27}{res}{space 2}-.3063526{col 39}{space 2} .0638903{col 50}{space 1}   -4.79{col 59}{space 3}0.000{col 67}{space 4}-.4325005{col 80}{space 3}-.1802046
+{txt}{space 15}_Ivilid_18 {c |}{col 27}{res}{space 2}-.0602414{col 39}{space 2} .1693432{col 50}{space 1}   -0.36{col 59}{space 3}0.722{col 67}{space 4}-.3946003{col 80}{space 3} .2741175
+{txt}{space 15}_Ivilid_19 {c |}{col 27}{res}{space 2}-.3395754{col 39}{space 2} .0796093{col 50}{space 1}   -4.27{col 59}{space 3}0.000{col 67}{space 4}-.4967596{col 80}{space 3}-.1823912
+{txt}{space 15}_Ivilid_20 {c |}{col 27}{res}{space 2}-.0363957{col 39}{space 2} .0904436{col 50}{space 1}   -0.40{col 59}{space 3}0.688{col 67}{space 4}-.2149717{col 80}{space 3} .1421802
+{txt}{space 15}_Ivilid_21 {c |}{col 27}{res}{space 2} -.255359{col 39}{space 2} .0780348{col 50}{space 1}   -3.27{col 59}{space 3}0.001{col 67}{space 4}-.4094345{col 80}{space 3}-.1012835
+{txt}{space 15}_Ivilid_22 {c |}{col 27}{res}{space 2}-.1906716{col 39}{space 2} .1137607{col 50}{space 1}   -1.68{col 59}{space 3}0.096{col 67}{space 4} -.415286{col 80}{space 3} .0339427
+{txt}{space 15}_Ivilid_23 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_24 {c |}{col 27}{res}{space 2}-.1013682{col 39}{space 2} .1376443{col 50}{space 1}   -0.74{col 59}{space 3}0.463{col 67}{space 4}-.3731394{col 80}{space 3}  .170403
+{txt}{space 15}_Ivilid_25 {c |}{col 27}{res}{space 2} .1128429{col 39}{space 2} .1552555{col 50}{space 1}    0.73{col 59}{space 3}0.468{col 67}{space 4}-.1937006{col 80}{space 3} .4193865
+{txt}{space 15}_Ivilid_26 {c |}{col 27}{res}{space 2}-.1311839{col 39}{space 2} .0352068{col 50}{space 1}   -3.73{col 59}{space 3}0.000{col 67}{space 4}-.2006978{col 80}{space 3}  -.06167
+{txt}{space 15}_Ivilid_27 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_28 {c |}{col 27}{res}{space 2} -.040171{col 39}{space 2} .0812866{col 50}{space 1}   -0.49{col 59}{space 3}0.622{col 67}{space 4}-.2006671{col 80}{space 3}  .120325
+{txt}{space 15}_Ivilid_29 {c |}{col 27}{res}{space 2}-.3268255{col 39}{space 2} .0838619{col 50}{space 1}   -3.90{col 59}{space 3}0.000{col 67}{space 4}-.4924064{col 80}{space 3}-.1612447
+{txt}{space 15}_Ivilid_30 {c |}{col 27}{res}{space 2}-.2284594{col 39}{space 2} .1422666{col 50}{space 1}   -1.61{col 59}{space 3}0.110{col 67}{space 4}-.5093571{col 80}{space 3} .0524383
+{txt}{space 15}_Ivilid_31 {c |}{col 27}{res}{space 2}-.1994708{col 39}{space 2}  .015103{col 50}{space 1}  -13.21{col 59}{space 3}0.000{col 67}{space 4}-.2292908{col 80}{space 3}-.1696508
+{txt}{space 15}_Ivilid_32 {c |}{col 27}{res}{space 2}  .069771{col 39}{space 2} .0871249{col 50}{space 1}    0.80{col 59}{space 3}0.424{col 67}{space 4}-.1022523{col 80}{space 3} .2417944
+{txt}{space 15}_Ivilid_33 {c |}{col 27}{res}{space 2}-.0325351{col 39}{space 2}  .042622{col 50}{space 1}   -0.76{col 59}{space 3}0.446{col 67}{space 4}-.1166899{col 80}{space 3} .0516197
+{txt}{space 15}_Ivilid_34 {c |}{col 27}{res}{space 2}-.0451392{col 39}{space 2} .2087275{col 50}{space 1}   -0.22{col 59}{space 3}0.829{col 67}{space 4}-.4572602{col 80}{space 3} .3669818
+{txt}{space 15}_Ivilid_35 {c |}{col 27}{res}{space 2}-.3740458{col 39}{space 2} .0186026{col 50}{space 1}  -20.11{col 59}{space 3}0.000{col 67}{space 4}-.4107756{col 80}{space 3}-.3373159
+{txt}{space 15}_Ivilid_36 {c |}{col 27}{res}{space 2}-.3602062{col 39}{space 2}  .097654{col 50}{space 1}   -3.69{col 59}{space 3}0.000{col 67}{space 4}-.5530188{col 80}{space 3}-.1673937
+{txt}{space 15}_Ivilid_37 {c |}{col 27}{res}{space 2}-.1770161{col 39}{space 2} .0221741{col 50}{space 1}   -7.98{col 59}{space 3}0.000{col 67}{space 4}-.2207976{col 80}{space 3}-.1332346
+{txt}{space 15}_Ivilid_38 {c |}{col 27}{res}{space 2}-.1280958{col 39}{space 2} .1956103{col 50}{space 1}   -0.65{col 59}{space 3}0.513{col 67}{space 4}-.5143176{col 80}{space 3}  .258126
+{txt}{space 15}_Ivilid_39 {c |}{col 27}{res}{space 2}-.1381876{col 39}{space 2} .1328476{col 50}{space 1}   -1.04{col 59}{space 3}0.300{col 67}{space 4}-.4004879{col 80}{space 3} .1241127
+{txt}{space 15}_Ivilid_40 {c |}{col 27}{res}{space 2}-.2851302{col 39}{space 2} .1514275{col 50}{space 1}   -1.88{col 59}{space 3}0.061{col 67}{space 4}-.5841155{col 80}{space 3} .0138551
+{txt}{space 15}_Ivilid_41 {c |}{col 27}{res}{space 2}-.1748761{col 39}{space 2} .0961413{col 50}{space 1}   -1.82{col 59}{space 3}0.071{col 67}{space 4} -.364702{col 80}{space 3} .0149497
+{txt}{space 15}_Ivilid_42 {c |}{col 27}{res}{space 2}-.2852972{col 39}{space 2} .0442582{col 50}{space 1}   -6.45{col 59}{space 3}0.000{col 67}{space 4}-.3726826{col 80}{space 3}-.1979117
+{txt}{space 15}_Ivilid_43 {c |}{col 27}{res}{space 2}  .422464{col 39}{space 2}  .028734{col 50}{space 1}   14.70{col 59}{space 3}0.000{col 67}{space 4} .3657303{col 80}{space 3} .4791977
+{txt}{space 15}_Ivilid_44 {c |}{col 27}{res}{space 2}-.1111072{col 39}{space 2} .1141388{col 50}{space 1}   -0.97{col 59}{space 3}0.332{col 67}{space 4} -.336468{col 80}{space 3} .1142537
+{txt}{space 15}_Ivilid_45 {c |}{col 27}{res}{space 2} .0768297{col 39}{space 2} .0891676{col 50}{space 1}    0.86{col 59}{space 3}0.390{col 67}{space 4} -.099227{col 80}{space 3} .2528863
+{txt}{space 15}_Ivilid_46 {c |}{col 27}{res}{space 2}-.2941174{col 39}{space 2} .0341094{col 50}{space 1}   -8.62{col 59}{space 3}0.000{col 67}{space 4}-.3614646{col 80}{space 3}-.2267703
+{txt}{space 15}_Ivilid_47 {c |}{col 27}{res}{space 2}-.2635088{col 39}{space 2} .0685471{col 50}{space 1}   -3.84{col 59}{space 3}0.000{col 67}{space 4}-.3988513{col 80}{space 3}-.1281663
+{txt}{space 20}_cons {c |}{col 27}{res}{space 2}-.1674247{col 39}{space 2} .1031443{col 50}{space 1}   -1.62{col 59}{space 3}0.106{col 67}{space 4}-.3710774{col 80}{space 3} .0362281
+{txt}{hline 26}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. reg takeup_survey network_rate_preintensive network_rate_presimple intensive friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend3} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_32} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,274
+                                                {txt}{help j_robustsingular:F(45, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.0913
+                                                {txt}Root MSE          =    {res} .48223
+
+{txt}{ralign 91:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 26}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 27}{c |}{col 39}    Robust
+{col 1}            takeup_survey{col 27}{c |} Coefficient{col 39}  std. err.{col 51}      t{col 59}   P>|t|{col 67}     [95% con{col 80}f. interval]
+{hline 26}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_rate_preintensive {c |}{col 27}{res}{space 2} .2780891{col 39}{space 2} .0844643{col 50}{space 1}    3.29{col 59}{space 3}0.001{col 67}{space 4}  .111319{col 80}{space 3} .4448592
+{txt}{space 3}network_rate_presimple {c |}{col 27}{res}{space 2}-.1079451{col 39}{space 2}   .09329{col 50}{space 1}   -1.16{col 59}{space 3}0.249{col 67}{space 4}-.2921412{col 80}{space 3}  .076251
+{txt}{space 16}intensive {c |}{col 27}{res}{space 2} .0256236{col 39}{space 2} .0330547{col 50}{space 1}    0.78{col 59}{space 3}0.439{col 67}{space 4}-.0396411{col 80}{space 3} .0908882
+{txt}{space 18}friend1 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend2 {c |}{col 27}{res}{space 2} -.265184{col 39}{space 2} .2325179{col 50}{space 1}   -1.14{col 59}{space 3}0.256{col 67}{space 4}-.7242779{col 80}{space 3} .1939099
+{txt}{space 18}friend3 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend4 {c |}{col 27}{res}{space 2} .0671916{col 39}{space 2} .2370514{col 50}{space 1}    0.28{col 59}{space 3}0.777{col 67}{space 4}-.4008535{col 80}{space 3} .5352368
+{txt}{space 18}friend5 {c |}{col 27}{res}{space 2} .1924117{col 39}{space 2}  .229564{col 50}{space 1}    0.84{col 59}{space 3}0.403{col 67}{space 4}  -.26085{col 80}{space 3} .6456733
+{txt}{space 16}_Ivilid_2 {c |}{col 27}{res}{space 2}-.5170619{col 39}{space 2} .1452846{col 50}{space 1}   -3.56{col 59}{space 3}0.000{col 67}{space 4}-.8039184{col 80}{space 3}-.2302054
+{txt}{space 16}_Ivilid_3 {c |}{col 27}{res}{space 2}-.3347716{col 39}{space 2} .0928574{col 50}{space 1}   -3.61{col 59}{space 3}0.000{col 67}{space 4}-.5181134{col 80}{space 3}-.1514298
+{txt}{space 16}_Ivilid_4 {c |}{col 27}{res}{space 2}-.2915162{col 39}{space 2} .0883575{col 50}{space 1}   -3.30{col 59}{space 3}0.001{col 67}{space 4}-.4659732{col 80}{space 3}-.1170592
+{txt}{space 16}_Ivilid_5 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 16}_Ivilid_6 {c |}{col 27}{res}{space 2}-.0697833{col 39}{space 2} .1989348{col 50}{space 1}   -0.35{col 59}{space 3}0.726{col 67}{space 4}-.4625692{col 80}{space 3} .3230026
+{txt}{space 16}_Ivilid_7 {c |}{col 27}{res}{space 2}-.2379635{col 39}{space 2} .0898406{col 50}{space 1}   -2.65{col 59}{space 3}0.009{col 67}{space 4}-.4153489{col 80}{space 3} -.060578
+{txt}{space 16}_Ivilid_8 {c |}{col 27}{res}{space 2}-.1417428{col 39}{space 2} .0995431{col 50}{space 1}   -1.42{col 59}{space 3}0.156{col 67}{space 4}-.3382854{col 80}{space 3} .0547997
+{txt}{space 16}_Ivilid_9 {c |}{col 27}{res}{space 2}-.3354236{col 39}{space 2} .1477278{col 50}{space 1}   -2.27{col 59}{space 3}0.024{col 67}{space 4}-.6271041{col 80}{space 3}-.0437432
+{txt}{space 15}_Ivilid_10 {c |}{col 27}{res}{space 2}-.0788618{col 39}{space 2} .0689277{col 50}{space 1}   -1.14{col 59}{space 3}0.254{col 67}{space 4}-.2149557{col 80}{space 3} .0572322
+{txt}{space 15}_Ivilid_11 {c |}{col 27}{res}{space 2}-.3090739{col 39}{space 2} .0842816{col 50}{space 1}   -3.67{col 59}{space 3}0.000{col 67}{space 4}-.4754832{col 80}{space 3}-.1426645
+{txt}{space 15}_Ivilid_12 {c |}{col 27}{res}{space 2}-.1166139{col 39}{space 2} .1208105{col 50}{space 1}   -0.97{col 59}{space 3}0.336{col 67}{space 4}-.3551477{col 80}{space 3} .1219198
+{txt}{space 15}_Ivilid_13 {c |}{col 27}{res}{space 2}-.1217668{col 39}{space 2} .1071588{col 50}{space 1}   -1.14{col 59}{space 3}0.257{col 67}{space 4} -.333346{col 80}{space 3} .0898124
+{txt}{space 15}_Ivilid_14 {c |}{col 27}{res}{space 2}-.3541568{col 39}{space 2} .1054506{col 50}{space 1}   -3.36{col 59}{space 3}0.001{col 67}{space 4}-.5623632{col 80}{space 3}-.1459504
+{txt}{space 15}_Ivilid_15 {c |}{col 27}{res}{space 2} .0422508{col 39}{space 2}  .123248{col 50}{space 1}    0.34{col 59}{space 3}0.732{col 67}{space 4}-.2010956{col 80}{space 3} .2855972
+{txt}{space 15}_Ivilid_16 {c |}{col 27}{res}{space 2}-.0596282{col 39}{space 2} .0601764{col 50}{space 1}   -0.99{col 59}{space 3}0.323{col 67}{space 4}-.1784432{col 80}{space 3} .0591869
+{txt}{space 15}_Ivilid_17 {c |}{col 27}{res}{space 2}-.3722175{col 39}{space 2} .0891721{col 50}{space 1}   -4.17{col 59}{space 3}0.000{col 67}{space 4}-.5482829{col 80}{space 3}-.1961521
+{txt}{space 15}_Ivilid_18 {c |}{col 27}{res}{space 2} -.109569{col 39}{space 2} .1714964{col 50}{space 1}   -0.64{col 59}{space 3}0.524{col 67}{space 4}-.4481794{col 80}{space 3} .2290413
+{txt}{space 15}_Ivilid_19 {c |}{col 27}{res}{space 2}-.3717859{col 39}{space 2} .0944744{col 50}{space 1}   -3.94{col 59}{space 3}0.000{col 67}{space 4}-.5583204{col 80}{space 3}-.1852513
+{txt}{space 15}_Ivilid_20 {c |}{col 27}{res}{space 2}-.1243429{col 39}{space 2} .1065748{col 50}{space 1}   -1.17{col 59}{space 3}0.245{col 67}{space 4} -.334769{col 80}{space 3} .0860832
+{txt}{space 15}_Ivilid_21 {c |}{col 27}{res}{space 2}-.3202348{col 39}{space 2} .0933012{col 50}{space 1}   -3.43{col 59}{space 3}0.001{col 67}{space 4} -.504453{col 80}{space 3}-.1360165
+{txt}{space 15}_Ivilid_22 {c |}{col 27}{res}{space 2}-.2714403{col 39}{space 2} .1374244{col 50}{space 1}   -1.98{col 59}{space 3}0.050{col 67}{space 4}-.5427773{col 80}{space 3}-.0001032
+{txt}{space 15}_Ivilid_23 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_24 {c |}{col 27}{res}{space 2}-.1778438{col 39}{space 2} .1517523{col 50}{space 1}   -1.17{col 59}{space 3}0.243{col 67}{space 4}-.4774703{col 80}{space 3} .1217828
+{txt}{space 15}_Ivilid_25 {c |}{col 27}{res}{space 2} .0628728{col 39}{space 2} .1646032{col 50}{space 1}    0.38{col 59}{space 3}0.703{col 67}{space 4}-.2621273{col 80}{space 3} .3878729
+{txt}{space 15}_Ivilid_26 {c |}{col 27}{res}{space 2}-.2454443{col 39}{space 2} .0735551{col 50}{space 1}   -3.34{col 59}{space 3}0.001{col 67}{space 4}-.3906749{col 80}{space 3}-.1002136
+{txt}{space 15}_Ivilid_27 {c |}{col 27}{res}{space 2}-.0442324{col 39}{space 2} .0590468{col 50}{space 1}   -0.75{col 59}{space 3}0.455{col 67}{space 4}-.1608172{col 80}{space 3} .0723524
+{txt}{space 15}_Ivilid_28 {c |}{col 27}{res}{space 2}-.1500101{col 39}{space 2} .1067349{col 50}{space 1}   -1.41{col 59}{space 3}0.162{col 67}{space 4}-.3607523{col 80}{space 3} .0607322
+{txt}{space 15}_Ivilid_29 {c |}{col 27}{res}{space 2}-.3718116{col 39}{space 2} .1108892{col 50}{space 1}   -3.35{col 59}{space 3}0.001{col 67}{space 4}-.5907564{col 80}{space 3}-.1528669
+{txt}{space 15}_Ivilid_30 {c |}{col 27}{res}{space 2}-.3566179{col 39}{space 2} .1611685{col 50}{space 1}   -2.21{col 59}{space 3}0.028{col 67}{space 4}-.6748363{col 80}{space 3}-.0383995
+{txt}{space 15}_Ivilid_31 {c |}{col 27}{res}{space 2}-.3142907{col 39}{space 2} .0594733{col 50}{space 1}   -5.28{col 59}{space 3}0.000{col 67}{space 4}-.4317174{col 80}{space 3} -.196864
+{txt}{space 15}_Ivilid_32 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_33 {c |}{col 27}{res}{space 2}-.0894852{col 39}{space 2} .0641825{col 50}{space 1}   -1.39{col 59}{space 3}0.165{col 67}{space 4}-.2162101{col 80}{space 3} .0372396
+{txt}{space 15}_Ivilid_34 {c |}{col 27}{res}{space 2}-.1502263{col 39}{space 2} .2063923{col 50}{space 1}   -0.73{col 59}{space 3}0.468{col 67}{space 4}-.5577366{col 80}{space 3}  .257284
+{txt}{space 15}_Ivilid_35 {c |}{col 27}{res}{space 2}-.4050362{col 39}{space 2} .0659627{col 50}{space 1}   -6.14{col 59}{space 3}0.000{col 67}{space 4}-.5352761{col 80}{space 3}-.2747964
+{txt}{space 15}_Ivilid_36 {c |}{col 27}{res}{space 2}-.4462711{col 39}{space 2} .1195196{col 50}{space 1}   -3.73{col 59}{space 3}0.000{col 67}{space 4}-.6822561{col 80}{space 3}-.2102861
+{txt}{space 15}_Ivilid_37 {c |}{col 27}{res}{space 2}-.2614215{col 39}{space 2} .0632067{col 50}{space 1}   -4.14{col 59}{space 3}0.000{col 67}{space 4}-.3862196{col 80}{space 3}-.1366233
+{txt}{space 15}_Ivilid_38 {c |}{col 27}{res}{space 2}-.1747955{col 39}{space 2} .2139511{col 50}{space 1}   -0.82{col 59}{space 3}0.415{col 67}{space 4}-.5972303{col 80}{space 3} .2476393
+{txt}{space 15}_Ivilid_39 {c |}{col 27}{res}{space 2}-.2172706{col 39}{space 2} .1838694{col 50}{space 1}   -1.18{col 59}{space 3}0.239{col 67}{space 4}-.5803108{col 80}{space 3} .1457695
+{txt}{space 15}_Ivilid_40 {c |}{col 27}{res}{space 2}-.3544703{col 39}{space 2}  .167627{col 50}{space 1}   -2.11{col 59}{space 3}0.036{col 67}{space 4}-.6854408{col 80}{space 3}-.0234999
+{txt}{space 15}_Ivilid_41 {c |}{col 27}{res}{space 2}-.2346066{col 39}{space 2} .0915869{col 50}{space 1}   -2.56{col 59}{space 3}0.011{col 67}{space 4}-.4154399{col 80}{space 3}-.0537733
+{txt}{space 15}_Ivilid_42 {c |}{col 27}{res}{space 2}-.3600809{col 39}{space 2} .0692713{col 50}{space 1}   -5.20{col 59}{space 3}0.000{col 67}{space 4}-.4968532{col 80}{space 3}-.2233085
+{txt}{space 15}_Ivilid_43 {c |}{col 27}{res}{space 2} .3449623{col 39}{space 2}  .061654{col 50}{space 1}    5.60{col 59}{space 3}0.000{col 67}{space 4} .2232298{col 80}{space 3} .4666947
+{txt}{space 15}_Ivilid_44 {c |}{col 27}{res}{space 2}-.2069951{col 39}{space 2}  .111044{col 50}{space 1}   -1.86{col 59}{space 3}0.064{col 67}{space 4}-.4262455{col 80}{space 3} .0122553
+{txt}{space 15}_Ivilid_45 {c |}{col 27}{res}{space 2} .0021027{col 39}{space 2} .1169405{col 50}{space 1}    0.02{col 59}{space 3}0.986{col 67}{space 4}-.2287899{col 80}{space 3} .2329953
+{txt}{space 15}_Ivilid_46 {c |}{col 27}{res}{space 2}-.3703334{col 39}{space 2} .0708309{col 50}{space 1}   -5.23{col 59}{space 3}0.000{col 67}{space 4}-.5101851{col 80}{space 3}-.2304816
+{txt}{space 15}_Ivilid_47 {c |}{col 27}{res}{space 2}  -.33559{col 39}{space 2} .0922789{col 50}{space 1}   -3.64{col 59}{space 3}0.000{col 67}{space 4}-.5177896{col 80}{space 3}-.1533903
+{txt}{space 20}_cons {c |}{col 27}{res}{space 2} .4565817{col 39}{space 2} .2415535{col 50}{space 1}    1.89{col 59}{space 3}0.060{col 67}{space 4}-.0203526{col 80}{space 3} .9335161
+{txt}{hline 26}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. reg takeup_survey network_rate_preintensive intensive inter_network_educ male age agpop ricearea_2010 literacy risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_27} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,255
+                                                {txt}{help j_robustsingular:F(52, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1226
+                                                {txt}Root MSE          =    {res}  .4752
+
+{txt}{ralign 91:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 26}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 27}{c |}{col 39}    Robust
+{col 1}            takeup_survey{col 27}{c |} Coefficient{col 39}  std. err.{col 51}      t{col 59}   P>|t|{col 67}     [95% con{col 80}f. interval]
+{hline 26}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_rate_preintensive {c |}{col 27}{res}{space 2} .4444749{col 39}{space 2} .1089443{col 50}{space 1}    4.08{col 59}{space 3}0.000{col 67}{space 4} .2293703{col 80}{space 3} .6595796
+{txt}{space 16}intensive {c |}{col 27}{res}{space 2} .0809232{col 39}{space 2} .0397319{col 50}{space 1}    2.04{col 59}{space 3}0.043{col 67}{space 4} .0024747{col 80}{space 3} .1593716
+{txt}{space 7}inter_network_educ {c |}{col 27}{res}{space 2} -.328592{col 39}{space 2}  .160919{col 50}{space 1}   -2.04{col 59}{space 3}0.043{col 67}{space 4}-.6463178{col 80}{space 3}-.0108663
+{txt}{space 21}male {c |}{col 27}{res}{space 2} .0186269{col 39}{space 2} .0740731{col 50}{space 1}    0.25{col 59}{space 3}0.802{col 67}{space 4}-.1276265{col 80}{space 3} .1648802
+{txt}{space 22}age {c |}{col 27}{res}{space 2} .0045921{col 39}{space 2} .0012054{col 50}{space 1}    3.81{col 59}{space 3}0.000{col 67}{space 4} .0022121{col 80}{space 3}  .006972
+{txt}{space 20}agpop {c |}{col 27}{res}{space 2}-.0102751{col 39}{space 2}  .006836{col 50}{space 1}   -1.50{col 59}{space 3}0.135{col 67}{space 4}-.0237724{col 80}{space 3} .0032222
+{txt}{space 12}ricearea_2010 {c |}{col 27}{res}{space 2} .0043351{col 39}{space 2} .0010269{col 50}{space 1}    4.22{col 59}{space 3}0.000{col 67}{space 4} .0023074{col 80}{space 3} .0063627
+{txt}{space 17}literacy {c |}{col 27}{res}{space 2} .0871877{col 39}{space 2} .0326466{col 50}{space 1}    2.67{col 59}{space 3}0.008{col 67}{space 4} .0227287{col 80}{space 3} .1516467
+{txt}{space 14}risk_averse {c |}{col 27}{res}{space 2} .1047806{col 39}{space 2} .0488233{col 50}{space 1}    2.15{col 59}{space 3}0.033{col 67}{space 4} .0083818{col 80}{space 3} .2011795
+{txt}{space 12}disaster_prob {c |}{col 27}{res}{space 2} .0019153{col 39}{space 2} .0008007{col 50}{space 1}    2.39{col 59}{space 3}0.018{col 67}{space 4} .0003343{col 80}{space 3} .0034963
+{txt}{space 18}friend1 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend2 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 18}friend3 {c |}{col 27}{res}{space 2} .1221102{col 39}{space 2} .2394622{col 50}{space 1}    0.51{col 59}{space 3}0.611{col 67}{space 4}-.3506948{col 80}{space 3} .5949153
+{txt}{space 18}friend4 {c |}{col 27}{res}{space 2} .1775006{col 39}{space 2} .1472125{col 50}{space 1}    1.21{col 59}{space 3}0.230{col 67}{space 4}-.1131626{col 80}{space 3} .4681637
+{txt}{space 18}friend5 {c |}{col 27}{res}{space 2} .3147423{col 39}{space 2} .0937711{col 50}{space 1}    3.36{col 59}{space 3}0.001{col 67}{space 4} .1295964{col 80}{space 3} .4998883
+{txt}{space 16}_Ivilid_2 {c |}{col 27}{res}{space 2}-.4475949{col 39}{space 2} .1448785{col 50}{space 1}   -3.09{col 59}{space 3}0.002{col 67}{space 4}-.7336496{col 80}{space 3}-.1615401
+{txt}{space 16}_Ivilid_3 {c |}{col 27}{res}{space 2}-.2845492{col 39}{space 2} .0647171{col 50}{space 1}   -4.40{col 59}{space 3}0.000{col 67}{space 4}-.4123297{col 80}{space 3}-.1567687
+{txt}{space 16}_Ivilid_4 {c |}{col 27}{res}{space 2}-.1345709{col 39}{space 2} .0560517{col 50}{space 1}   -2.40{col 59}{space 3}0.017{col 67}{space 4}-.2452419{col 80}{space 3}-.0238998
+{txt}{space 16}_Ivilid_5 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 16}_Ivilid_6 {c |}{col 27}{res}{space 2} .0817074{col 39}{space 2} .1546839{col 50}{space 1}    0.53{col 59}{space 3}0.598{col 67}{space 4}-.2237075{col 80}{space 3} .3871224
+{txt}{space 16}_Ivilid_7 {c |}{col 27}{res}{space 2} -.109223{col 39}{space 2} .0729305{col 50}{space 1}   -1.50{col 59}{space 3}0.136{col 67}{space 4}-.2532203{col 80}{space 3} .0347744
+{txt}{space 16}_Ivilid_8 {c |}{col 27}{res}{space 2}-.0828196{col 39}{space 2} .0813464{col 50}{space 1}   -1.02{col 59}{space 3}0.310{col 67}{space 4}-.2434336{col 80}{space 3} .0777944
+{txt}{space 16}_Ivilid_9 {c |}{col 27}{res}{space 2}-.2064473{col 39}{space 2} .1359317{col 50}{space 1}   -1.52{col 59}{space 3}0.131{col 67}{space 4}-.4748371{col 80}{space 3} .0619426
+{txt}{space 15}_Ivilid_10 {c |}{col 27}{res}{space 2}-.1079498{col 39}{space 2} .0845951{col 50}{space 1}   -1.28{col 59}{space 3}0.204{col 67}{space 4}-.2749783{col 80}{space 3} .0590787
+{txt}{space 15}_Ivilid_11 {c |}{col 27}{res}{space 2}-.1910258{col 39}{space 2} .0654892{col 50}{space 1}   -2.92{col 59}{space 3}0.004{col 67}{space 4}-.3203307{col 80}{space 3}-.0617209
+{txt}{space 15}_Ivilid_12 {c |}{col 27}{res}{space 2} .0007518{col 39}{space 2}  .103284{col 50}{space 1}    0.01{col 59}{space 3}0.994{col 67}{space 4}-.2031768{col 80}{space 3} .2046804
+{txt}{space 15}_Ivilid_13 {c |}{col 27}{res}{space 2}-.0390839{col 39}{space 2} .0651383{col 50}{space 1}   -0.60{col 59}{space 3}0.549{col 67}{space 4}-.1676959{col 80}{space 3} .0895281
+{txt}{space 15}_Ivilid_14 {c |}{col 27}{res}{space 2} -.280998{col 39}{space 2} .0862847{col 50}{space 1}   -3.26{col 59}{space 3}0.001{col 67}{space 4}-.4513624{col 80}{space 3}-.1106336
+{txt}{space 15}_Ivilid_15 {c |}{col 27}{res}{space 2} .1448569{col 39}{space 2} .0989728{col 50}{space 1}    1.46{col 59}{space 3}0.145{col 67}{space 4}-.0505595{col 80}{space 3} .3402733
+{txt}{space 15}_Ivilid_16 {c |}{col 27}{res}{space 2} -.005519{col 39}{space 2} .0237874{col 50}{space 1}   -0.23{col 59}{space 3}0.817{col 67}{space 4} -.052486{col 80}{space 3}  .041448
+{txt}{space 15}_Ivilid_17 {c |}{col 27}{res}{space 2}-.2846395{col 39}{space 2} .0637101{col 50}{space 1}   -4.47{col 59}{space 3}0.000{col 67}{space 4}-.4104317{col 80}{space 3}-.1588473
+{txt}{space 15}_Ivilid_18 {c |}{col 27}{res}{space 2}-.0299112{col 39}{space 2} .1767254{col 50}{space 1}   -0.17{col 59}{space 3}0.866{col 67}{space 4}-.3788459{col 80}{space 3} .3190235
+{txt}{space 15}_Ivilid_19 {c |}{col 27}{res}{space 2}-.3189339{col 39}{space 2} .0773467{col 50}{space 1}   -4.12{col 59}{space 3}0.000{col 67}{space 4}-.4716508{col 80}{space 3} -.166217
+{txt}{space 15}_Ivilid_20 {c |}{col 27}{res}{space 2}-.0210646{col 39}{space 2} .0908662{col 50}{space 1}   -0.23{col 59}{space 3}0.817{col 67}{space 4} -.200475{col 80}{space 3} .1583457
+{txt}{space 15}_Ivilid_21 {c |}{col 27}{res}{space 2}-.2404617{col 39}{space 2} .0762463{col 50}{space 1}   -3.15{col 59}{space 3}0.002{col 67}{space 4}-.3910059{col 80}{space 3}-.0899176
+{txt}{space 15}_Ivilid_22 {c |}{col 27}{res}{space 2}-.1672806{col 39}{space 2} .1105887{col 50}{space 1}   -1.51{col 59}{space 3}0.132{col 67}{space 4}-.3856319{col 80}{space 3} .0510708
+{txt}{space 15}_Ivilid_23 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_24 {c |}{col 27}{res}{space 2}-.0810271{col 39}{space 2}  .134225{col 50}{space 1}   -0.60{col 59}{space 3}0.547{col 67}{space 4} -.346047{col 80}{space 3} .1839928
+{txt}{space 15}_Ivilid_25 {c |}{col 27}{res}{space 2} .1302694{col 39}{space 2} .1539617{col 50}{space 1}    0.85{col 59}{space 3}0.399{col 67}{space 4}-.1737197{col 80}{space 3} .4342585
+{txt}{space 15}_Ivilid_26 {c |}{col 27}{res}{space 2}-.1137612{col 39}{space 2} .0380654{col 50}{space 1}   -2.99{col 59}{space 3}0.003{col 67}{space 4}-.1889193{col 80}{space 3}-.0386031
+{txt}{space 15}_Ivilid_27 {c |}{col 27}{res}{space 2}        0{col 39}{txt}  (omitted)
+{space 15}_Ivilid_28 {c |}{col 27}{res}{space 2}-.0184491{col 39}{space 2} .0777992{col 50}{space 1}   -0.24{col 59}{space 3}0.813{col 67}{space 4}-.1720594{col 80}{space 3} .1351613
+{txt}{space 15}_Ivilid_29 {c |}{col 27}{res}{space 2}-.3079594{col 39}{space 2} .0858579{col 50}{space 1}   -3.59{col 59}{space 3}0.000{col 67}{space 4}-.4774813{col 80}{space 3}-.1384376
+{txt}{space 15}_Ivilid_30 {c |}{col 27}{res}{space 2}-.2117678{col 39}{space 2} .1411173{col 50}{space 1}   -1.50{col 59}{space 3}0.135{col 67}{space 4}-.4903962{col 80}{space 3} .0668606
+{txt}{space 15}_Ivilid_31 {c |}{col 27}{res}{space 2}-.1856843{col 39}{space 2} .0159698{col 50}{space 1}  -11.63{col 59}{space 3}0.000{col 67}{space 4}-.2172158{col 80}{space 3}-.1541528
+{txt}{space 15}_Ivilid_32 {c |}{col 27}{res}{space 2} .0842695{col 39}{space 2} .0909274{col 50}{space 1}    0.93{col 59}{space 3}0.355{col 67}{space 4}-.0952617{col 80}{space 3} .2638008
+{txt}{space 15}_Ivilid_33 {c |}{col 27}{res}{space 2}-.0039789{col 39}{space 2} .0366365{col 50}{space 1}   -0.11{col 59}{space 3}0.914{col 67}{space 4}-.0763157{col 80}{space 3} .0683578
+{txt}{space 15}_Ivilid_34 {c |}{col 27}{res}{space 2}-.0392469{col 39}{space 2} .2148119{col 50}{space 1}   -0.18{col 59}{space 3}0.855{col 67}{space 4}-.4633812{col 80}{space 3} .3848874
+{txt}{space 15}_Ivilid_35 {c |}{col 27}{res}{space 2}-.3540522{col 39}{space 2} .0208347{col 50}{space 1}  -16.99{col 59}{space 3}0.000{col 67}{space 4}-.3951892{col 80}{space 3}-.3129153
+{txt}{space 15}_Ivilid_36 {c |}{col 27}{res}{space 2} -.334712{col 39}{space 2} .0974004{col 50}{space 1}   -3.44{col 59}{space 3}0.001{col 67}{space 4}-.5270239{col 80}{space 3}-.1424001
+{txt}{space 15}_Ivilid_37 {c |}{col 27}{res}{space 2}-.1569619{col 39}{space 2} .0238918{col 50}{space 1}   -6.57{col 59}{space 3}0.000{col 67}{space 4}-.2041349{col 80}{space 3}-.1097889
+{txt}{space 15}_Ivilid_38 {c |}{col 27}{res}{space 2}-.1004503{col 39}{space 2}  .195002{col 50}{space 1}   -0.52{col 59}{space 3}0.607{col 67}{space 4}-.4854711{col 80}{space 3} .2845704
+{txt}{space 15}_Ivilid_39 {c |}{col 27}{res}{space 2}-.1165906{col 39}{space 2} .1236872{col 50}{space 1}   -0.94{col 59}{space 3}0.347{col 67}{space 4}-.3608043{col 80}{space 3} .1276232
+{txt}{space 15}_Ivilid_40 {c |}{col 27}{res}{space 2}-.2701749{col 39}{space 2} .1470304{col 50}{space 1}   -1.84{col 59}{space 3}0.068{col 67}{space 4}-.5604785{col 80}{space 3} .0201286
+{txt}{space 15}_Ivilid_41 {c |}{col 27}{res}{space 2}-.1468868{col 39}{space 2} .0942757{col 50}{space 1}   -1.56{col 59}{space 3}0.121{col 67}{space 4} -.333029{col 80}{space 3} .0392555
+{txt}{space 15}_Ivilid_42 {c |}{col 27}{res}{space 2}-.2737173{col 39}{space 2} .0424413{col 50}{space 1}   -6.45{col 59}{space 3}0.000{col 67}{space 4}-.3575153{col 80}{space 3}-.1899193
+{txt}{space 15}_Ivilid_43 {c |}{col 27}{res}{space 2} .4307949{col 39}{space 2} .0324247{col 50}{space 1}   13.29{col 59}{space 3}0.000{col 67}{space 4} .3667742{col 80}{space 3} .4948156
+{txt}{space 15}_Ivilid_44 {c |}{col 27}{res}{space 2}-.0967959{col 39}{space 2} .1151307{col 50}{space 1}   -0.84{col 59}{space 3}0.402{col 67}{space 4}-.3241152{col 80}{space 3} .1305234
+{txt}{space 15}_Ivilid_45 {c |}{col 27}{res}{space 2} .0952797{col 39}{space 2} .0915862{col 50}{space 1}    1.04{col 59}{space 3}0.300{col 67}{space 4}-.0855522{col 80}{space 3} .2761116
+{txt}{space 15}_Ivilid_46 {c |}{col 27}{res}{space 2}-.2776361{col 39}{space 2} .0364792{col 50}{space 1}   -7.61{col 59}{space 3}0.000{col 67}{space 4}-.3496622{col 80}{space 3}-.2056099
+{txt}{space 15}_Ivilid_47 {c |}{col 27}{res}{space 2}-.2499718{col 39}{space 2} .0650632{col 50}{space 1}   -3.84{col 59}{space 3}0.000{col 67}{space 4}-.3784357{col 80}{space 3} -.121508
+{txt}{space 20}_cons {c |}{col 27}{res}{space 2}-.2093469{col 39}{space 2} .1181326{col 50}{space 1}   -1.77{col 59}{space 3}0.078{col 67}{space 4}-.4425934{col 80}{space 3} .0238996
+{txt}{hline 26}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. test network_rate_preintensive inter_network_educ
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}network_rate_preintensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_network_educ = 0{p_end}
+
+{txt}       F(  2,   165) ={res}    8.68
+{txt}{col 13}Prob > F ={res}    0.0003
+{txt}
+{com}. test intensive inter_network_educ
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_network_educ = 0{p_end}
+
+{txt}       F(  2,   165) ={res}    2.68
+{txt}{col 13}Prob > F ={res}    0.0718
+{txt}
+{com}. reg takeup_survey network_onlyone network_onlytwo network_twomore intensive inter_network_educ1 inter_network_educ2 inter_network_educ3 male age agpop ricearea_2010 literacy risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_27} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,255
+                                                {txt}{help j_robustsingular:F(56, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1287
+                                                {txt}Root MSE          =    {res} .47433
+
+{txt}{ralign 85:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 21}{c |}{col 33}    Robust
+{col 1}      takeup_survey{col 21}{c |} Coefficient{col 33}  std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}network_onlyone {c |}{col 21}{res}{space 2} .0969821{col 33}{space 2} .0424851{col 44}{space 1}    2.28{col 53}{space 3}0.024{col 61}{space 4} .0130976{col 74}{space 3} .1808666
+{txt}{space 4}network_onlytwo {c |}{col 21}{res}{space 2}  .177096{col 33}{space 2} .1114581{col 44}{space 1}    1.59{col 53}{space 3}0.114{col 61}{space 4}-.0429719{col 74}{space 3} .3971638
+{txt}{space 4}network_twomore {c |}{col 21}{res}{space 2} .1369322{col 33}{space 2} .0916141{col 44}{space 1}    1.49{col 53}{space 3}0.137{col 61}{space 4} -.043955{col 74}{space 3} .3178193
+{txt}{space 10}intensive {c |}{col 21}{res}{space 2} .0935944{col 33}{space 2} .0419079{col 44}{space 1}    2.23{col 53}{space 3}0.027{col 61}{space 4} .0108495{col 74}{space 3} .1763394
+{txt}inter_network_educ1 {c |}{col 21}{res}{space 2}-.0869055{col 33}{space 2} .0551442{col 44}{space 1}   -1.58{col 53}{space 3}0.117{col 61}{space 4}-.1957847{col 74}{space 3} .0219737
+{txt}inter_network_educ2 {c |}{col 21}{res}{space 2}-.0907766{col 33}{space 2}  .192624{col 44}{space 1}   -0.47{col 53}{space 3}0.638{col 61}{space 4}-.4711022{col 74}{space 3} .2895489
+{txt}inter_network_educ3 {c |}{col 21}{res}{space 2}-.1405079{col 33}{space 2} .1738363{col 44}{space 1}   -0.81{col 53}{space 3}0.420{col 61}{space 4}-.4837383{col 74}{space 3} .2027225
+{txt}{space 15}male {c |}{col 21}{res}{space 2} .0292083{col 33}{space 2} .0729577{col 44}{space 1}    0.40{col 53}{space 3}0.689{col 61}{space 4}-.1148428{col 74}{space 3} .1732594
+{txt}{space 16}age {c |}{col 21}{res}{space 2} .0046181{col 33}{space 2} .0012251{col 44}{space 1}    3.77{col 53}{space 3}0.000{col 61}{space 4} .0021992{col 74}{space 3}  .007037
+{txt}{space 14}agpop {c |}{col 21}{res}{space 2}-.0083813{col 33}{space 2} .0068516{col 44}{space 1}   -1.22{col 53}{space 3}0.223{col 61}{space 4}-.0219094{col 74}{space 3} .0051468
+{txt}{space 6}ricearea_2010 {c |}{col 21}{res}{space 2} .0044333{col 33}{space 2} .0010307{col 44}{space 1}    4.30{col 53}{space 3}0.000{col 61}{space 4} .0023982{col 74}{space 3} .0064684
+{txt}{space 11}literacy {c |}{col 21}{res}{space 2} .0901466{col 33}{space 2} .0327411{col 44}{space 1}    2.75{col 53}{space 3}0.007{col 61}{space 4} .0255011{col 74}{space 3} .1547921
+{txt}{space 8}risk_averse {c |}{col 21}{res}{space 2} .1037422{col 33}{space 2} .0493319{col 44}{space 1}    2.10{col 53}{space 3}0.037{col 61}{space 4} .0063391{col 74}{space 3} .2011453
+{txt}{space 6}disaster_prob {c |}{col 21}{res}{space 2} .0016982{col 33}{space 2}  .000812{col 44}{space 1}    2.09{col 53}{space 3}0.038{col 61}{space 4} .0000951{col 74}{space 3} .0033014
+{txt}{space 12}friend1 {c |}{col 21}{res}{space 2}        0{col 33}{txt}  (omitted)
+{space 12}friend2 {c |}{col 21}{res}{space 2}        0{col 33}{txt}  (omitted)
+{space 12}friend3 {c |}{col 21}{res}{space 2} .0639547{col 33}{space 2} .2357249{col 44}{space 1}    0.27{col 53}{space 3}0.786{col 61}{space 4}-.4014713{col 74}{space 3} .5293807
+{txt}{space 12}friend4 {c |}{col 21}{res}{space 2} .0958195{col 33}{space 2} .1307932{col 44}{space 1}    0.73{col 53}{space 3}0.465{col 61}{space 4}-.1624247{col 74}{space 3} .3540636
+{txt}{space 12}friend5 {c |}{col 21}{res}{space 2} .2193946{col 33}{space 2} .0711592{col 44}{space 1}    3.08{col 53}{space 3}0.002{col 61}{space 4} .0788946{col 74}{space 3} .3598946
+{txt}{space 10}_Ivilid_2 {c |}{col 21}{res}{space 2}-.4108686{col 33}{space 2} .1346199{col 44}{space 1}   -3.05{col 53}{space 3}0.003{col 61}{space 4}-.6766682{col 74}{space 3} -.145069
+{txt}{space 10}_Ivilid_3 {c |}{col 21}{res}{space 2} -.249323{col 33}{space 2} .0651857{col 44}{space 1}   -3.82{col 53}{space 3}0.000{col 61}{space 4}-.3780287{col 74}{space 3}-.1206174
+{txt}{space 10}_Ivilid_4 {c |}{col 21}{res}{space 2}-.1011312{col 33}{space 2} .0649444{col 44}{space 1}   -1.56{col 53}{space 3}0.121{col 61}{space 4}-.2293603{col 74}{space 3} .0270979
+{txt}{space 10}_Ivilid_5 {c |}{col 21}{res}{space 2}        0{col 33}{txt}  (omitted)
+{space 10}_Ivilid_6 {c |}{col 21}{res}{space 2} .1297553{col 33}{space 2} .1533846{col 44}{space 1}    0.85{col 53}{space 3}0.399{col 61}{space 4}-.1730943{col 74}{space 3} .4326048
+{txt}{space 10}_Ivilid_7 {c |}{col 21}{res}{space 2}-.0662337{col 33}{space 2} .0716677{col 44}{space 1}   -0.92{col 53}{space 3}0.357{col 61}{space 4}-.2077377{col 74}{space 3} .0752703
+{txt}{space 10}_Ivilid_8 {c |}{col 21}{res}{space 2}-.0156161{col 33}{space 2}   .08446{col 44}{space 1}   -0.18{col 53}{space 3}0.854{col 61}{space 4}-.1823777{col 74}{space 3} .1511456
+{txt}{space 10}_Ivilid_9 {c |}{col 21}{res}{space 2} -.142434{col 33}{space 2} .1395221{col 44}{space 1}   -1.02{col 53}{space 3}0.309{col 61}{space 4}-.4179128{col 74}{space 3} .1330447
+{txt}{space 9}_Ivilid_10 {c |}{col 21}{res}{space 2}-.0551596{col 33}{space 2} .1036052{col 44}{space 1}   -0.53{col 53}{space 3}0.595{col 61}{space 4}-.2597225{col 74}{space 3} .1494033
+{txt}{space 9}_Ivilid_11 {c |}{col 21}{res}{space 2}-.1314217{col 33}{space 2}  .069607{col 44}{space 1}   -1.89{col 53}{space 3}0.061{col 61}{space 4}-.2688569{col 74}{space 3} .0060135
+{txt}{space 9}_Ivilid_12 {c |}{col 21}{res}{space 2} .0457866{col 33}{space 2} .1092103{col 44}{space 1}    0.42{col 53}{space 3}0.676{col 61}{space 4}-.1698432{col 74}{space 3} .2614165
+{txt}{space 9}_Ivilid_13 {c |}{col 21}{res}{space 2}-.0082238{col 33}{space 2} .0661459{col 44}{space 1}   -0.12{col 53}{space 3}0.901{col 61}{space 4}-.1388254{col 74}{space 3} .1223778
+{txt}{space 9}_Ivilid_14 {c |}{col 21}{res}{space 2}-.2363806{col 33}{space 2} .0897347{col 44}{space 1}   -2.63{col 53}{space 3}0.009{col 61}{space 4}-.4135569{col 74}{space 3}-.0592042
+{txt}{space 9}_Ivilid_15 {c |}{col 21}{res}{space 2} .2091902{col 33}{space 2} .1147166{col 44}{space 1}    1.82{col 53}{space 3}0.070{col 61}{space 4}-.0173115{col 74}{space 3} .4356919
+{txt}{space 9}_Ivilid_16 {c |}{col 21}{res}{space 2} .0398187{col 33}{space 2} .0343252{col 44}{space 1}    1.16{col 53}{space 3}0.248{col 61}{space 4}-.0279545{col 74}{space 3} .1075919
+{txt}{space 9}_Ivilid_17 {c |}{col 21}{res}{space 2}-.2410564{col 33}{space 2}  .064022{col 44}{space 1}   -3.77{col 53}{space 3}0.000{col 61}{space 4}-.3674642{col 74}{space 3}-.1146485
+{txt}{space 9}_Ivilid_18 {c |}{col 21}{res}{space 2}  .020932{col 33}{space 2} .1722306{col 44}{space 1}    0.12{col 53}{space 3}0.903{col 61}{space 4} -.319128{col 74}{space 3} .3609919
+{txt}{space 9}_Ivilid_19 {c |}{col 21}{res}{space 2}-.2824804{col 33}{space 2} .0794384{col 44}{space 1}   -3.56{col 53}{space 3}0.000{col 61}{space 4}-.4393272{col 74}{space 3}-.1256336
+{txt}{space 9}_Ivilid_20 {c |}{col 21}{res}{space 2} .0189951{col 33}{space 2}  .092965{col 44}{space 1}    0.20{col 53}{space 3}0.838{col 61}{space 4}-.1645592{col 74}{space 3} .2025494
+{txt}{space 9}_Ivilid_21 {c |}{col 21}{res}{space 2}-.2070614{col 33}{space 2} .0691073{col 44}{space 1}   -3.00{col 53}{space 3}0.003{col 61}{space 4}  -.34351{col 74}{space 3}-.0706129
+{txt}{space 9}_Ivilid_22 {c |}{col 21}{res}{space 2}-.1179937{col 33}{space 2} .1127395{col 44}{space 1}   -1.05{col 53}{space 3}0.297{col 61}{space 4}-.3405917{col 74}{space 3} .1046042
+{txt}{space 9}_Ivilid_23 {c |}{col 21}{res}{space 2}        0{col 33}{txt}  (omitted)
+{space 9}_Ivilid_24 {c |}{col 21}{res}{space 2}-.0175169{col 33}{space 2}  .140589{col 44}{space 1}   -0.12{col 53}{space 3}0.901{col 61}{space 4}-.2951021{col 74}{space 3} .2600683
+{txt}{space 9}_Ivilid_25 {c |}{col 21}{res}{space 2} .1864604{col 33}{space 2} .1541932{col 44}{space 1}    1.21{col 53}{space 3}0.228{col 61}{space 4}-.1179857{col 74}{space 3} .4909066
+{txt}{space 9}_Ivilid_26 {c |}{col 21}{res}{space 2}-.0936103{col 33}{space 2} .0415035{col 44}{space 1}   -2.26{col 53}{space 3}0.025{col 61}{space 4}-.1755567{col 74}{space 3} -.011664
+{txt}{space 9}_Ivilid_27 {c |}{col 21}{res}{space 2}        0{col 33}{txt}  (omitted)
+{space 9}_Ivilid_28 {c |}{col 21}{res}{space 2} .0321785{col 33}{space 2} .0840412{col 44}{space 1}    0.38{col 53}{space 3}0.702{col 61}{space 4}-.1337563{col 74}{space 3} .1981132
+{txt}{space 9}_Ivilid_29 {c |}{col 21}{res}{space 2}-.2705404{col 33}{space 2} .0925504{col 44}{space 1}   -2.92{col 53}{space 3}0.004{col 61}{space 4} -.453276{col 74}{space 3}-.0878047
+{txt}{space 9}_Ivilid_30 {c |}{col 21}{res}{space 2}-.1601366{col 33}{space 2} .1426763{col 44}{space 1}   -1.12{col 53}{space 3}0.263{col 61}{space 4}-.4418432{col 74}{space 3}   .12157
+{txt}{space 9}_Ivilid_31 {c |}{col 21}{res}{space 2}-.1472723{col 33}{space 2} .0227059{col 44}{space 1}   -6.49{col 53}{space 3}0.000{col 61}{space 4}-.1921039{col 74}{space 3}-.1024407
+{txt}{space 9}_Ivilid_32 {c |}{col 21}{res}{space 2} .1544013{col 33}{space 2} .0891602{col 44}{space 1}    1.73{col 53}{space 3}0.085{col 61}{space 4}-.0216406{col 74}{space 3} .3304432
+{txt}{space 9}_Ivilid_33 {c |}{col 21}{res}{space 2} .0479637{col 33}{space 2} .0417186{col 44}{space 1}    1.15{col 53}{space 3}0.252{col 61}{space 4}-.0344073{col 74}{space 3} .1303348
+{txt}{space 9}_Ivilid_34 {c |}{col 21}{res}{space 2}-.0133661{col 33}{space 2} .2248879{col 44}{space 1}   -0.06{col 53}{space 3}0.953{col 61}{space 4} -.457395{col 74}{space 3} .4306628
+{txt}{space 9}_Ivilid_35 {c |}{col 21}{res}{space 2}-.3009263{col 33}{space 2} .0338579{col 44}{space 1}   -8.89{col 53}{space 3}0.000{col 61}{space 4}-.3677769{col 74}{space 3}-.2340758
+{txt}{space 9}_Ivilid_36 {c |}{col 21}{res}{space 2}-.3023035{col 33}{space 2} .1019418{col 44}{space 1}   -2.97{col 53}{space 3}0.003{col 61}{space 4}-.5035821{col 74}{space 3}-.1010249
+{txt}{space 9}_Ivilid_37 {c |}{col 21}{res}{space 2}-.1113482{col 33}{space 2} .0315537{col 44}{space 1}   -3.53{col 53}{space 3}0.001{col 61}{space 4}-.1736492{col 74}{space 3}-.0490472
+{txt}{space 9}_Ivilid_38 {c |}{col 21}{res}{space 2}-.0360357{col 33}{space 2} .1839279{col 44}{space 1}   -0.20{col 53}{space 3}0.845{col 61}{space 4}-.3991913{col 74}{space 3}   .32712
+{txt}{space 9}_Ivilid_39 {c |}{col 21}{res}{space 2}-.0664515{col 33}{space 2} .1243406{col 44}{space 1}   -0.53{col 53}{space 3}0.594{col 61}{space 4}-.3119553{col 74}{space 3} .1790523
+{txt}{space 9}_Ivilid_40 {c |}{col 21}{res}{space 2}-.2249663{col 33}{space 2} .1540153{col 44}{space 1}   -1.46{col 53}{space 3}0.146{col 61}{space 4}-.5290612{col 74}{space 3} .0791286
+{txt}{space 9}_Ivilid_41 {c |}{col 21}{res}{space 2}-.1045148{col 33}{space 2} .0896633{col 44}{space 1}   -1.17{col 53}{space 3}0.245{col 61}{space 4}-.2815501{col 74}{space 3} .0725204
+{txt}{space 9}_Ivilid_42 {c |}{col 21}{res}{space 2}-.2134265{col 33}{space 2} .0510639{col 44}{space 1}   -4.18{col 53}{space 3}0.000{col 61}{space 4}-.3142494{col 74}{space 3}-.1126036
+{txt}{space 9}_Ivilid_43 {c |}{col 21}{res}{space 2} .4815171{col 33}{space 2} .0376199{col 44}{space 1}   12.80{col 53}{space 3}0.000{col 61}{space 4} .4072388{col 74}{space 3} .5557955
+{txt}{space 9}_Ivilid_44 {c |}{col 21}{res}{space 2}-.0526524{col 33}{space 2} .1112004{col 44}{space 1}   -0.47{col 53}{space 3}0.636{col 61}{space 4}-.2722114{col 74}{space 3} .1669067
+{txt}{space 9}_Ivilid_45 {c |}{col 21}{res}{space 2}  .143208{col 33}{space 2} .0971813{col 44}{space 1}    1.47{col 53}{space 3}0.142{col 61}{space 4}-.0486713{col 74}{space 3} .3350873
+{txt}{space 9}_Ivilid_46 {c |}{col 21}{res}{space 2}-.2356783{col 33}{space 2}  .040023{col 44}{space 1}   -5.89{col 53}{space 3}0.000{col 61}{space 4}-.3147015{col 74}{space 3} -.156655
+{txt}{space 9}_Ivilid_47 {c |}{col 21}{res}{space 2}-.2101928{col 33}{space 2} .0685947{col 44}{space 1}   -3.06{col 53}{space 3}0.003{col 61}{space 4}-.3456293{col 74}{space 3}-.0747563
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2}-.1881967{col 33}{space 2} .1018169{col 44}{space 1}   -1.85{col 53}{space 3}0.066{col 61}{space 4}-.3892286{col 74}{space 3} .0128353
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. 
+. gen nofriend = 1
+{txt}
+{com}. replace nofriend = 0 if delay == 1 & info_none == 1 & network_yes == 1
+{txt}(683 real changes made)
+
+{com}. *2.2. test spillover effect from non-friends
+. *table2, column 6
+. reg takeup_survey intensive delay inter_inten_delay male age agpop ricearea_2010 literacy risk_averse disaster_prob _Ivilid* if delay == 0 | (delay == 1 & info_none == 1 & nofriend == 1), cluster(address)
+
+{txt}Linear regression                               Number of obs     = {res}     2,756
+                                                {txt}{help j_robustsingular:F(52, 172) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1072
+                                                {txt}Root MSE          =    {res} .47299
+
+{txt}{ralign 83:(Std. err. adjusted for {res:173} clusters in {res:address})}
+{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 19}{c |}{col 31}    Robust
+{col 1}    takeup_survey{col 19}{c |} Coefficient{col 31}  std. err.{col 43}      t{col 51}   P>|t|{col 59}     [95% con{col 72}f. interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}intensive {c |}{col 19}{res}{space 2} .1403269{col 31}{space 2} .0259038{col 42}{space 1}    5.42{col 51}{space 3}0.000{col 59}{space 4} .0891966{col 72}{space 3} .1914572
+{txt}{space 12}delay {c |}{col 19}{res}{space 2} .0317972{col 31}{space 2} .0362454{col 42}{space 1}    0.88{col 51}{space 3}0.382{col 59}{space 4}-.0397458{col 72}{space 3} .1033403
+{txt}inter_inten_delay {c |}{col 19}{res}{space 2}-.0525256{col 31}{space 2} .0467534{col 42}{space 1}   -1.12{col 51}{space 3}0.263{col 59}{space 4}-.1448099{col 72}{space 3} .0397587
+{txt}{space 13}male {c |}{col 19}{res}{space 2} .0480664{col 31}{space 2} .0416527{col 42}{space 1}    1.15{col 51}{space 3}0.250{col 59}{space 4}-.0341499{col 72}{space 3} .1302828
+{txt}{space 14}age {c |}{col 19}{res}{space 2} .0023435{col 31}{space 2} .0009131{col 42}{space 1}    2.57{col 51}{space 3}0.011{col 59}{space 4} .0005411{col 72}{space 3} .0041459
+{txt}{space 12}agpop {c |}{col 19}{res}{space 2}-.0044836{col 31}{space 2} .0048757{col 42}{space 1}   -0.92{col 51}{space 3}0.359{col 59}{space 4}-.0141075{col 72}{space 3} .0051403
+{txt}{space 4}ricearea_2010 {c |}{col 19}{res}{space 2} .0011529{col 31}{space 2} .0007719{col 42}{space 1}    1.49{col 51}{space 3}0.137{col 59}{space 4}-.0003707{col 72}{space 3} .0026765
+{txt}{space 9}literacy {c |}{col 19}{res}{space 2} .0625757{col 31}{space 2} .0225257{col 42}{space 1}    2.78{col 51}{space 3}0.006{col 59}{space 4} .0181132{col 72}{space 3} .1070382
+{txt}{space 6}risk_averse {c |}{col 19}{res}{space 2} .0720106{col 31}{space 2} .0306167{col 42}{space 1}    2.35{col 51}{space 3}0.020{col 59}{space 4} .0115777{col 72}{space 3} .1324435
+{txt}{space 4}disaster_prob {c |}{col 19}{res}{space 2} .0001667{col 31}{space 2} .0005875{col 42}{space 1}    0.28{col 51}{space 3}0.777{col 59}{space 4}-.0009929{col 72}{space 3} .0013263
+{txt}{space 8}_Ivilid_2 {c |}{col 19}{res}{space 2}-.4191927{col 31}{space 2} .1197146{col 42}{space 1}   -3.50{col 51}{space 3}0.001{col 59}{space 4}-.6554917{col 72}{space 3}-.1828937
+{txt}{space 8}_Ivilid_3 {c |}{col 19}{res}{space 2}-.2272989{col 31}{space 2} .0590425{col 42}{space 1}   -3.85{col 51}{space 3}0.000{col 59}{space 4}-.3438401{col 72}{space 3}-.1107577
+{txt}{space 8}_Ivilid_4 {c |}{col 19}{res}{space 2}-.2730082{col 31}{space 2} .0596259{col 42}{space 1}   -4.58{col 51}{space 3}0.000{col 59}{space 4} -.390701{col 72}{space 3}-.1553155
+{txt}{space 8}_Ivilid_5 {c |}{col 19}{res}{space 2}-.1679513{col 31}{space 2} .1496356{col 42}{space 1}   -1.12{col 51}{space 3}0.263{col 59}{space 4}-.4633099{col 72}{space 3} .1274072
+{txt}{space 8}_Ivilid_6 {c |}{col 19}{res}{space 2} .1714305{col 31}{space 2} .0378353{col 42}{space 1}    4.53{col 51}{space 3}0.000{col 59}{space 4} .0967491{col 72}{space 3} .2461118
+{txt}{space 8}_Ivilid_7 {c |}{col 19}{res}{space 2}-.2783659{col 31}{space 2} .0425506{col 42}{space 1}   -6.54{col 51}{space 3}0.000{col 59}{space 4}-.3623544{col 72}{space 3}-.1943774
+{txt}{space 8}_Ivilid_8 {c |}{col 19}{res}{space 2}-.1923783{col 31}{space 2} .1031435{col 42}{space 1}   -1.87{col 51}{space 3}0.064{col 59}{space 4}-.3959684{col 72}{space 3} .0112118
+{txt}{space 8}_Ivilid_9 {c |}{col 19}{res}{space 2}-.2407098{col 31}{space 2} .1055517{col 42}{space 1}   -2.28{col 51}{space 3}0.024{col 59}{space 4}-.4490533{col 72}{space 3}-.0323663
+{txt}{space 7}_Ivilid_10 {c |}{col 19}{res}{space 2}-.1514583{col 31}{space 2} .0993653{col 42}{space 1}   -1.52{col 51}{space 3}0.129{col 59}{space 4}-.3475908{col 72}{space 3} .0446742
+{txt}{space 7}_Ivilid_11 {c |}{col 19}{res}{space 2}-.1688292{col 31}{space 2} .0512959{col 42}{space 1}   -3.29{col 51}{space 3}0.001{col 59}{space 4}-.2700798{col 72}{space 3}-.0675786
+{txt}{space 7}_Ivilid_12 {c |}{col 19}{res}{space 2}-.0011707{col 31}{space 2} .0957109{col 42}{space 1}   -0.01{col 51}{space 3}0.990{col 59}{space 4}  -.19009{col 72}{space 3} .1877486
+{txt}{space 7}_Ivilid_13 {c |}{col 19}{res}{space 2}    -.006{col 31}{space 2} .0791854{col 42}{space 1}   -0.08{col 51}{space 3}0.940{col 59}{space 4}-.1623002{col 72}{space 3} .1503002
+{txt}{space 7}_Ivilid_14 {c |}{col 19}{res}{space 2}-.2220805{col 31}{space 2} .0819122{col 42}{space 1}   -2.71{col 51}{space 3}0.007{col 59}{space 4}-.3837631{col 72}{space 3}-.0603979
+{txt}{space 7}_Ivilid_15 {c |}{col 19}{res}{space 2} .1058526{col 31}{space 2} .0823051{col 42}{space 1}    1.29{col 51}{space 3}0.200{col 59}{space 4}-.0566054{col 72}{space 3} .2683106
+{txt}{space 7}_Ivilid_16 {c |}{col 19}{res}{space 2}-.4257579{col 31}{space 2} .0153719{col 42}{space 1}  -27.70{col 51}{space 3}0.000{col 59}{space 4}-.4560998{col 72}{space 3} -.395416
+{txt}{space 7}_Ivilid_17 {c |}{col 19}{res}{space 2}-.3942722{col 31}{space 2} .0640323{col 42}{space 1}   -6.16{col 51}{space 3}0.000{col 59}{space 4}-.5206624{col 72}{space 3}-.2678819
+{txt}{space 7}_Ivilid_18 {c |}{col 19}{res}{space 2}-.0939815{col 31}{space 2} .0734668{col 42}{space 1}   -1.28{col 51}{space 3}0.203{col 59}{space 4}-.2389941{col 72}{space 3}  .051031
+{txt}{space 7}_Ivilid_19 {c |}{col 19}{res}{space 2}-.3046031{col 31}{space 2} .0617228{col 42}{space 1}   -4.94{col 51}{space 3}0.000{col 59}{space 4}-.4264347{col 72}{space 3}-.1827714
+{txt}{space 7}_Ivilid_20 {c |}{col 19}{res}{space 2}-.1372601{col 31}{space 2}  .104844{col 42}{space 1}   -1.31{col 51}{space 3}0.192{col 59}{space 4}-.3442066{col 72}{space 3} .0696865
+{txt}{space 7}_Ivilid_21 {c |}{col 19}{res}{space 2}-.2844593{col 31}{space 2} .0443675{col 42}{space 1}   -6.41{col 51}{space 3}0.000{col 59}{space 4}-.3720341{col 72}{space 3}-.1968844
+{txt}{space 7}_Ivilid_22 {c |}{col 19}{res}{space 2}-.2846745{col 31}{space 2}  .132013{col 42}{space 1}   -2.16{col 51}{space 3}0.032{col 59}{space 4}-.5452487{col 72}{space 3}-.0241003
+{txt}{space 7}_Ivilid_23 {c |}{col 19}{res}{space 2}-.2716647{col 31}{space 2} .1098468{col 42}{space 1}   -2.47{col 51}{space 3}0.014{col 59}{space 4}-.4884859{col 72}{space 3}-.0548434
+{txt}{space 7}_Ivilid_24 {c |}{col 19}{res}{space 2}-.1284568{col 31}{space 2} .1031228{col 42}{space 1}   -1.25{col 51}{space 3}0.215{col 59}{space 4} -.332006{col 72}{space 3} .0750924
+{txt}{space 7}_Ivilid_25 {c |}{col 19}{res}{space 2} .0360313{col 31}{space 2} .0490816{col 42}{space 1}    0.73{col 51}{space 3}0.464{col 59}{space 4}-.0608484{col 72}{space 3}  .132911
+{txt}{space 7}_Ivilid_26 {c |}{col 19}{res}{space 2} .0205876{col 31}{space 2} .0997737{col 42}{space 1}    0.21{col 51}{space 3}0.837{col 59}{space 4} -.176351{col 72}{space 3} .2175261
+{txt}{space 7}_Ivilid_27 {c |}{col 19}{res}{space 2} -.155377{col 31}{space 2} .0637348{col 42}{space 1}   -2.44{col 51}{space 3}0.016{col 59}{space 4}-.2811801{col 72}{space 3} -.029574
+{txt}{space 7}_Ivilid_28 {c |}{col 19}{res}{space 2} .0218129{col 31}{space 2} .0717003{col 42}{space 1}    0.30{col 51}{space 3}0.761{col 59}{space 4}-.1197129{col 72}{space 3} .1633387
+{txt}{space 7}_Ivilid_29 {c |}{col 19}{res}{space 2}-.3652692{col 31}{space 2} .0644646{col 42}{space 1}   -5.67{col 51}{space 3}0.000{col 59}{space 4}-.4925127{col 72}{space 3}-.2380257
+{txt}{space 7}_Ivilid_30 {c |}{col 19}{res}{space 2}-.2935357{col 31}{space 2} .0738758{col 42}{space 1}   -3.97{col 51}{space 3}0.000{col 59}{space 4}-.4393556{col 72}{space 3}-.1477158
+{txt}{space 7}_Ivilid_31 {c |}{col 19}{res}{space 2}-.0002777{col 31}{space 2} .0198891{col 42}{space 1}   -0.01{col 51}{space 3}0.989{col 59}{space 4}-.0395358{col 72}{space 3} .0389803
+{txt}{space 7}_Ivilid_32 {c |}{col 19}{res}{space 2} .2026638{col 31}{space 2} .0874193{col 42}{space 1}    2.32{col 51}{space 3}0.022{col 59}{space 4}  .030111{col 72}{space 3} .3752166
+{txt}{space 7}_Ivilid_33 {c |}{col 19}{res}{space 2} .0849835{col 31}{space 2} .1172704{col 42}{space 1}    0.72{col 51}{space 3}0.470{col 59}{space 4}-.1464909{col 72}{space 3}  .316458
+{txt}{space 7}_Ivilid_34 {c |}{col 19}{res}{space 2}-.3094035{col 31}{space 2} .1354611{col 42}{space 1}   -2.28{col 51}{space 3}0.024{col 59}{space 4}-.5767837{col 72}{space 3}-.0420232
+{txt}{space 7}_Ivilid_35 {c |}{col 19}{res}{space 2}-.2197439{col 31}{space 2} .0127285{col 42}{space 1}  -17.26{col 51}{space 3}0.000{col 59}{space 4}-.2448681{col 72}{space 3}-.1946197
+{txt}{space 7}_Ivilid_36 {c |}{col 19}{res}{space 2}-.2082179{col 31}{space 2} .0234607{col 42}{space 1}   -8.88{col 51}{space 3}0.000{col 59}{space 4}-.2545259{col 72}{space 3}-.1619099
+{txt}{space 7}_Ivilid_37 {c |}{col 19}{res}{space 2}-.2721439{col 31}{space 2} .0824854{col 42}{space 1}   -3.30{col 51}{space 3}0.001{col 59}{space 4}-.4349579{col 72}{space 3}-.1093299
+{txt}{space 7}_Ivilid_38 {c |}{col 19}{res}{space 2} .0132964{col 31}{space 2} .0385656{col 42}{space 1}    0.34{col 51}{space 3}0.731{col 59}{space 4}-.0628264{col 72}{space 3} .0894191
+{txt}{space 7}_Ivilid_39 {c |}{col 19}{res}{space 2}-.4139016{col 31}{space 2}  .027058{col 42}{space 1}  -15.30{col 51}{space 3}0.000{col 59}{space 4}  -.46731{col 72}{space 3}-.3604932
+{txt}{space 7}_Ivilid_40 {c |}{col 19}{res}{space 2}-.1610064{col 31}{space 2}   .07723{col 42}{space 1}   -2.08{col 51}{space 3}0.039{col 59}{space 4}-.3134471{col 72}{space 3}-.0085657
+{txt}{space 7}_Ivilid_41 {c |}{col 19}{res}{space 2} -.096842{col 31}{space 2} .0440867{col 42}{space 1}   -2.20{col 51}{space 3}0.029{col 59}{space 4}-.1838626{col 72}{space 3}-.0098214
+{txt}{space 7}_Ivilid_42 {c |}{col 19}{res}{space 2}-.3705229{col 31}{space 2}  .047119{col 42}{space 1}   -7.86{col 51}{space 3}0.000{col 59}{space 4}-.4635287{col 72}{space 3} -.277517
+{txt}{space 7}_Ivilid_43 {c |}{col 19}{res}{space 2} .0125913{col 31}{space 2} .0595598{col 42}{space 1}    0.21{col 51}{space 3}0.833{col 59}{space 4} -.104971{col 72}{space 3} .1301536
+{txt}{space 7}_Ivilid_44 {c |}{col 19}{res}{space 2}-.4004385{col 31}{space 2} .0351585{col 42}{space 1}  -11.39{col 51}{space 3}0.000{col 59}{space 4}-.4698362{col 72}{space 3}-.3310408
+{txt}{space 7}_Ivilid_45 {c |}{col 19}{res}{space 2} .0087315{col 31}{space 2} .0844402{col 42}{space 1}    0.10{col 51}{space 3}0.918{col 59}{space 4}-.1579409{col 72}{space 3} .1754039
+{txt}{space 7}_Ivilid_46 {c |}{col 19}{res}{space 2}-.3363034{col 31}{space 2} .0581305{col 42}{space 1}   -5.79{col 51}{space 3}0.000{col 59}{space 4}-.4510444{col 72}{space 3}-.2215624
+{txt}{space 7}_Ivilid_47 {c |}{col 19}{res}{space 2}-.3108602{col 31}{space 2} .0614448{col 42}{space 1}   -5.06{col 51}{space 3}0.000{col 59}{space 4}-.4321431{col 72}{space 3}-.1895773
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} .3325853{col 31}{space 2}  .079483{col 42}{space 1}    4.18{col 51}{space 3}0.000{col 59}{space 4} .1756975{col 72}{space 3}  .489473
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile0'
+{txt}{browse `"Table2.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table2.txt""':seeout}
+
+{com}. test intensive inter_inten_delay
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}intensive = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} inter_inten_delay = 0{p_end}
+
+{txt}       F(  2,   172) ={res}   16.69
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. 
+. *2.3. Alternative measures and nonlinear effect
+. *table 3
+. local outputfile2 Table3.xls
+{txt}
+{com}. reg takeup_survey network_twoside male age agpop ricearea_2010 literacy intensive risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_27} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,255
+                                                {txt}{help j_robustsingular:F(51, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1127
+                                                {txt}Root MSE          =    {res} .47766
+
+{txt}{ralign 81:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 17}{c |}{col 29}    Robust
+{col 1}  takeup_survey{col 17}{c |} Coefficient{col 29}  std. err.{col 41}      t{col 49}   P>|t|{col 57}     [95% con{col 70}f. interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_twoside {c |}{col 17}{res}{space 2} .4003157{col 29}{space 2} .1727367{col 40}{space 1}    2.32{col 49}{space 3}0.022{col 57}{space 4} .0592565{col 70}{space 3} .7413749
+{txt}{space 11}male {c |}{col 17}{res}{space 2} .0158313{col 29}{space 2} .0729849{col 40}{space 1}    0.22{col 49}{space 3}0.829{col 57}{space 4}-.1282735{col 70}{space 3}  .159936
+{txt}{space 12}age {c |}{col 17}{res}{space 2} .0045619{col 29}{space 2} .0012537{col 40}{space 1}    3.64{col 49}{space 3}0.000{col 57}{space 4} .0020866{col 70}{space 3} .0070372
+{txt}{space 10}agpop {c |}{col 17}{res}{space 2} -.009707{col 29}{space 2} .0070101{col 40}{space 1}   -1.38{col 49}{space 3}0.168{col 57}{space 4}-.0235481{col 70}{space 3} .0041341
+{txt}{space 2}ricearea_2010 {c |}{col 17}{res}{space 2} .0041592{col 29}{space 2}  .001002{col 40}{space 1}    4.15{col 49}{space 3}0.000{col 57}{space 4} .0021808{col 70}{space 3} .0061375
+{txt}{space 7}literacy {c |}{col 17}{res}{space 2} .0803797{col 29}{space 2} .0330053{col 40}{space 1}    2.44{col 49}{space 3}0.016{col 57}{space 4} .0152125{col 70}{space 3}  .145547
+{txt}{space 6}intensive {c |}{col 17}{res}{space 2} .0245081{col 29}{space 2} .0331752{col 40}{space 1}    0.74{col 49}{space 3}0.461{col 57}{space 4}-.0409945{col 70}{space 3} .0900106
+{txt}{space 4}risk_averse {c |}{col 17}{res}{space 2} .1105594{col 29}{space 2} .0486692{col 40}{space 1}    2.27{col 49}{space 3}0.024{col 57}{space 4} .0144648{col 70}{space 3}  .206654
+{txt}{space 2}disaster_prob {c |}{col 17}{res}{space 2} .0019885{col 29}{space 2} .0008106{col 40}{space 1}    2.45{col 49}{space 3}0.015{col 57}{space 4}  .000388{col 70}{space 3} .0035891
+{txt}{space 8}friend1 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 8}friend2 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 8}friend3 {c |}{col 17}{res}{space 2} .1193774{col 29}{space 2} .2587278{col 40}{space 1}    0.46{col 49}{space 3}0.645{col 57}{space 4}-.3914666{col 70}{space 3} .6302213
+{txt}{space 8}friend4 {c |}{col 17}{res}{space 2} .1648759{col 29}{space 2} .1706251{col 40}{space 1}    0.97{col 49}{space 3}0.335{col 57}{space 4}-.1720142{col 70}{space 3} .5017659
+{txt}{space 8}friend5 {c |}{col 17}{res}{space 2} .3037102{col 29}{space 2}  .126707{col 40}{space 1}    2.40{col 49}{space 3}0.018{col 57}{space 4} .0535342{col 70}{space 3} .5538862
+{txt}{space 6}_Ivilid_2 {c |}{col 17}{res}{space 2}-.4976289{col 29}{space 2} .1440066{col 40}{space 1}   -3.46{col 49}{space 3}0.001{col 57}{space 4}-.7819621{col 70}{space 3}-.2132958
+{txt}{space 6}_Ivilid_3 {c |}{col 17}{res}{space 2}-.3315304{col 29}{space 2} .0615265{col 40}{space 1}   -5.39{col 49}{space 3}0.000{col 57}{space 4} -.453011{col 70}{space 3}-.2100497
+{txt}{space 6}_Ivilid_4 {c |}{col 17}{res}{space 2} -.178892{col 29}{space 2} .0466062{col 40}{space 1}   -3.84{col 49}{space 3}0.000{col 57}{space 4}-.2709134{col 70}{space 3}-.0868706
+{txt}{space 6}_Ivilid_5 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 6}_Ivilid_6 {c |}{col 17}{res}{space 2} .0150661{col 29}{space 2} .1501091{col 40}{space 1}    0.10{col 49}{space 3}0.920{col 57}{space 4}-.2813161{col 70}{space 3} .3114483
+{txt}{space 6}_Ivilid_7 {c |}{col 17}{res}{space 2}-.1457189{col 29}{space 2} .0785378{col 40}{space 1}   -1.86{col 49}{space 3}0.065{col 57}{space 4}-.3007875{col 70}{space 3} .0093498
+{txt}{space 6}_Ivilid_8 {c |}{col 17}{res}{space 2}-.1082253{col 29}{space 2} .0718947{col 40}{space 1}   -1.51{col 49}{space 3}0.134{col 57}{space 4}-.2501774{col 70}{space 3} .0337268
+{txt}{space 6}_Ivilid_9 {c |}{col 17}{res}{space 2}-.2373499{col 29}{space 2} .1392499{col 40}{space 1}   -1.70{col 49}{space 3}0.090{col 57}{space 4}-.5122911{col 70}{space 3} .0375914
+{txt}{space 5}_Ivilid_10 {c |}{col 17}{res}{space 2}-.1579952{col 29}{space 2} .0814824{col 40}{space 1}   -1.94{col 49}{space 3}0.054{col 57}{space 4}-.3188778{col 70}{space 3} .0028875
+{txt}{space 5}_Ivilid_11 {c |}{col 17}{res}{space 2} -.240614{col 29}{space 2} .0649514{col 40}{space 1}   -3.70{col 49}{space 3}0.000{col 57}{space 4} -.368857{col 70}{space 3}-.1123709
+{txt}{space 5}_Ivilid_12 {c |}{col 17}{res}{space 2}-.0314251{col 29}{space 2} .1054307{col 40}{space 1}   -0.30{col 49}{space 3}0.766{col 57}{space 4}-.2395922{col 70}{space 3}  .176742
+{txt}{space 5}_Ivilid_13 {c |}{col 17}{res}{space 2}-.0720337{col 29}{space 2} .0578581{col 40}{space 1}   -1.25{col 49}{space 3}0.215{col 57}{space 4}-.1862713{col 70}{space 3}  .042204
+{txt}{space 5}_Ivilid_14 {c |}{col 17}{res}{space 2}-.3348289{col 29}{space 2} .0854975{col 40}{space 1}   -3.92{col 49}{space 3}0.000{col 57}{space 4}-.5036391{col 70}{space 3}-.1660188
+{txt}{space 5}_Ivilid_15 {c |}{col 17}{res}{space 2} .0908461{col 29}{space 2} .1000972{col 40}{space 1}    0.91{col 49}{space 3}0.365{col 57}{space 4}-.1067904{col 70}{space 3} .2884826
+{txt}{space 5}_Ivilid_16 {c |}{col 17}{res}{space 2}-.0416201{col 29}{space 2} .0232938{col 40}{space 1}   -1.79{col 49}{space 3}0.076{col 57}{space 4}-.0876123{col 70}{space 3} .0043722
+{txt}{space 5}_Ivilid_17 {c |}{col 17}{res}{space 2}-.3296272{col 29}{space 2} .0655763{col 40}{space 1}   -5.03{col 49}{space 3}0.000{col 57}{space 4} -.459104{col 70}{space 3}-.2001504
+{txt}{space 5}_Ivilid_18 {c |}{col 17}{res}{space 2}-.0810466{col 29}{space 2} .1800461{col 40}{space 1}   -0.45{col 49}{space 3}0.653{col 57}{space 4}-.4365378{col 70}{space 3} .2744445
+{txt}{space 5}_Ivilid_19 {c |}{col 17}{res}{space 2}-.3682119{col 29}{space 2} .0808112{col 40}{space 1}   -4.56{col 49}{space 3}0.000{col 57}{space 4}-.5277693{col 70}{space 3}-.2086545
+{txt}{space 5}_Ivilid_20 {c |}{col 17}{res}{space 2}-.0640997{col 29}{space 2} .0910647{col 40}{space 1}   -0.70{col 49}{space 3}0.482{col 57}{space 4}-.2439019{col 70}{space 3} .1157025
+{txt}{space 5}_Ivilid_21 {c |}{col 17}{res}{space 2}-.2856804{col 29}{space 2} .0845844{col 40}{space 1}   -3.38{col 49}{space 3}0.001{col 57}{space 4}-.4526877{col 70}{space 3}-.1186731
+{txt}{space 5}_Ivilid_22 {c |}{col 17}{res}{space 2}-.2265559{col 29}{space 2} .1164826{col 40}{space 1}   -1.94{col 49}{space 3}0.053{col 57}{space 4}-.4565445{col 70}{space 3} .0034327
+{txt}{space 5}_Ivilid_23 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 5}_Ivilid_24 {c |}{col 17}{res}{space 2}-.1280379{col 29}{space 2} .1437748{col 40}{space 1}   -0.89{col 49}{space 3}0.374{col 57}{space 4}-.4119133{col 70}{space 3} .1558375
+{txt}{space 5}_Ivilid_25 {c |}{col 17}{res}{space 2} .0650725{col 29}{space 2} .1488589{col 40}{space 1}    0.44{col 49}{space 3}0.663{col 57}{space 4}-.2288413{col 70}{space 3} .3589864
+{txt}{space 5}_Ivilid_26 {c |}{col 17}{res}{space 2}-.1627075{col 29}{space 2} .0389302{col 40}{space 1}   -4.18{col 49}{space 3}0.000{col 57}{space 4}-.2395731{col 70}{space 3}-.0858419
+{txt}{space 5}_Ivilid_27 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 5}_Ivilid_28 {c |}{col 17}{res}{space 2}-.0777145{col 29}{space 2}  .077314{col 40}{space 1}   -1.01{col 49}{space 3}0.316{col 57}{space 4}-.2303668{col 70}{space 3} .0749377
+{txt}{space 5}_Ivilid_29 {c |}{col 17}{res}{space 2}-.3372872{col 29}{space 2} .0821768{col 40}{space 1}   -4.10{col 49}{space 3}0.000{col 57}{space 4}-.4995408{col 70}{space 3}-.1750336
+{txt}{space 5}_Ivilid_30 {c |}{col 17}{res}{space 2}-.2747585{col 29}{space 2} .1401985{col 40}{space 1}   -1.96{col 49}{space 3}0.052{col 57}{space 4}-.5515728{col 70}{space 3} .0020557
+{txt}{space 5}_Ivilid_31 {c |}{col 17}{res}{space 2}-.2336297{col 29}{space 2} .0171133{col 40}{space 1}  -13.65{col 49}{space 3}0.000{col 57}{space 4}-.2674191{col 70}{space 3}-.1998403
+{txt}{space 5}_Ivilid_32 {c |}{col 17}{res}{space 2} .0269182{col 29}{space 2}  .082333{col 40}{space 1}    0.33{col 49}{space 3}0.744{col 57}{space 4}-.1356438{col 70}{space 3} .1894802
+{txt}{space 5}_Ivilid_33 {c |}{col 17}{res}{space 2} -.043235{col 29}{space 2} .0398549{col 40}{space 1}   -1.08{col 49}{space 3}0.280{col 57}{space 4}-.1219263{col 70}{space 3} .0354564
+{txt}{space 5}_Ivilid_34 {c |}{col 17}{res}{space 2}-.0985171{col 29}{space 2} .2227703{col 40}{space 1}   -0.44{col 49}{space 3}0.659{col 57}{space 4}-.5383649{col 70}{space 3} .3413307
+{txt}{space 5}_Ivilid_35 {c |}{col 17}{res}{space 2}  -.40234{col 29}{space 2} .0163905{col 40}{space 1}  -24.55{col 49}{space 3}0.000{col 57}{space 4} -.434702{col 70}{space 3}-.3699779
+{txt}{space 5}_Ivilid_36 {c |}{col 17}{res}{space 2}-.3865928{col 29}{space 2} .0957609{col 40}{space 1}   -4.04{col 49}{space 3}0.000{col 57}{space 4}-.5756675{col 70}{space 3} -.197518
+{txt}{space 5}_Ivilid_37 {c |}{col 17}{res}{space 2}-.2292572{col 29}{space 2} .0227109{col 40}{space 1}  -10.09{col 49}{space 3}0.000{col 57}{space 4}-.2740986{col 70}{space 3}-.1844159
+{txt}{space 5}_Ivilid_38 {c |}{col 17}{res}{space 2}-.1395057{col 29}{space 2} .1799725{col 40}{space 1}   -0.78{col 49}{space 3}0.439{col 57}{space 4}-.4948516{col 70}{space 3} .2158402
+{txt}{space 5}_Ivilid_39 {c |}{col 17}{res}{space 2}-.1869006{col 29}{space 2}  .124686{col 40}{space 1}   -1.50{col 49}{space 3}0.136{col 57}{space 4}-.4330864{col 70}{space 3} .0592852
+{txt}{space 5}_Ivilid_40 {c |}{col 17}{res}{space 2}-.3106374{col 29}{space 2} .1513631{col 40}{space 1}   -2.05{col 49}{space 3}0.042{col 57}{space 4}-.6094956{col 70}{space 3}-.0117791
+{txt}{space 5}_Ivilid_41 {c |}{col 17}{res}{space 2}-.1750046{col 29}{space 2} .0967511{col 40}{space 1}   -1.81{col 49}{space 3}0.072{col 57}{space 4}-.3660344{col 70}{space 3} .0160252
+{txt}{space 5}_Ivilid_42 {c |}{col 17}{res}{space 2}-.3172604{col 29}{space 2} .0497409{col 40}{space 1}   -6.38{col 49}{space 3}0.000{col 57}{space 4}-.4154712{col 70}{space 3}-.2190497
+{txt}{space 5}_Ivilid_43 {c |}{col 17}{res}{space 2} .3681089{col 29}{space 2} .0278621{col 40}{space 1}   13.21{col 49}{space 3}0.000{col 57}{space 4} .3130967{col 70}{space 3} .4231211
+{txt}{space 5}_Ivilid_44 {c |}{col 17}{res}{space 2}-.1407155{col 29}{space 2} .1247103{col 40}{space 1}   -1.13{col 49}{space 3}0.261{col 57}{space 4}-.3869493{col 70}{space 3} .1055183
+{txt}{space 5}_Ivilid_45 {c |}{col 17}{res}{space 2} .0503368{col 29}{space 2} .0882251{col 40}{space 1}    0.57{col 49}{space 3}0.569{col 57}{space 4}-.1238589{col 70}{space 3} .2245325
+{txt}{space 5}_Ivilid_46 {c |}{col 17}{res}{space 2}-.3292605{col 29}{space 2} .0352275{col 40}{space 1}   -9.35{col 49}{space 3}0.000{col 57}{space 4}-.3988153{col 70}{space 3}-.2597056
+{txt}{space 5}_Ivilid_47 {c |}{col 17}{res}{space 2}-.2852555{col 29}{space 2} .0684097{col 40}{space 1}   -4.17{col 49}{space 3}0.000{col 57}{space 4}-.4203267{col 70}{space 3}-.1501843
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2} -.087313{col 29}{space 2}  .142749{col 40}{space 1}   -0.61{col 49}{space 3}0.542{col 57}{space 4}-.3691631{col 70}{space 3} .1945371
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile2'
+{txt}{browse `"Table3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table3.txt""':seeout}
+
+{com}. reg takeup_survey network_second male age agpop ricearea_2010 literacy intensive risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_32} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,247
+                                                {txt}{help j_robustsingular:F(51, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1087
+                                                {txt}Root MSE          =    {res} .47888
+
+{txt}{ralign 80:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 15}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 16}{c |}{col 28}    Robust
+{col 1} takeup_survey{col 16}{c |} Coefficient{col 28}  std. err.{col 40}      t{col 48}   P>|t|{col 56}     [95% con{col 69}f. interval]
+{hline 15}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_second {c |}{col 16}{res}{space 2} .1799045{col 28}{space 2} .1398635{col 39}{space 1}    1.29{col 48}{space 3}0.200{col 56}{space 4}-.0962485{col 69}{space 3} .4560574
+{txt}{space 10}male {c |}{col 16}{res}{space 2} .0092792{col 28}{space 2} .0767641{col 39}{space 1}    0.12{col 48}{space 3}0.904{col 56}{space 4}-.1422873{col 69}{space 3} .1608458
+{txt}{space 11}age {c |}{col 16}{res}{space 2} .0044682{col 28}{space 2} .0012574{col 39}{space 1}    3.55{col 48}{space 3}0.000{col 56}{space 4} .0019855{col 69}{space 3} .0069509
+{txt}{space 9}agpop {c |}{col 16}{res}{space 2} -.009414{col 28}{space 2} .0069782{col 39}{space 1}   -1.35{col 48}{space 3}0.179{col 56}{space 4}-.0231921{col 69}{space 3} .0043641
+{txt}{space 1}ricearea_2010 {c |}{col 16}{res}{space 2} .0040657{col 28}{space 2} .0010427{col 39}{space 1}    3.90{col 48}{space 3}0.000{col 56}{space 4}  .002007{col 69}{space 3} .0061243
+{txt}{space 6}literacy {c |}{col 16}{res}{space 2} .0850385{col 28}{space 2} .0325608{col 39}{space 1}    2.61{col 48}{space 3}0.010{col 56}{space 4}  .020749{col 69}{space 3}  .149328
+{txt}{space 5}intensive {c |}{col 16}{res}{space 2} .0260585{col 28}{space 2} .0339662{col 39}{space 1}    0.77{col 48}{space 3}0.444{col 56}{space 4}-.0410058{col 69}{space 3} .0931229
+{txt}{space 3}risk_averse {c |}{col 16}{res}{space 2} .1155741{col 28}{space 2} .0493055{col 39}{space 1}    2.34{col 48}{space 3}0.020{col 56}{space 4} .0182231{col 69}{space 3} .2129251
+{txt}{space 1}disaster_prob {c |}{col 16}{res}{space 2} .0019147{col 28}{space 2} .0008155{col 39}{space 1}    2.35{col 48}{space 3}0.020{col 56}{space 4} .0003046{col 69}{space 3} .0035248
+{txt}{space 7}friend1 {c |}{col 16}{res}{space 2}        0{col 28}{txt}  (omitted)
+{space 7}friend2 {c |}{col 16}{res}{space 2}        0{col 28}{txt}  (omitted)
+{space 7}friend3 {c |}{col 16}{res}{space 2} .0494521{col 28}{space 2} .2444415{col 39}{space 1}    0.20{col 48}{space 3}0.840{col 56}{space 4}-.4331844{col 69}{space 3} .5320885
+{txt}{space 7}friend4 {c |}{col 16}{res}{space 2} .0744817{col 28}{space 2} .1243349{col 39}{space 1}    0.60{col 48}{space 3}0.550{col 56}{space 4}-.1710109{col 69}{space 3} .3199743
+{txt}{space 7}friend5 {c |}{col 16}{res}{space 2} .2262501{col 28}{space 2} .0575727{col 39}{space 1}    3.93{col 48}{space 3}0.000{col 56}{space 4}  .112576{col 69}{space 3} .3399242
+{txt}{space 5}_Ivilid_2 {c |}{col 16}{res}{space 2}-.5347636{col 28}{space 2}     .168{col 39}{space 1}   -3.18{col 48}{space 3}0.002{col 56}{space 4}-.8664704{col 69}{space 3}-.2030568
+{txt}{space 5}_Ivilid_3 {c |}{col 16}{res}{space 2}-.3879572{col 28}{space 2} .0985839{col 39}{space 1}   -3.94{col 48}{space 3}0.000{col 56}{space 4}-.5826058{col 69}{space 3}-.1933086
+{txt}{space 5}_Ivilid_4 {c |}{col 16}{res}{space 2}-.2376042{col 28}{space 2} .0923519{col 39}{space 1}   -2.57{col 48}{space 3}0.011{col 56}{space 4} -.419948{col 69}{space 3}-.0552603
+{txt}{space 5}_Ivilid_5 {c |}{col 16}{res}{space 2}        0{col 28}{txt}  (omitted)
+{space 5}_Ivilid_6 {c |}{col 16}{res}{space 2}-.0202424{col 28}{space 2} .1718596{col 39}{space 1}   -0.12{col 48}{space 3}0.906{col 56}{space 4}-.3595699{col 69}{space 3}  .319085
+{txt}{space 5}_Ivilid_7 {c |}{col 16}{res}{space 2}   -.2145{col 28}{space 2} .0969607{col 39}{space 1}   -2.21{col 48}{space 3}0.028{col 56}{space 4}-.4059435{col 69}{space 3}-.0230565
+{txt}{space 5}_Ivilid_8 {c |}{col 16}{res}{space 2}-.1685739{col 28}{space 2} .1044842{col 39}{space 1}   -1.61{col 48}{space 3}0.109{col 56}{space 4}-.3748722{col 69}{space 3} .0377245
+{txt}{space 5}_Ivilid_9 {c |}{col 16}{res}{space 2}-.3042047{col 28}{space 2} .1460189{col 39}{space 1}   -2.08{col 48}{space 3}0.039{col 56}{space 4}-.5925111{col 69}{space 3}-.0158984
+{txt}{space 4}_Ivilid_10 {c |}{col 16}{res}{space 2}-.2010773{col 28}{space 2} .1063184{col 39}{space 1}   -1.89{col 48}{space 3}0.060{col 56}{space 4}-.4109972{col 69}{space 3} .0088427
+{txt}{space 4}_Ivilid_11 {c |}{col 16}{res}{space 2}-.3094542{col 28}{space 2}  .100094{col 39}{space 1}   -3.09{col 48}{space 3}0.002{col 56}{space 4}-.5070843{col 69}{space 3}-.1118241
+{txt}{space 4}_Ivilid_12 {c |}{col 16}{res}{space 2}-.0954978{col 28}{space 2} .1346273{col 39}{space 1}   -0.71{col 48}{space 3}0.479{col 56}{space 4}-.3613121{col 69}{space 3} .1703165
+{txt}{space 4}_Ivilid_13 {c |}{col 16}{res}{space 2}-.1402408{col 28}{space 2} .0833854{col 39}{space 1}   -1.68{col 48}{space 3}0.094{col 56}{space 4}-.3048807{col 69}{space 3} .0243991
+{txt}{space 4}_Ivilid_14 {c |}{col 16}{res}{space 2}-.3914054{col 28}{space 2} .1148428{col 39}{space 1}   -3.41{col 48}{space 3}0.001{col 56}{space 4}-.6181563{col 69}{space 3}-.1646546
+{txt}{space 4}_Ivilid_15 {c |}{col 16}{res}{space 2} .0290985{col 28}{space 2}  .132324{col 39}{space 1}    0.22{col 48}{space 3}0.826{col 56}{space 4} -.232168{col 69}{space 3}  .290365
+{txt}{space 4}_Ivilid_16 {c |}{col 16}{res}{space 2}-.1164397{col 28}{space 2} .0718509{col 39}{space 1}   -1.62{col 48}{space 3}0.107{col 56}{space 4}-.2583055{col 69}{space 3}  .025426
+{txt}{space 4}_Ivilid_17 {c |}{col 16}{res}{space 2}-.3910842{col 28}{space 2}  .099097{col 39}{space 1}   -3.95{col 48}{space 3}0.000{col 56}{space 4}-.5867458{col 69}{space 3}-.1954227
+{txt}{space 4}_Ivilid_18 {c |}{col 16}{res}{space 2}-.1428891{col 28}{space 2} .1846056{col 39}{space 1}   -0.77{col 48}{space 3}0.440{col 56}{space 4}-.5073827{col 69}{space 3} .2216045
+{txt}{space 4}_Ivilid_19 {c |}{col 16}{res}{space 2}-.4172146{col 28}{space 2}  .109268{col 39}{space 1}   -3.82{col 48}{space 3}0.000{col 56}{space 4}-.6329582{col 69}{space 3}-.2014709
+{txt}{space 4}_Ivilid_20 {c |}{col 16}{res}{space 2}-.1240146{col 28}{space 2} .1171479{col 39}{space 1}   -1.06{col 48}{space 3}0.291{col 56}{space 4}-.3553169{col 69}{space 3} .1072876
+{txt}{space 4}_Ivilid_21 {c |}{col 16}{res}{space 2}-.3456029{col 28}{space 2} .1100863{col 39}{space 1}   -3.14{col 48}{space 3}0.002{col 56}{space 4}-.5629623{col 69}{space 3}-.1282434
+{txt}{space 4}_Ivilid_22 {c |}{col 16}{res}{space 2}-.2741385{col 28}{space 2} .1397924{col 39}{space 1}   -1.96{col 48}{space 3}0.052{col 56}{space 4} -.550151{col 69}{space 3}  .001874
+{txt}{space 4}_Ivilid_23 {c |}{col 16}{res}{space 2}        0{col 28}{txt}  (omitted)
+{space 4}_Ivilid_24 {c |}{col 16}{res}{space 2}-.1396857{col 28}{space 2} .1670088{col 39}{space 1}   -0.84{col 48}{space 3}0.404{col 56}{space 4}-.4694354{col 69}{space 3}  .190064
+{txt}{space 4}_Ivilid_25 {c |}{col 16}{res}{space 2} .0186203{col 28}{space 2} .1723604{col 39}{space 1}    0.11{col 48}{space 3}0.914{col 56}{space 4} -.321696{col 69}{space 3} .3589365
+{txt}{space 4}_Ivilid_26 {c |}{col 16}{res}{space 2}-.2121059{col 28}{space 2} .0786238{col 39}{space 1}   -2.70{col 48}{space 3}0.008{col 56}{space 4}-.3673443{col 69}{space 3}-.0568675
+{txt}{space 4}_Ivilid_27 {c |}{col 16}{res}{space 2}-.0761455{col 28}{space 2} .0768954{col 39}{space 1}   -0.99{col 48}{space 3}0.324{col 56}{space 4}-.2279713{col 69}{space 3} .0756804
+{txt}{space 4}_Ivilid_28 {c |}{col 16}{res}{space 2}-.1376157{col 28}{space 2} .0972556{col 39}{space 1}   -1.41{col 48}{space 3}0.159{col 56}{space 4}-.3296416{col 69}{space 3} .0544103
+{txt}{space 4}_Ivilid_29 {c |}{col 16}{res}{space 2}-.3941838{col 28}{space 2} .1135102{col 39}{space 1}   -3.47{col 48}{space 3}0.001{col 56}{space 4}-.6183035{col 69}{space 3}-.1700642
+{txt}{space 4}_Ivilid_30 {c |}{col 16}{res}{space 2}-.3081078{col 28}{space 2} .1670824{col 39}{space 1}   -1.84{col 48}{space 3}0.067{col 56}{space 4}-.6380028{col 69}{space 3} .0217873
+{txt}{space 4}_Ivilid_31 {c |}{col 16}{res}{space 2}-.3156157{col 28}{space 2} .0759617{col 39}{space 1}   -4.15{col 48}{space 3}0.000{col 56}{space 4} -.465598{col 69}{space 3}-.1656335
+{txt}{space 4}_Ivilid_32 {c |}{col 16}{res}{space 2}        0{col 28}{txt}  (omitted)
+{space 4}_Ivilid_33 {c |}{col 16}{res}{space 2}-.1042622{col 28}{space 2} .0836665{col 39}{space 1}   -1.25{col 48}{space 3}0.214{col 56}{space 4}-.2694572{col 69}{space 3} .0609327
+{txt}{space 4}_Ivilid_34 {c |}{col 16}{res}{space 2}-.1570299{col 28}{space 2} .2267884{col 39}{space 1}   -0.69{col 48}{space 3}0.490{col 56}{space 4}-.6048112{col 69}{space 3} .2907513
+{txt}{space 4}_Ivilid_35 {c |}{col 16}{res}{space 2}-.4681445{col 28}{space 2} .0725546{col 39}{space 1}   -6.45{col 48}{space 3}0.000{col 56}{space 4}-.6113997{col 69}{space 3}-.3248894
+{txt}{space 4}_Ivilid_36 {c |}{col 16}{res}{space 2}-.4439828{col 28}{space 2} .1175014{col 39}{space 1}   -3.78{col 48}{space 3}0.000{col 56}{space 4}-.6759829{col 69}{space 3}-.2119828
+{txt}{space 4}_Ivilid_37 {c |}{col 16}{res}{space 2}-.2707923{col 28}{space 2} .0780931{col 39}{space 1}   -3.47{col 48}{space 3}0.001{col 56}{space 4} -.424983{col 69}{space 3}-.1166017
+{txt}{space 4}_Ivilid_38 {c |}{col 16}{res}{space 2}-.2048095{col 28}{space 2}  .198658{col 39}{space 1}   -1.03{col 48}{space 3}0.304{col 56}{space 4} -.597049{col 69}{space 3} .1874299
+{txt}{space 4}_Ivilid_39 {c |}{col 16}{res}{space 2}-.2487425{col 28}{space 2} .1551819{col 39}{space 1}   -1.60{col 48}{space 3}0.111{col 56}{space 4}-.5551406{col 69}{space 3} .0576556
+{txt}{space 4}_Ivilid_40 {c |}{col 16}{res}{space 2}-.3644528{col 28}{space 2} .1686003{col 39}{space 1}   -2.16{col 48}{space 3}0.032{col 56}{space 4}-.6973449{col 69}{space 3}-.0315607
+{txt}{space 4}_Ivilid_41 {c |}{col 16}{res}{space 2}-.2399896{col 28}{space 2} .1140195{col 39}{space 1}   -2.10{col 48}{space 3}0.037{col 56}{space 4} -.465115{col 69}{space 3}-.0148642
+{txt}{space 4}_Ivilid_42 {c |}{col 16}{res}{space 2} -.363553{col 28}{space 2} .0879904{col 39}{space 1}   -4.13{col 48}{space 3}0.000{col 56}{space 4}-.5372852{col 69}{space 3}-.1898208
+{txt}{space 4}_Ivilid_43 {c |}{col 16}{res}{space 2} .3201976{col 28}{space 2} .0824621{col 39}{space 1}    3.88{col 48}{space 3}0.000{col 56}{space 4} .1573806{col 69}{space 3} .4830147
+{txt}{space 4}_Ivilid_44 {c |}{col 16}{res}{space 2}-.1997848{col 28}{space 2} .1409446{col 39}{space 1}   -1.42{col 48}{space 3}0.158{col 56}{space 4}-.4780722{col 69}{space 3} .0785027
+{txt}{space 4}_Ivilid_45 {c |}{col 16}{res}{space 2}-.0157817{col 28}{space 2} .1213454{col 39}{space 1}   -0.13{col 48}{space 3}0.897{col 56}{space 4}-.2553717{col 69}{space 3} .2238082
+{txt}{space 4}_Ivilid_46 {c |}{col 16}{res}{space 2}-.3884757{col 28}{space 2} .0839287{col 39}{space 1}   -4.63{col 48}{space 3}0.000{col 56}{space 4}-.5541883{col 69}{space 3}-.2227632
+{txt}{space 4}_Ivilid_47 {c |}{col 16}{res}{space 2}-.3417499{col 28}{space 2} .1041386{col 39}{space 1}   -3.28{col 48}{space 3}0.001{col 56}{space 4} -.547366{col 69}{space 3}-.1361338
+{txt}{space 9}_cons {c |}{col 16}{res}{space 2} .0368924{col 28}{space 2} .1036403{col 39}{space 1}    0.36{col 48}{space 3}0.722{col 56}{space 4}-.1677398{col 69}{space 3} .2415245
+{txt}{hline 15}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile2'
+{txt}{browse `"Table3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table3.txt""':seeout}
+
+{com}. reg takeup_survey network_onlyone network_onlytwo network_twomore male age agpop ricearea_2010 literacy intensive risk_averse disaster_prob friend* _Ivilid* if delay == 1 & info_none == 1, cluster(address)
+{txt}{p 0 6 2}note: {bf:friend1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:friend2} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_5} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_23} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:_Ivilid_27} omitted because of collinearity.{p_end}
+
+Linear regression                               Number of obs     = {res}     1,255
+                                                {txt}{help j_robustsingular:F(53, 165) }       =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1229
+                                                {txt}Root MSE          =    {res} .47532
+
+{txt}{ralign 81:(Std. err. adjusted for {res:166} clusters in {res:address})}
+{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 17}{c |}{col 29}    Robust
+{col 1}  takeup_survey{col 17}{c |} Coefficient{col 29}  std. err.{col 41}      t{col 49}   P>|t|{col 57}     [95% con{col 70}f. interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+network_onlyone {c |}{col 17}{res}{space 2} .0531452{col 29}{space 2} .0315233{col 40}{space 1}    1.69{col 49}{space 3}0.094{col 57}{space 4} -.009096{col 70}{space 3} .1153863
+{txt}network_onlytwo {c |}{col 17}{res}{space 2} .1105086{col 29}{space 2} .0818464{col 40}{space 1}    1.35{col 49}{space 3}0.179{col 57}{space 4}-.0510926{col 70}{space 3} .2721098
+{txt}network_twomore {c |}{col 17}{res}{space 2} .0750393{col 29}{space 2}  .070789{col 40}{space 1}    1.06{col 49}{space 3}0.291{col 57}{space 4}-.0647298{col 70}{space 3} .2148083
+{txt}{space 11}male {c |}{col 17}{res}{space 2} .0215778{col 29}{space 2} .0732348{col 40}{space 1}    0.29{col 49}{space 3}0.769{col 57}{space 4}-.1230204{col 70}{space 3}  .166176
+{txt}{space 12}age {c |}{col 17}{res}{space 2} .0044863{col 29}{space 2} .0012224{col 40}{space 1}    3.67{col 49}{space 3}0.000{col 57}{space 4} .0020727{col 70}{space 3} .0068998
+{txt}{space 10}agpop {c |}{col 17}{res}{space 2}-.0089016{col 29}{space 2} .0068582{col 40}{space 1}   -1.30{col 49}{space 3}0.196{col 57}{space 4}-.0224427{col 70}{space 3} .0046395
+{txt}{space 2}ricearea_2010 {c |}{col 17}{res}{space 2} .0043561{col 29}{space 2} .0010283{col 40}{space 1}    4.24{col 49}{space 3}0.000{col 57}{space 4} .0023259{col 70}{space 3} .0063864
+{txt}{space 7}literacy {c |}{col 17}{res}{space 2} .0890687{col 29}{space 2} .0327671{col 40}{space 1}    2.72{col 49}{space 3}0.007{col 57}{space 4}  .024372{col 70}{space 3} .1537655
+{txt}{space 6}intensive {c |}{col 17}{res}{space 2} .0251553{col 29}{space 2}  .033083{col 40}{space 1}    0.76{col 49}{space 3}0.448{col 57}{space 4}-.0401654{col 70}{space 3} .0904759
+{txt}{space 4}risk_averse {c |}{col 17}{res}{space 2} .1091457{col 29}{space 2} .0491475{col 40}{space 1}    2.22{col 49}{space 3}0.028{col 57}{space 4} .0121066{col 70}{space 3} .2061847
+{txt}{space 2}disaster_prob {c |}{col 17}{res}{space 2} .0017922{col 29}{space 2} .0008041{col 40}{space 1}    2.23{col 49}{space 3}0.027{col 57}{space 4} .0002046{col 70}{space 3} .0033798
+{txt}{space 8}friend1 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 8}friend2 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 8}friend3 {c |}{col 17}{res}{space 2} .0518693{col 29}{space 2} .2295619{col 40}{space 1}    0.23{col 49}{space 3}0.822{col 57}{space 4}-.4013881{col 70}{space 3} .5051267
+{txt}{space 8}friend4 {c |}{col 17}{res}{space 2}  .098232{col 29}{space 2} .1280545{col 40}{space 1}    0.77{col 49}{space 3}0.444{col 57}{space 4}-.1546047{col 70}{space 3} .3510687
+{txt}{space 8}friend5 {c |}{col 17}{res}{space 2} .2204511{col 29}{space 2} .0658038{col 40}{space 1}    3.35{col 49}{space 3}0.001{col 57}{space 4}  .090525{col 70}{space 3} .3503772
+{txt}{space 6}_Ivilid_2 {c |}{col 17}{res}{space 2}-.4396058{col 29}{space 2} .1337116{col 40}{space 1}   -3.29{col 49}{space 3}0.001{col 57}{space 4}-.7036121{col 70}{space 3}-.1755994
+{txt}{space 6}_Ivilid_3 {c |}{col 17}{res}{space 2}-.2779983{col 29}{space 2} .0661025{col 40}{space 1}   -4.21{col 49}{space 3}0.000{col 57}{space 4}-.4085141{col 70}{space 3}-.1474825
+{txt}{space 6}_Ivilid_4 {c |}{col 17}{res}{space 2}-.1418739{col 29}{space 2}  .059547{col 40}{space 1}   -2.38{col 49}{space 3}0.018{col 57}{space 4}-.2594462{col 70}{space 3}-.0243015
+{txt}{space 6}_Ivilid_5 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 6}_Ivilid_6 {c |}{col 17}{res}{space 2} .0833515{col 29}{space 2} .1414929{col 40}{space 1}    0.59{col 49}{space 3}0.557{col 57}{space 4}-.1960185{col 70}{space 3} .3627215
+{txt}{space 6}_Ivilid_7 {c |}{col 17}{res}{space 2}-.1070281{col 29}{space 2} .0736403{col 40}{space 1}   -1.45{col 49}{space 3}0.148{col 57}{space 4}-.2524268{col 70}{space 3} .0383707
+{txt}{space 6}_Ivilid_8 {c |}{col 17}{res}{space 2}-.0520072{col 29}{space 2} .0815074{col 40}{space 1}   -0.64{col 49}{space 3}0.524{col 57}{space 4}-.2129391{col 70}{space 3} .1089246
+{txt}{space 6}_Ivilid_9 {c |}{col 17}{res}{space 2}-.1710392{col 29}{space 2}   .14421{col 40}{space 1}   -1.19{col 49}{space 3}0.237{col 57}{space 4} -.455774{col 70}{space 3} .1136956
+{txt}{space 5}_Ivilid_10 {c |}{col 17}{res}{space 2}-.0942549{col 29}{space 2} .1003159{col 40}{space 1}   -0.94{col 49}{space 3}0.349{col 57}{space 4}-.2923232{col 70}{space 3} .1038134
+{txt}{space 5}_Ivilid_11 {c |}{col 17}{res}{space 2}-.1667545{col 29}{space 2} .0679844{col 40}{space 1}   -2.45{col 49}{space 3}0.015{col 57}{space 4} -.300986{col 70}{space 3} -.032523
+{txt}{space 5}_Ivilid_12 {c |}{col 17}{res}{space 2} .0111201{col 29}{space 2} .1078897{col 40}{space 1}    0.10{col 49}{space 3}0.918{col 57}{space 4}-.2019022{col 70}{space 3} .2241424
+{txt}{space 5}_Ivilid_13 {c |}{col 17}{res}{space 2}-.0312025{col 29}{space 2} .0670201{col 40}{space 1}   -0.47{col 49}{space 3}0.642{col 57}{space 4}  -.16353{col 70}{space 3}  .101125
+{txt}{space 5}_Ivilid_14 {c |}{col 17}{res}{space 2}-.2720699{col 29}{space 2} .0860987{col 40}{space 1}   -3.16{col 49}{space 3}0.002{col 57}{space 4}-.4420671{col 70}{space 3}-.1020726
+{txt}{space 5}_Ivilid_15 {c |}{col 17}{res}{space 2} .1632273{col 29}{space 2} .1199429{col 40}{space 1}    1.36{col 49}{space 3}0.175{col 57}{space 4}-.0735935{col 70}{space 3}  .400048
+{txt}{space 5}_Ivilid_16 {c |}{col 17}{res}{space 2} .0030257{col 29}{space 2} .0304968{col 40}{space 1}    0.10{col 49}{space 3}0.921{col 57}{space 4}-.0571885{col 70}{space 3}   .06324
+{txt}{space 5}_Ivilid_17 {c |}{col 17}{res}{space 2}-.2778286{col 29}{space 2} .0629436{col 40}{space 1}   -4.41{col 49}{space 3}0.000{col 57}{space 4}-.4021073{col 70}{space 3}-.1535499
+{txt}{space 5}_Ivilid_18 {c |}{col 17}{res}{space 2}-.0313994{col 29}{space 2} .1584509{col 40}{space 1}   -0.20{col 49}{space 3}0.843{col 57}{space 4}-.3442521{col 70}{space 3} .2814533
+{txt}{space 5}_Ivilid_19 {c |}{col 17}{res}{space 2}-.3177548{col 29}{space 2} .0843332{col 40}{space 1}   -3.77{col 49}{space 3}0.000{col 57}{space 4}-.4842662{col 70}{space 3}-.1512434
+{txt}{space 5}_Ivilid_20 {c |}{col 17}{res}{space 2}-.0087327{col 29}{space 2} .0928551{col 40}{space 1}   -0.09{col 49}{space 3}0.925{col 57}{space 4}-.1920701{col 70}{space 3} .1746046
+{txt}{space 5}_Ivilid_21 {c |}{col 17}{res}{space 2}-.2348121{col 29}{space 2} .0734676{col 40}{space 1}   -3.20{col 49}{space 3}0.002{col 57}{space 4}-.3798698{col 70}{space 3}-.0897543
+{txt}{space 5}_Ivilid_22 {c |}{col 17}{res}{space 2}-.1605372{col 29}{space 2}  .115947{col 40}{space 1}   -1.38{col 49}{space 3}0.168{col 57}{space 4}-.3894682{col 70}{space 3} .0683939
+{txt}{space 5}_Ivilid_23 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 5}_Ivilid_24 {c |}{col 17}{res}{space 2}-.0603569{col 29}{space 2} .1427249{col 40}{space 1}   -0.42{col 49}{space 3}0.673{col 57}{space 4}-.3421595{col 70}{space 3} .2214456
+{txt}{space 5}_Ivilid_25 {c |}{col 17}{res}{space 2} .1521801{col 29}{space 2} .1536331{col 40}{space 1}    0.99{col 49}{space 3}0.323{col 57}{space 4}-.1511602{col 70}{space 3} .4555204
+{txt}{space 5}_Ivilid_26 {c |}{col 17}{res}{space 2}-.1216798{col 29}{space 2} .0385866{col 40}{space 1}   -3.15{col 49}{space 3}0.002{col 57}{space 4} -.197867{col 70}{space 3}-.0454927
+{txt}{space 5}_Ivilid_27 {c |}{col 17}{res}{space 2}        0{col 29}{txt}  (omitted)
+{space 5}_Ivilid_28 {c |}{col 17}{res}{space 2}-.0117229{col 29}{space 2} .0890566{col 40}{space 1}   -0.13{col 49}{space 3}0.895{col 57}{space 4}-.1875604{col 70}{space 3} .1641146
+{txt}{space 5}_Ivilid_29 {c |}{col 17}{res}{space 2} -.301379{col 29}{space 2} .0888245{col 40}{space 1}   -3.39{col 49}{space 3}0.001{col 57}{space 4}-.4767582{col 70}{space 3}-.1259999
+{txt}{space 5}_Ivilid_30 {c |}{col 17}{res}{space 2} -.191916{col 29}{space 2} .1430929{col 40}{space 1}   -1.34{col 49}{space 3}0.182{col 57}{space 4}-.4744451{col 70}{space 3} .0906131
+{txt}{space 5}_Ivilid_31 {c |}{col 17}{res}{space 2}-.1814926{col 29}{space 2} .0185918{col 40}{space 1}   -9.76{col 49}{space 3}0.000{col 57}{space 4} -.218201{col 70}{space 3}-.1447842
+{txt}{space 5}_Ivilid_32 {c |}{col 17}{res}{space 2} .1112375{col 29}{space 2} .0889449{col 40}{space 1}    1.25{col 49}{space 3}0.213{col 57}{space 4}-.0643794{col 70}{space 3} .2868543
+{txt}{space 5}_Ivilid_33 {c |}{col 17}{res}{space 2} .0155188{col 29}{space 2} .0409356{col 40}{space 1}    0.38{col 49}{space 3}0.705{col 57}{space 4}-.0653063{col 70}{space 3} .0963439
+{txt}{space 5}_Ivilid_34 {c |}{col 17}{res}{space 2}-.0283388{col 29}{space 2} .2159259{col 40}{space 1}   -0.13{col 49}{space 3}0.896{col 57}{space 4}-.4546727{col 70}{space 3} .3979951
+{txt}{space 5}_Ivilid_35 {c |}{col 17}{res}{space 2}-.3389661{col 29}{space 2} .0302679{col 40}{space 1}  -11.20{col 49}{space 3}0.000{col 57}{space 4}-.3987284{col 70}{space 3}-.2792038
+{txt}{space 5}_Ivilid_36 {c |}{col 17}{res}{space 2}-.3435459{col 29}{space 2} .1011667{col 40}{space 1}   -3.40{col 49}{space 3}0.001{col 57}{space 4} -.543294{col 70}{space 3}-.1437977
+{txt}{space 5}_Ivilid_37 {c |}{col 17}{res}{space 2} -.150358{col 29}{space 2} .0278946{col 40}{space 1}   -5.39{col 49}{space 3}0.000{col 57}{space 4}-.2054344{col 70}{space 3}-.0952816
+{txt}{space 5}_Ivilid_38 {c |}{col 17}{res}{space 2}-.0850956{col 29}{space 2} .1828322{col 40}{space 1}   -0.47{col 49}{space 3}0.642{col 57}{space 4}-.4460877{col 70}{space 3} .2758966
+{txt}{space 5}_Ivilid_39 {c |}{col 17}{res}{space 2}-.1062848{col 29}{space 2}  .135541{col 40}{space 1}   -0.78{col 49}{space 3}0.434{col 57}{space 4}-.3739031{col 70}{space 3} .1613336
+{txt}{space 5}_Ivilid_40 {c |}{col 17}{res}{space 2}-.2568408{col 29}{space 2} .1569836{col 40}{space 1}   -1.64{col 49}{space 3}0.104{col 57}{space 4}-.5667964{col 70}{space 3} .0531147
+{txt}{space 5}_Ivilid_41 {c |}{col 17}{res}{space 2}-.1515437{col 29}{space 2} .0883505{col 40}{space 1}   -1.72{col 49}{space 3}0.088{col 57}{space 4}-.3259869{col 70}{space 3} .0228995
+{txt}{space 5}_Ivilid_42 {c |}{col 17}{res}{space 2}-.2480331{col 29}{space 2} .0508355{col 40}{space 1}   -4.88{col 49}{space 3}0.000{col 57}{space 4} -.348405{col 70}{space 3}-.1476612
+{txt}{space 5}_Ivilid_43 {c |}{col 17}{res}{space 2} .4566513{col 29}{space 2} .0323643{col 40}{space 1}   14.11{col 49}{space 3}0.000{col 57}{space 4} .3927497{col 70}{space 3} .5205529
+{txt}{space 5}_Ivilid_44 {c |}{col 17}{res}{space 2}-.0826593{col 29}{space 2} .1115177{col 40}{space 1}   -0.74{col 49}{space 3}0.460{col 57}{space 4}-.3028448{col 70}{space 3} .1375263
+{txt}{space 5}_Ivilid_45 {c |}{col 17}{res}{space 2} .1106018{col 29}{space 2} .0937615{col 40}{space 1}    1.18{col 49}{space 3}0.240{col 57}{space 4}-.0745251{col 70}{space 3} .2957288
+{txt}{space 5}_Ivilid_46 {c |}{col 17}{res}{space 2}-.2684424{col 29}{space 2}  .035862{col 40}{space 1}   -7.49{col 49}{space 3}0.000{col 57}{space 4}  -.33925{col 70}{space 3}-.1976348
+{txt}{space 5}_Ivilid_47 {c |}{col 17}{res}{space 2}-.2379705{col 29}{space 2} .0723052{col 40}{space 1}   -3.29{col 49}{space 3}0.001{col 57}{space 4}-.3807331{col 70}{space 3}-.0952078
+{txt}{space 10}_cons {c |}{col 17}{res}{space 2}-.1052584{col 29}{space 2} .0985511{col 40}{space 1}   -1.07{col 49}{space 3}0.287{col 57}{space 4}-.2998422{col 70}{space 3} .0893254
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using `outputfile2'
+{txt}{browse `"Table3.xls"'}
+{browse `"/Volumes/GoogleDrive/My Drive/UnifiedDesignBasedInference/Cai(2015)Insurance/dataverse_files/Social_Networks_Insurance_Replication/Data"' :dir}{com} : {txt}{stata `"seeout using "Table3.txt""':seeout}
+
+{com}. save temp, replace
+{txt}{p 0 4 2}
+file {bf}
+temp.dta{rm}
+saved
+{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. mean
+{err}last estimates not found
+{txt}{search r(301), local:r(301);}
+
+{com}. mean takeup
+{res}
+{txt}{col 1}Mean estimation{col 43}{lalign 13:Number of obs}{col 56} = {res}{ralign 5:4,902}
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 15}{c |}       Mean{col 27}   Std. err.{col 39}     [95% con{col 52}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
+takeup_survey {c |}{col 15}{res}{space 2} .4455324{col 27}{space 2} .0070996{col 38}{space 5}  .431614{col 52}{space 3} .4594509
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
+
+{com}. mean takeup_survey if delay==0 & intensive==0
+{res}
+{txt}{col 1}Mean estimation{col 43}{lalign 13:Number of obs}{col 56} = {res}{ralign 5:1,079}
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 15}{c |}       Mean{col 27}   Std. err.{col 39}     [95% con{col 52}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
+takeup_survey {c |}{col 15}{res}{space 2} .3521779{col 27}{space 2} .0145479{col 38}{space 5} .3236326{col 52}{space 3} .3807233
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
+
+{com}. 
