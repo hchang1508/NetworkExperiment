@@ -1,4 +1,3 @@
-
 SIM_ONERUN_IMPUTED_AUG20_AS2=function(status,pol_size,prob,y1,y0,pi1,pi0,Y_all,index,expo1,expo2,option,x){
   
   print('here')
@@ -13,9 +12,13 @@ SIM_ONERUN_IMPUTED_AUG20_AS2=function(status,pol_size,prob,y1,y0,pi1,pi0,Y_all,i
     
     temp=cbind(net %v% "group",net %v% "assignment")
     realized_assignment=ASSIGNMENT(temp)
+    
   }
   
-  #calculate exposures
+  ############################################
+  ##########calculate exposures###############
+  ############################################
+  
   exposure = matrix(0,nrow=pol_size,ncol=7)
   exposure[,1]=1:pol_size #vertex indices
   exposure[,2]=realized_assignment==1
@@ -29,9 +32,10 @@ SIM_ONERUN_IMPUTED_AUG20_AS2=function(status,pol_size,prob,y1,y0,pi1,pi0,Y_all,i
   
   exposure_t = exposure[subjects_t,2:7]
   
+  ###############################
   #please double check every time 
   if (is.null(dim(exposure_t))){
-    state_t=individual_exposure(exposure_t)
+    state_t=INDIVIDUAL_EXPOSURE(exposure_t)
     state_t = state_t[c(expo1,expo2)]
     y0_t = state_t[expo1] * y0
     y1_t = state_t[expo2] * y1

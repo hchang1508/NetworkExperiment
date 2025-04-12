@@ -8,6 +8,8 @@ expo1=as.numeric(input[2])
 expo2=as.numeric(input[3])
 weight=as.numeric(input[4])
 
+contrast=c(-1,1)
+
 #set random seed
 set.seed(index)
 
@@ -29,26 +31,18 @@ time_start=Sys.time()
 prob=c(0.25,0.25,0.25,0.25)
 
 
-#load foso informations
-
+#Load treatment probability and FO design matrices
 foso_file=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/','Stratified_nat_',expo1,expo2,'_D.Rdata')
 load(foso_file)
 fo=mean_pre
 so=cov_pre
 
+
+#Load variance bound matrices 
 so_bound_file=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/','Stratified_nat_',expo1,expo2,'_Dbound.Rdata')
 load(so_bound_file)
 so_AS2=so_bound
-# components_t=component.dist(net_t,connected='weak')
-# memberships_t=components_t$membership
-# csize_t = components_t$csize
-# for (i in (unique(memberships_t))){
-#  print(i)
-#  net_tt=get.inducedSubgraph(net_t,which(memberships_t==i))
-#  foso_t=FOSO(net_tt,individual_exposure,num_status=4,prob=prob,num_mappings=12,nrep=10000,id_list,1,4)
-#  fo[[i]]=foso_t[[1]]
-#  so[[i]]=foso_t[[2]]
-# }
+
 
 #unfold fo for later calculations
 fo_vec=unlist(fo)
@@ -104,7 +98,10 @@ subjects_memberships_t=memberships_t[id_t %in% id_list]
 #sort subjects according to component index
 subjects_t=subjects_t[order(subjects_memberships_t)]
 
-#create dictionary for group belongings
+######################################################
+#create dictionary for group belongings###############
+######################################################
+
 group_index = cumsum(table(subjects_memberships_t))
 dict_group=matrix(0,length(group_index),5)
 dict_group[,1]=names(group_index)
@@ -113,22 +110,23 @@ dict_group[,3]= group_index
 dict_group[,4]=c(0,2*group_index[1:(length(group_index)-1)])+1
 dict_group[,5]= group_index*2
 dict_group<- matrix(as.numeric(dict_group),   ncol = ncol(dict_group))
-contrast=c(-1,1)
+
+
 
 
 #prepare y and x informations, in the order of group beloings
-#Y=Y_sim2[match(id_t,Y_sim2[,1]),c(1,expo1+1,expo2+1)]
+Y=Y_impute[match(id_t,Y_impute[,1]),c(1,expo1+1,expo2+1)]
 #Y_all=Y_all[match(id_t,Y_all[,1]),]
 #Y_all=Y_sim2[match(id_t,Y_sim2[,1]),]
-#Y_all=Y_all[subjects_t,]
+Y_all=Y[subjects_t,]
 #Y=Y[subjects_t,]
 #Y=Y_all[,c(1,2,3)]
-weights_random = runif(subject_size)
-y0_imp=Y_sim2[,expo1+1]
-y1_imp=Y_sim2[,expo2+1]
-y0=y0_opt * (weights_random <= weight) + y0_imp * (weights_random > weight) 
-y1=y1_opt * (weights_random <= weight) + y1_imp * (weights_random > weight) 
-Y_all=cbind(y0,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1)
+#weights_random = runif(subject_size)
+y0_imp=Y_impute[,2] #control
+y1_imp=Y_impute[,3] #treated
+#y0=y0_opt * (weights_random <= weight) + y0_imp * (weights_random > weight) 
+#y1=y1_opt * (weights_random <= weight) + y1_imp * (weights_random > weight) 
+#Y_all=cbind(y0,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1)
 
 #covariates
 x=all_info2[match(id_t,all_info2$id),]

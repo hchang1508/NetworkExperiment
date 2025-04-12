@@ -73,6 +73,7 @@ logistic=function(u){
   
   return(exp(u)/(1+exp(u)))
 }
+
 Optimal_Reg = function(y1,y0,x){
   
   
@@ -347,6 +348,10 @@ Logit_full=function(y,d1,d0,weights,x,pi0,pi1,mode){
   return(list(avg_effect1-avg_effect0,y_p1,y_p0))
   #return(c(avg_effect1-avg_effect0,coef))
 }
+
+#####################################################################
+#############Variance Bound Estimation###############################
+#####################################################################
 
 theoretical_variance_full=function(y1,y0,x,fo,so,contrast,dict_group){
   
