@@ -7,7 +7,7 @@
 #SBATCH --mail-user=haoge.chang@yale.edu
 #SBATCH --partition=scavenge
 #SBATCH --time=24:00:00
-#SBATCH --array=1-3000
+#SBATCH --array=1-10000
 #SBATCH --requeue
 echo "SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 echo "SLURM_ARRAY_JOB_ID: " $SLURM_ARRAY_JOB_ID
@@ -16,13 +16,13 @@ module load miniconda
 conda deactivate
 conda activate network_experiment
 
-cd "/home/hc654/Unified/final_analysis"
+cd "/home/hc654/NetworkExperiment/2_simulation_s"
 #module load R/3.6.1-foss-2018b-X11-20180604
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 4
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 5
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 3 0
 
-Rscript --vanilla LargeSim_AS2.R $SLURM_ARRAY_TASK_ID 1 4 1
+Rscript --vanilla 0_LargeSim_AS2.R $SLURM_ARRAY_TASK_ID 1 4 1
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 3 0.1
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 3 0.2
 #Rscript --vanilla LargeSim.R $SLURM_ARRAY_TASK_ID 1 3 0.3

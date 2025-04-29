@@ -1,0 +1,85 @@
+SLURM_ARRAY_TASK_ID:  1
+SLURM_ARRAY_JOB_ID:  28527575
+/var/spool/slurmd/job28527578/slurm_script: line 19: cd: home/hc654/NetworkExperiment/2_simulation_Bernoulli: No such file or directory
+Loading required package: tergm
+Loading required package: ergm
+Loading required package: network
+
+‘network’ 1.18.1 (2023-01-24), part of the Statnet Project
+* ‘news(package="network")’ for changes since last version
+* ‘citation("network")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+
+‘ergm’ 4.4.0 (2023-01-26), part of the Statnet Project
+* ‘news(package="ergm")’ for changes since last version
+* ‘citation("ergm")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+‘ergm’ 4 is a major update that introduces some backwards-incompatible
+changes. Please type ‘news(package="ergm")’ for a list of major
+changes.
+
+Loading required package: networkDynamic
+
+‘networkDynamic’ 0.11.3 (2023-02-15), part of the Statnet Project
+* ‘news(package="networkDynamic")’ for changes since last version
+* ‘citation("networkDynamic")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+Registered S3 method overwritten by 'tergm':
+  method                   from
+  simulate_formula.network ergm
+
+‘tergm’ 4.1.1 (2022-11-07), part of the Statnet Project
+* ‘news(package="tergm")’ for changes since last version
+* ‘citation("tergm")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+
+Attaching package: ‘tergm’
+
+The following object is masked from ‘package:ergm’:
+
+    snctrl
+
+Loading required package: ergm.count
+
+‘ergm.count’ 4.1.1 (2022-05-24), part of the Statnet Project
+* ‘news(package="ergm.count")’ for changes since last version
+* ‘citation("ergm.count")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+Loading required package: sna
+Loading required package: statnet.common
+
+Attaching package: ‘statnet.common’
+
+The following object is masked from ‘package:ergm’:
+
+    snctrl
+
+The following objects are masked from ‘package:base’:
+
+    attr, order
+
+sna: Tools for Social Network Analysis
+Version 2.7-1 created on 2023-01-24.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+
+Loading required package: tsna
+
+‘statnet’ 2019.6 (2019-06-13), part of the Statnet Project
+* ‘news(package="statnet")’ for changes since last version
+* ‘citation("statnet")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+unable to reach CRAN
+Error in file(file, "rt") : cannot open the connection
+Calls: read.csv -> read.table -> file
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file '/home/hc654/NetworkExperiment/2_simulation_Bernoulli/case_to_do_b45.csv': No such file or directory
+Execution halted

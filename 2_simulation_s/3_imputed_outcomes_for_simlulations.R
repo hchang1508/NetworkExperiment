@@ -2,10 +2,11 @@
 rm(list=ls())
 library(dplyr)
 library(network)
-data_save_path='/Users/haoge/Desktop/net_complete_natvillage.RData'
+data_save_path=data_save_path='/home/hc654/NetworkExperiment/FinalData/net_complete_natvillage.RData'
+
 load(data_save_path)
 
-outcome_data_path= '/Users/haoge/Desktop/0422analysis.csv'
+outcome_data_path= '/home/hc654/NetworkExperiment/FinalData/0422analysis.csv'
 outcome_data=read.csv(outcome_data_path)
 
 #outcome data

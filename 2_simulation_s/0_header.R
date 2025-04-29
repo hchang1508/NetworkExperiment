@@ -31,11 +31,13 @@ Y_impute=Y_impute[,2:9]
 
 
 #Import functions
-source('./functions/functions.R')
+source('./functions/functions_compute_FOSO_inner.R') #functions calculating FOSO probabilities
 #source('./functions/functions2.R')
-source('./functions/functions3.R')
-#source('./functions/functions4.R')
-#source('./functions/functions5.R')
-#source('./functions/functions6.R')
-source('./functions/functions7.R')
-#source('./functions/functions8.R')
+source('./functions/functions_compute_FOSO.R') #functions calculating FOSO probabilitiess
+source('./functions/functions_estimators.R') #various estimators
+source('./functions/functions_maketable.R')
+source('./functions/functions_simulations.R') #scripts for simulations
+source('./functions/functions_noharm.R') #no harm estimators
+source('./functions/functions_var_estimation.R') #variance bound estimation
+source('./functions/functions_opt_logit2.R') #variance bound estimation
+

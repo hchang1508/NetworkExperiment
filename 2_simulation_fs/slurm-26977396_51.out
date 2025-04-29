@@ -1,0 +1,370 @@
+SLURM_ARRAY_TASK_ID:  51
+SLURM_ARRAY_JOB_ID:  26977396
+/var/spool/slurmd/job26977448/slurm_script: line 19: cd: home/hc654/NetworkExperiment/2_simulation_fs: No such file or directory
+Loading required package: tergm
+Loading required package: ergm
+Loading required package: network
+
+‘network’ 1.18.1 (2023-01-24), part of the Statnet Project
+* ‘news(package="network")’ for changes since last version
+* ‘citation("network")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+
+‘ergm’ 4.4.0 (2023-01-26), part of the Statnet Project
+* ‘news(package="ergm")’ for changes since last version
+* ‘citation("ergm")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+‘ergm’ 4 is a major update that introduces some backwards-incompatible
+changes. Please type ‘news(package="ergm")’ for a list of major
+changes.
+
+Loading required package: networkDynamic
+
+‘networkDynamic’ 0.11.3 (2023-02-15), part of the Statnet Project
+* ‘news(package="networkDynamic")’ for changes since last version
+* ‘citation("networkDynamic")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+Registered S3 method overwritten by 'tergm':
+  method                   from
+  simulate_formula.network ergm
+
+‘tergm’ 4.1.1 (2022-11-07), part of the Statnet Project
+* ‘news(package="tergm")’ for changes since last version
+* ‘citation("tergm")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+
+Attaching package: ‘tergm’
+
+The following object is masked from ‘package:ergm’:
+
+    snctrl
+
+Loading required package: ergm.count
+
+‘ergm.count’ 4.1.1 (2022-05-24), part of the Statnet Project
+* ‘news(package="ergm.count")’ for changes since last version
+* ‘citation("ergm.count")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+Loading required package: sna
+Loading required package: statnet.common
+
+Attaching package: ‘statnet.common’
+
+The following object is masked from ‘package:ergm’:
+
+    snctrl
+
+The following objects are masked from ‘package:base’:
+
+    attr, order
+
+sna: Tools for Social Network Analysis
+Version 2.7-1 created on 2023-01-24.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+
+Loading required package: tsna
+
+‘statnet’ 2019.6 (2019-06-13), part of the Statnet Project
+* ‘news(package="statnet")’ for changes since last version
+* ‘citation("statnet")’ for citation information
+* ‘https://statnet.org’ for help, support, and other information
+
+unable to reach CRAN
+[1] 1
+[1] 7
+[1] 2401
+[1] "Stratified"
+[1] "689 units dropped."
+[1] "Processing Component 1"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 5"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 12"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 7"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 8"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 10"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 11"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 13"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 16"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 18"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 19"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 20"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 21"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 24"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 23"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 25"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 26"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 27"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 30"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 31"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 35"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 36"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 37"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 38"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 41"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"
+[1] "Processing Component 40"
+[1] "1% completed"
+[1] "2% completed"
+[1] "3% completed"
+[1] "4% completed"
+[1] "5% completed"
+[1] "6% completed"
+[1] "7% completed"
+[1] "8% completed"
+[1] "9% completed"
+[1] "10% completed"

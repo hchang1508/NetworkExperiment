@@ -13,7 +13,7 @@ contrast=c(-1,1)
 #set random seed
 set.seed(index)
 
-case_to_do=read.csv(paste0('/home/hc654/Unified/final_analysis/Sim_case_to_do_',weight,'_',expo1,expo2,'_R.csv'))[,2]
+case_to_do=read.csv(paste0('/home/hc654/NetworkExperiment/2_simulation_s/Sim_case_to_do_',expo1,expo2,'.csv'))[,2]
 index=case_to_do[index]
 #simulation parameters
 nsim=1
@@ -22,7 +22,6 @@ time_start=Sys.time()
 
 
 #initial membership informations
-
 #drop cluster 7, 12 and 29, exposure mapping not defined
 #comp_list=1:31
 #comp_list=comp_list[-c(7,12,29)] #no exposure mapping for these two  
@@ -82,14 +81,14 @@ if (expo1 == 7 | expo1 == 12 | expo2 ==7 | expo2==12){
 }
 
 ###read from some input files
-
 pi0 = fo_vec[(1:length(fo_vec))%%2==1]
 pi1 = fo_vec[(1:length(fo_vec))%%2==0]
 
+######################################################
+#EXTRACT SUBJECTS OF INTEREST#########################
+######################################################
 ##divide into components####
 memberships_t=net %v% 'membership'
-
-
 
 #extract subjects of interest
 subjects_t = (1:pol_size)[id_t %in% id_list]
@@ -98,48 +97,151 @@ subjects_memberships_t=memberships_t[id_t %in% id_list]
 #sort subjects according to component index
 subjects_t=subjects_t[order(subjects_memberships_t)]
 
+
 ######################################################
-#create dictionary for group belongings###############
+#CREATE DICTIONARY FOR GROUP BELONGINGS###############
 ######################################################
 
 group_index = cumsum(table(subjects_memberships_t))
 dict_group=matrix(0,length(group_index),5)
 dict_group[,1]=names(group_index)
-dict_group[,2]= c(0,group_index[1:(length(group_index)-1)])+1
+dict_group[,2]= c(0,group_index[(1:(length(group_index))-1)])+1
 dict_group[,3]= group_index
-dict_group[,4]=c(0,2*group_index[1:(length(group_index)-1)])+1
+dict_group[,4]=c(0,2*group_index[(1:(length(group_index))-1)])+1
 dict_group[,5]= group_index*2
 dict_group<- matrix(as.numeric(dict_group),   ncol = ncol(dict_group))
 
+###########################################################################################
+#SANITY CHECK: MAKE SURE THE ORDERING FOR FO AND SO MATRICES ARE CONSISTENT################
+###########################################################################################
+
+print('Checking inconsisntey in id orderings of foso probabilities (no error msg is good)')
 
 
+compare1=compute_FOSO_all_components_sanity_check(net,expo1,expo2 ,id_list,option='Stratified')
+for (i in 1:nrow(dict_group)){
+  
+  
+  #network index
+  m = dict_group[i,1]
+  
+  #for those subjects who are in group m, what are their id?
+  compare2_temp = id_t[subjects_t[dict_group[i,2]:dict_group[i,3]]]
+  
+  compare1_temp = compare1[[m]]  
+  
+  temp = (compare1_temp)==(compare2_temp)
+  #if there is any inequality !temp will contain a true and this prompts an error msg
+  if (any(!temp)==TRUE ){
+    print(paste0('Inconsistency in network component m:', m))
+  }
+  
+}
 
-#prepare y and x informations, in the order of group beloings
-Y=Y_impute[match(id_t,Y_impute[,1]),c(1,expo1+1,expo2+1)]
-#Y_all=Y_all[match(id_t,Y_all[,1]),]
-#Y_all=Y_sim2[match(id_t,Y_sim2[,1]),]
-Y_all=Y[subjects_t,]
+#################################################################
+####SORT OUTCOMES################################################
+#################################################################
+#the outcomes are sorted according to the orderings of subjects_t
+
+Y=matrix(0,0,3)
+for (i in 1:nrow(dict_group)){
+  
+  #network index
+  m = dict_group[i,1]
+  
+  #for those subjects who are in group m, what are their id?
+  id_temp = id_t[subjects_t[dict_group[i,2]:dict_group[i,3]]]
+  
+  
+  Y_temp = Y_impute[match(id_temp,Y_impute[,1]),c(1,expo1+1,expo2+1)]
+  
+  Y = rbind(Y,Y_temp)
+  
+}
+
+
 #Y=Y[subjects_t,]
 #Y=Y_all[,c(1,2,3)]
 #weights_random = runif(subject_size)
-y0_imp=Y_impute[,2] #control
-y1_imp=Y_impute[,3] #treated
+y0=Y[,2] #control
+y1=Y[,3] #treated
 #y0=y0_opt * (weights_random <= weight) + y0_imp * (weights_random > weight) 
 #y1=y1_opt * (weights_random <= weight) + y1_imp * (weights_random > weight) 
-#Y_all=cbind(y0,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1,y1)
 
-#covariates
-x=all_info2[match(id_t,all_info2$id),]
-x=x[subjects_t,]
-subject_size=length(subjects_t)
-#demean X
-#pre-treatment covarates and demeaning
-x=x[,c('male','age','agpop','literacy','ricearea_2010','risk_averse','disaster_prob')] 
-for (i in 1:ncol(x)){
+############################################################################
+####SANITY CHECK AGAIN: MAKE THE OUTCOMES AND FOSO ARE ALIGNED##############
+############################################################################
+
+print('Checking nnconsisntey in id orderings of outcomes (no error msg is good)')
+
+for (i in 1:nrow(dict_group)){
+  
+  
+  #network index
+  m = dict_group[i,1]
+  
+  #for those subjects who are in group m, what are their id?
+  compare3_temp =Y[(dict_group[i,2]:dict_group[i,3]),1]
+  
+  
+  compare1_temp = compare1[[m]]  
+  temp = (compare1_temp)==(compare3_temp)
+  
+  #if there is any inequality !temp will contain a true and this prompts an error msg
+  if (any(!temp)==TRUE ){
+    
+    print(paste0('Inconsistency in network component m:', m))
+  }
+  
+}
+
+
+
+#################################################################
+#######COVARIATES################################################
+#################################################################
+
+X=all_info2[match(id_t,all_info2$id),]
+X=X[,c('id','male','age','agpop','literacy','ricearea_2010','risk_averse','disaster_prob')] 
+x=c()
+for (i in 1:nrow(dict_group)){
+  
+  #network index
+  m = dict_group[i,1]
+  
+  #for those subjects who are in group m, what are their id?
+  id_temp = id_t[subjects_t[dict_group[i,2]:dict_group[i,3]]]
+  
+  
+  X_temp = X[match(id_temp,X[,1]),]
+  
+  x = rbind(x,X_temp)
+  
+}
+
+
+for (i in 2:ncol(x)){
   x[,i]=(x[,i]-mean(x[,i]))/sd(x[,i])
 }
 x=as.matrix(x)
 
+############################################################################
+####SANITY CHECK AGAIN: MAKE THE OUTCOMES AND COVARATES ALIGNED##############
+############################################################################
+
+print('Checking nnconsisntey in id orderings of x (no error msg is good)')
+temp = (Y[,1]==x[,1])
+
+if (any(!temp)==TRUE ){
+  
+  print('Inconsistency in between outcomes and covariates')
+}
+
+x=x[,2:ncol(x)]
+
+#################################################################
+#######FRIENDSHIP################################################
+#################################################################
 
 #friendship information
 friends=matrix(FALSE,nrow=pol_size,ncol=5)
@@ -152,10 +254,17 @@ for (i in 1:pol_size){
 }
 
 
+
+
+#################################################################
+#######SIMULATION################################################
+#################################################################
+
+
 for (i in 1:nsim){
   
   
-  result=SIM_ONERUN_IMPUTED_AUG20_AS2(status,pol_size,prob,y1,y0,pi1,pi0,Y_all,index,expo1,expo2,option='Stratified',x)
+  result=SIM_ONERUN_IMPUTED_AUG20_AS2(status,pol_size,prob,y1,y0,pi1,pi0,index,expo1,expo2,option='Stratified',x,subjects_t=subjects_t,so_AS2=so_AS2)
   
   est_sim=result[[1]]
   var_sim=result[[2]]
@@ -171,7 +280,7 @@ output=list(est_sim,var_sim,var_sim2)
 
 print(output)
 
-file_name=paste0('/home/hc654/palmer_scratch/final_analysis_Ds_' ,expo1,expo2,'_AS2','/',weight,'_',expo1,expo2,'_Sim_',index,'_Oct22.Rdata')
+file_name=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/simulation_output/',expo1,'_',expo2,'_Sim_',index,'.Rdata')
 #file_name2=paste0('/home/hc654/palmer_scratch/final_analysis_simulation/',weight,'_',expo1,expo2,'_SimSampleSize_',index,'.Rdata')
 save(output,file=file_name)
 

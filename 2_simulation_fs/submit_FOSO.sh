@@ -7,7 +7,7 @@
 #SBATCH --mail-user=haoge.chang@yale.edu
 #SBATCH --partition=scavenge
 #SBATCH --time=24:00:00
-#SBATCH --array=1
+#SBATCH --array=1-300
 #SBATCH --requeue
 echo "SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 echo "SLURM_ARRAY_JOB_ID: " $SLURM_ARRAY_JOB_ID
@@ -16,7 +16,7 @@ module load miniconda
 conda deactivate
 conda activate network_experiment
 
-cd "home/hc654/Cai(2015)/2_simulation_fs"
+cd "home/hc654/NetworkExperiment/2_simulation_fs"
 #module load R/3.6.1-foss-2018b-X11-20180604
 
-Rscript --vanilla compute_FOSO_all_clusters.R 1 4 $SLURM_ARRAY_TASK_ID 
+Rscript --vanilla 0_compute_FOSO_all_clusters.R 1 2 $SLURM_ARRAY_TASK_ID 
