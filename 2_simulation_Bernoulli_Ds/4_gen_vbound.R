@@ -12,12 +12,12 @@ source('0_header.R')
 input= commandArgs(trailingOnly=TRUE)
 expo1=as.numeric(input[1])
 expo2=as.numeric(input[2])
-
+case=as.numeric(input[3])
 
 ##################################
 #import foso information##########
 ##################################
-foso_file=paste0('/home/hc654/palmer_scratch/final_analysis_Bernoulli/','Bernoulli_',expo1,expo2,'_D.Rdata')
+foso_file=paste0('/home/hc654/palmer_scratch/Bernoulli_compareDs/',case,'_Bernoulli_',expo1,expo2,'_D.Rdata')
 load(foso_file)
 fo=mean_pre
 so=cov_pre
@@ -140,5 +140,5 @@ for (i in 1:nrow(dict_group)){
 ######################################################
 #CREATE OUTPUT########################################
 ######################################################
-so_bound_file=paste0('/home/hc654/palmer_scratch/final_analysis_Bernoulli/','Bernoulli_',expo1,expo2,'_Dbound.Rdata')
+so_bound_file=paste0('/home/hc654/palmer_scratch/Bernoulli_compareDs/',case,'_Bernoulli_',expo1,expo2,'_Dbound.Rdata')
 save(so_bound,file=so_bound_file)

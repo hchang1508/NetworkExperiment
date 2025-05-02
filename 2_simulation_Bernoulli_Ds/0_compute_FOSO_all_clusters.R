@@ -4,7 +4,8 @@ input= commandArgs(trailingOnly=TRUE)
 
 expo1=as.numeric(input[1])
 expo2=as.numeric(input[2])
-case_to_do=read.csv(paste0('/home/hc654/NetworkExperiment/2_simulation_Bernoulli/case_to_do_b',expo1,expo2,'.csv'))
+prob_cases= as.integer(input[4])
+case_to_do=read.csv(paste0('/home/hc654/NetworkExperiment/2_simulation_Bernoulli_Ds/case_to_do_b', prob_cases, '_',expo1,expo2,'.csv'))
 
 print(input)
 case_to_do=case_to_do[,2]
@@ -17,7 +18,6 @@ option='Bernoulli'
 #####Different assignment probabilities#############
 ####################################################
 
-prob_cases= as.integer(input[4])
 
 if (prob_cases==1){
   prob=rep(0.25,4)

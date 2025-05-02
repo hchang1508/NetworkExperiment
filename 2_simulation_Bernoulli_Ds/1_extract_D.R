@@ -4,13 +4,14 @@ input= commandArgs(trailingOnly=TRUE)
 
 expo1=as.numeric(input[1])
 expo2=as.numeric(input[2])
+case=as.numeric(input[3])
 
 
-setwd('/home/hc654/palmer_scratch/final_analysis_Bernoulli/')
+setwd('/home/hc654/palmer_scratch/Bernoulli_compareDs/')
 
 files=list.files()
 #pattern=paste0('Stratified',expo1,'_',expo2,'_','FOSO*')
-pattern=paste0('Bernoulli_nat_',expo1,'_',expo2,'_','FOSO*')
+pattern=paste0(case,'_Bernoulli_',expo1,'_',expo2,'_','FOSO*')
 #pattern=paste0('Bernoulli_nat_',expo1,'_',expo2,'_','FOSO*')
 temp=files[grep(pattern,files )]
 
@@ -46,5 +47,5 @@ for (i in 2:length(temp)){
   n_old=n_old + 10000
 }
 
-name=paste0('Bernoulli_',expo1,expo2,'_D.Rdata')
+name=paste0(case,'_Bernoulli_',expo1,expo2,'_D.Rdata')
 save(mean_pre,cov_pre,file=name)

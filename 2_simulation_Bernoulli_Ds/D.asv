@@ -1,9 +1,9 @@
 %% 12
-Dtemp=readtable('/home/hc654/palmer_scratch/final_analysis_Ds/Stratified_nat_12_D.csv');
+Dtemp=readtable('/home/hc654/palmer_scratch/Bernoulli_compareDs/2_Bernoulli_34_D.csv');
 Dtemp=table2array(Dtemp(:,2:9019));
 
 %
-p=readtable('/home/hc654/palmer_scratch/final_analysis_Ds/Stratified_nat_12_p.csv');
+p=readtable('/home/hc654/palmer_scratch/Bernoulli_compareDs/2_Bernoulli_34_p.csv');
 p=table2array(p(:,2));
 
 %
@@ -53,7 +53,7 @@ p=table2array(p(:,2));
 Dmat = diag(1./p) * Dtemp * diag(1./p);
 
 %
-[eigen_vec16,eigen_value16]=eigs(Dmat,1);
+[eigen_vec15,eigen_value15]=eigs(Dmat,1);
 
 %% 17
 
@@ -68,7 +68,7 @@ p=table2array(p(:,2));
 Dmat = diag(1./p) * Dtemp * diag(1./p);
 
 %
-[eigen_vec17,eigen_value17]=eigs(Dmat,1);
+[eigen_vec15,eigen_value15]=eigs(Dmat,1);
 
 
 

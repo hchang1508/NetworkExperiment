@@ -7,7 +7,7 @@ library(statnet)
 #set working path
 root = '/home/hc654/NetworkExperiment/'
 
-working_path=paste0(root,'2_simulation_Bernoulli/')
+working_path=paste0(root,'2_simulation_Bernoulli_Ds/')
 data_path=paste0(root,'FinalData/net_complete_natvillage.RData')
 
 
