@@ -35,6 +35,13 @@ temp5_36=files[grep('5_Bernoulli_3_6_FOSO*',files )]
 temp5_45=files[grep('5_Bernoulli_4_5_FOSO*',files )]
 temp5_46=files[grep('5_Bernoulli_4_6_FOSO*',files )]
 
+temp6_34=files[grep('6_Bernoulli_3_4_FOSO*',files )]
+temp6_35=files[grep('6_Bernoulli_3_5_FOSO*',files )]
+temp6_36=files[grep('6_Bernoulli_3_6_FOSO*',files )]
+temp6_45=files[grep('6_Bernoulli_4_5_FOSO*',files )]
+temp6_46=files[grep('6_Bernoulli_4_6_FOSO*',files )]
+
+
 
 #########################################################
 ########Generate Todo List###############################
@@ -164,6 +171,26 @@ case_to_do_5_46=setdiff(1:10000,as.numeric(case_to_do_5_46))
 write.csv(case_to_do_5_46,'case_to_do_b5_46.csv')
 
 
+case_to_do_6_34=gsub('6_Bernoulli_3_4_FOSO_','',temp6_34)
+case_to_do_6_34=gsub('.Rdata','',case_to_do_6_34)
+case_to_do_6_34=setdiff(1:10000,as.numeric(case_to_do_6_34))
+write.csv(case_to_do_6_34,'case_to_do_b6_34.csv')
+case_to_do_6_35=gsub('6_Bernoulli_3_5_FOSO_','',temp6_35)
+case_to_do_6_35=gsub('.Rdata','',case_to_do_6_35)
+case_to_do_6_35=setdiff(1:10000,as.numeric(case_to_do_6_35))
+write.csv(case_to_do_6_35,'case_to_do_b6_35.csv')
+case_to_do_6_36=gsub('6_Bernoulli_3_6_FOSO_','',temp6_36)
+case_to_do_6_36=gsub('.Rdata','',case_to_do_6_36)
+case_to_do_6_36=setdiff(1:10000,as.numeric(case_to_do_6_36))
+write.csv(case_to_do_5_36,'case_to_do_b5_36.csv')
+case_to_do_6_45=gsub('6_Bernoulli_4_5_FOSO_','',temp6_45)
+case_to_do_6_45=gsub('.Rdata','',case_to_do_6_45)
+case_to_do_6_45=setdiff(1:10000,as.numeric(case_to_do_6_45))
+write.csv(case_to_do_6_45,'case_to_do_b6_45.csv')
+case_to_do_6_46=gsub('6_Bernoulli_4_6_FOSO_','',temp6_46)
+case_to_do_6_46=gsub('.Rdata','',case_to_do_6_46)
+case_to_do_6_46=setdiff(1:10000,as.numeric(case_to_do_6_46))
+write.csv(case_to_do_6_46,'case_to_do_b6_46.csv')
 
 
 

@@ -19,5 +19,5 @@ conda activate network_experiment
 cd "/home/hc654/NetworkExperiment/2_simulation_Bernoulli_Ds"
 #module load R/3.6.1-foss-2018b-X11-20180604
 
-#Rscript --vanilla 1_extract_D.R 4 5 3 
-Rscript --vanilla 4_gen_vbound.R 4 5 3
+Rscript --vanilla 1_extract_D.R 3 5 6 
+Rscript --vanilla 4_gen_vbound.R 3 5 6
