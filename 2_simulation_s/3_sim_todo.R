@@ -12,6 +12,12 @@ temp15=files[grep('Stratified_nat_1_5_FOSO*',files )]
 temp16=files[grep('Stratified_nat_1_6_FOSO*',files )]
 temp17=files[grep('Stratified_nat_1_7_FOSO*',files )]
 
+temp34=files[grep('Stratified_nat_3_4_FOSO*',files )]
+temp35=files[grep('Stratified_nat_3_5_FOSO*',files )]
+temp36=files[grep('Stratified_nat_3_6_FOSO*',files )]
+temp45=files[grep('Stratified_nat_4_5_FOSO*',files )]
+temp46=files[grep('Stratified_nat_4_6_FOSO*',files )]
+
 #########################################################
 ########Generate Todo List###############################
 #########################################################
@@ -48,6 +54,30 @@ case_to_do17=gsub('.Rdata','',case_to_do17)
 case_to_do17=setdiff(1:10000,as.numeric(case_to_do17))
 write.csv(case_to_do17,'case_to_do_nat17.csv')
 
+case_to_do34=gsub('Stratified_nat_3_4_FOSO_','',temp34)
+case_to_do34=gsub('.Rdata','',case_to_do34)
+case_to_do34=setdiff(1:10000,as.numeric(case_to_do34))
+write.csv(case_to_do34,'case_to_do_nat34.csv')
+
+case_to_do35=gsub('Stratified_nat_3_5_FOSO_','',temp35)
+case_to_do35=gsub('.Rdata','',case_to_do35)
+case_to_do35=setdiff(1:10000,as.numeric(case_to_do35))
+write.csv(case_to_do35,'case_to_do_nat35.csv')
+
+case_to_do36=gsub('Stratified_nat_3_6_FOSO_','',temp36)
+case_to_do36=gsub('.Rdata','',case_to_do36)
+case_to_do36=setdiff(1:10000,as.numeric(case_to_do36))
+write.csv(case_to_do36,'case_to_do_nat36.csv')
+
+case_to_do45=gsub('Stratified_nat_4_5_FOSO_','',temp45)
+case_to_do45=gsub('.Rdata','',case_to_do45)
+case_to_do45=setdiff(1:10000,as.numeric(case_to_do45))
+write.csv(case_to_do45,'case_to_do_nat45.csv')
+
+case_to_do46=gsub('Stratified_nat_4_6_FOSO_','',temp46)
+case_to_do46=gsub('.Rdata','',case_to_do46)
+case_to_do46=setdiff(1:10000,as.numeric(case_to_do46))
+write.csv(case_to_do46,'case_to_do_nat46.csv')
 
 #########################################################
 ########Generate Simulation Files########################
