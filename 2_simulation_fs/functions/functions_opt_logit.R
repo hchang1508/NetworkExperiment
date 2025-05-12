@@ -165,92 +165,94 @@ Optimal_Logit_Est_C = function(y,d1,d0,x,pi0,pi1,Maxiter=1,Optim=FALSE,Option='B
   XX=auxiliary_matrices[[2]]
   
   
-  #random starts
-  Max_out_iter=1000
-  terminate=0
-  out_iter=1
-  while (terminate==0 & out_iter<Max_out_iter){
+  # #random starts
+  # Max_out_iter=1000
+  # terminate=0
+  # out_iter=1
+  # while (terminate==0 & out_iter<Max_out_iter){
+  # 
+  #   print(paste0('In outer loop', out_iter))
+  #   terminate=1
+  #   iter=1
+  #   tol=1e-4
+  #   diff=1
+  #   if (out_iter==1){
+  #     beta_old=rep(0,9)
+  #   }else{
+  #     beta_old=rnorm(9)*0.1
+  #     
+  #   }
+  #   weight=0.1
+  #   foc=10
+  #   print(beta_old)
+  #   loss_new=10
+  #   ind=0
+  #   while (foc>tol & iter<Maxiter & diff>tol){
+  #     
+  #     loss_old=Optimal_Logit_Z_Criterion(beta_old,y1_temp,y0_temp,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
+  #     ind=0
+  #     weight=0.1
+  #     iter=0
+  #     while (ind==0){
+  #       
+  #       updates=update(beta_old,weight,y1,y0,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
+  #     
+  #       beta_new=updates[[1]]
+  #       foc=sum(updates[[2]]^2)
+  #     
+  #       beta_new=as.matrix(beta_new)
+  #       diff= sqrt(sum((beta_new-beta_old)^2))
+  #       print('iter')
+  #       print(iter)
+  #       print('foc')
+  #       print(foc)
+  #       print(foc>tol)
+  #       print('diff')
+  #       print(diff)
+  #       print(beta_new)
+  #       loss_new=Optimal_Logit_Z_Criterion(beta_new,y1_temp,y0_temp,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
+  # 
+  #       if (loss_new>loss_old){
+  #         weight = weight/2
+  #         print('weights halved')
+  #         print('backtracking')
+  #       
+  #       }else{
+  #         ind =1
+  #       }
+  #       iter=iter+1
+  #     }
+  #       if (max(abs(beta_old)>(3+out_iter*0.1))){
+  #         print('Exceed search buondary')
+  #         terminate=0
+  #         break
+  #     }
+  #       beta_old=beta_new
+  #       loss_old=loss_new 
+  #   }
+  # 
+  #     out_iter = out_iter + 1
+  # }
+  # 
+  # if (out_iter==Max_out_iter){
+  #   stop()
+  # }  
+  # if (max(abs(beta_old)>10)){
+  #   stop()
+  # }
+  # if (ind==0){
+  #   stop()
+  # }
+  # if (iter==Maxiter){
+  #   stop()
+  # }
+  # print(paste0('iter is',iter))
+  # print('newton')
+  # print(beta_old)
+  # 
+  # optimal_b=beta_old
   
-    print(paste0('In outer loop', out_iter))
-    terminate=1
-    iter=1
-    tol=1e-4
-    diff=1
-    if (out_iter==1){
-      beta_old=rep(0,9)
-    }else{
-      beta_old=rnorm(9)*0.1
-      
-    }
-    weight=0.1
-    foc=10
-    print(beta_old)
-    loss_new=10
-    ind=0
-    while (foc>tol & iter<Maxiter & diff>tol){
-      
-      loss_old=Optimal_Logit_Z_Criterion(beta_old,y1_temp,y0_temp,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
-      ind=0
-      weight=0.1
-      iter=0
-      while (ind==0){
-      updates=update(beta_old,weight,y1,y0,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
-      
-      beta_new=updates[[1]]
-      foc=sum(updates[[2]]^2)
-      
-      beta_new=as.matrix(beta_new)
-      diff= sqrt(sum((beta_new-beta_old)^2))
-      print('iter')
-      print(iter)
-      print('foc')
-      print(foc)
-      print(foc>tol)
-      print('diff')
-      print(diff)
-      print(beta_new)
-      loss_new=Optimal_Logit_Z_Criterion(beta_new,y1_temp,y0_temp,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
-
-      if (loss_new>loss_old){
-        weight = weight/2
-        print('weights halved')
-        print('backtracking')
-        
-      }else{
-        ind =1
-      }
-      iter=iter+1
-      }
-      if (max(abs(beta_old)>(3+out_iter*0.1))){
-        print('Exceed searcch buondary')
-        terminate=0
-        break
-      }
-      beta_old=beta_new
-      loss_old=loss_new 
-    }
-
-    out_iter = out_iter + 1
-  }
-  
-  if (out_iter==Max_out_iter){
-    stop()
-  }  
-  if (max(abs(beta_old)>10)){
-    stop()
-  }
-  if (ind==0){
-    stop()
-  }
-  if (iter==Maxiter){
-    stop()
-  }
-  print(paste0('iter is',iter))
-  print('newton')
-  print(beta_old)
-  
-  optimal_b=beta_old
-  
+  beta_old = rnorm(ncol(treated_covar))
   min_val=Optimal_Logit_Z_Criterion(beta_old,y1_temp,y0_temp,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)
   #If Optim==TRUE, search for local optimum
   if (Optim==TRUE & min_val>1e-4){
@@ -868,7 +870,7 @@ update=function(beta,weighting,y1,y0,d1,d0,pi1,pi0,treated_covar,control_covar,X
     H[j,]= (update_inner(beta+diff,weighting,y1,y0,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX)-update_inner(beta-diff,weighting,y1,y0,d1,d0,pi1,pi0,treated_covar,control_covar,X,XX))/0.005*2
   }
   print('Hessian')
- print(eigen(H)$values)}
+  print(eigen(H)$values)}
   
   beta_new = beta -foc * weighting
   
@@ -1428,7 +1430,6 @@ Optimal_Logit_Z_Criterion=function(beta,y1,y0,d1,d0,pi1,pi0,treated_covar,contro
   Nablaf_control=sweep(control_covar,1,control_impute*(1-control_impute)/normalization_impute,'*')
   
   
-  
   Nablaf=matrix(0,nrow=2*subject_size,ncol=ncol(Nablaf_treat))
   Nablaf[2*(1:subject_size)-1,]=Nablaf_control
   Nablaf[2*(1:subject_size),]=Nablaf_treat
@@ -1451,7 +1452,7 @@ Optimal_Logit_Z_Criterion=function(beta,y1,y0,d1,d0,pi1,pi0,treated_covar,contro
     
   }  
   Z_criterion=Z_criterion1 + Z_criterion2
-  criterion=sum(Z_criterion^2)
+  criterion=sum(Z_criterion^2) + 1/subject_size*sum(beta^2) #add a penalty
   print(criterion)
   return(criterion)
   
@@ -1888,7 +1889,7 @@ Optimal_Logit_B=function(y1,y0,x,Maxiter=1,Optim=FALSE){
 
 logistic=function(u){
   
-  return(exp(u)/(1+exp(u)))
+  return(1/(1+exp(-1*u)))
 }
 
 second_order_matrix = function(treated_covar,control_covar){

@@ -2,7 +2,7 @@
 ##header
 library(RSpectra)
 
-working_path='/home/hc654/palmer_scratch/final_analysis_Ds//'
+working_path='/home/hc654/palmer_scratch/final_analysis_D_fs/'
 setwd(working_path)
 
 input= commandArgs(trailingOnly=TRUE)
@@ -10,15 +10,15 @@ expo1=as.numeric(input[1])
 expo2=as.numeric(input[2])
 
 
-foso_file=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/Stratified_nat_',expo1,expo2,'_D.Rdata')
+foso_file=paste0('/home/hc654/palmer_scratch/final_analysis_D_fs/Stratified_fs_',expo1,expo2,'_D.Rdata')
 load(foso_file)
 fo=mean_pre
 so=cov_pre
 fo=unlist(fo)
 nrow=length(fo)
 
-data_path_D=paste0(working_path,'Stratified_nat_',expo1,expo2,'_D.csv')
-data_path_p=paste0(working_path,'Stratified_nat_',expo1,expo2,'_p.csv')
+data_path_D=paste0(working_path,'Stratified_fs_',expo1,expo2,'_D.csv')
+data_path_p=paste0(working_path,'Stratified_fs_',expo1,expo2,'_p.csv')
 
 
 D_output=matrix(0,nrow,nrow)

@@ -363,7 +363,7 @@ extract_result_imputed = function(expo1,expo2,y1,y0,fo,so,so_AS2,dict_group,subj
   
 }
 
-load_data_imputed=function(expo1,expo2,case){
+load_data_imputed=function(expo1,expo2){
   
   nsim=1
   expo1=expo1
@@ -376,12 +376,12 @@ load_data_imputed=function(expo1,expo2,case){
   prob=c(0.25,0.25,0.25,0.25)
   
   
-  foso_file=paste0('/home/hc654/palmer_scratch/Bernoulli_compareDs/',case,'_Bernoulli_',expo1,expo2,'_D.Rdata')
+  foso_file=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/','Stratified_nat_',expo1,expo2,'_D.Rdata')
   load(foso_file)
   fo<<-mean_pre
   so<<-cov_pre
   
-  so_bound_file=  foso_file=paste0('/home/hc654/palmer_scratch/Bernoulli_compareDs/',case,'_Bernoulli_',expo1,expo2,'_Dbound.Rdata')
+  so_bound_file=paste0('/home/hc654/palmer_scratch/final_analysis_Ds/','Stratified_nat_',expo1,expo2,'_Dbound.Rdata')
   load(so_bound_file)
   so_AS2<<-so_bound
   fo_vec<<-unlist(fo)
@@ -457,7 +457,7 @@ load_data_imputed=function(expo1,expo2,case){
   print('Checking inconsisntey in id orderings of foso probabilities (no error msg is good)')
   
   
-  compare1=compute_FOSO_all_components_sanity_check(net,expo1,expo2 ,id_list,option='Bernoulli')
+  compare1=compute_FOSO_all_components_sanity_check(net,expo1,expo2 ,id_list,option='Stratified')
   for (i in 1:nrow(dict_group)){
     
     #network index

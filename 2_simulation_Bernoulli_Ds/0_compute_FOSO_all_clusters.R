@@ -30,7 +30,7 @@ if (prob_cases==1){
 }else if (prob_cases==5){
   prob=c(1/8,1/8,6/16,6/16)
 }else if (prob_cases==6){
-  prob=c(1/9,2/6,4/12,4/12)
+  prob=c(1/9,2/9,4/12,4/12)
 }
 save_path=paste0('/home/hc654/palmer_scratch/Bernoulli_compareDs/' ,prob_cases,'_Bernoulli_',expo1,'_',expo2,'_FOSO_',simulation_index,'.Rdata')
 

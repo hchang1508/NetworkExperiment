@@ -236,14 +236,7 @@ FOSO_nppl = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,
 
 FOSO = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,option='Bernoulli'){
   
-  #This function depends on the following functions:
-  # 1. WELFORD_ONLINE: for online estimation of mean vector and covariance matrix.
-  # 2. ASSIGNMENT: treatment assignment for the village-level stratified design.
-  # 3. FRIEND_TREATED: compute number of friends treated.
-  # 4. INDIVIDUAL_EXPOSURE: caculate individuals exposure mapping.
-  
-  
-  
+
   # This function calculate First Order and Second Order Assignment Probabilities 
   # for a network.
   # 
@@ -276,8 +269,8 @@ FOSO = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,optio
   #define experient targets
   network_subjects = net %v% 'vertex.names'
   subjects = (1:pol_size)[network_subjects %in% id_list]
-  
   subject_size = length(subjects)
+  
   #output 
   mean_pre=rep(0,subject_size*pairs )
   cov_pre=matrix(0,subject_size*pairs ,subject_size*pairs )  
@@ -319,14 +312,14 @@ FOSO = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,optio
     exposure[,5]=realized_assignment==4 #second round intense
 
     num_friend_treated = apply(friends,1,FRIEND_TREATED,realized_assignment)
-    exposure[,6]=num_friend_treated[1,] #number of friends treated in first round simple session
-    exposure[,7]=num_friend_treated[2,] #number of friends treated in first round intensive session
+    exposure[,6]=num_friend_treated[1,] #number of friends treated in first round
+    exposure[,7]=num_friend_treated[2,] #number of friends treated in second round
     
-    #extract exposures for the units of interest
+    
     exposure_temp = exposure[subjects,2:7]
     
     #please double check every time 
-
+    
     if (is.null(dim(exposure_temp))){
       state_temp=individual_exposure(exposure_temp)
       state_temp = state_temp[c(expo1,expo2)]
@@ -347,6 +340,25 @@ FOSO = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,optio
   }
 
   return(result)
+  
+}
+FOSO_sanity_check = function(net, num_status,prob,num_mappings,nrep,id_list,expo1,expo2,option='Bernoulli'){
+  
+  
+  # This function returns the list (order) of subjects 
+  
+  #calculate network size
+  pol_size = network.size(net)
+
+  #define experient targets
+  network_subjects = net %v% 'vertex.names'
+  subjects = (1:pol_size)[network_subjects %in% id_list]
+  subject_size = length(subjects)
+  
+  #output the list of subjects in the network
+  output_list = network_subjects[subjects]
+  
+  return(output_list)
   
 }
 
