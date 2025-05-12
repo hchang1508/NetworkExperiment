@@ -6,7 +6,7 @@ input= commandArgs(trailingOnly=TRUE)
 index=as.numeric(input[1])
 expo1=as.numeric(input[2])
 expo2=as.numeric(input[3])
-weight=as.numeric(input[4])
+case=as.numeric(input[4])
 
 contrast=c(-1,1)
 

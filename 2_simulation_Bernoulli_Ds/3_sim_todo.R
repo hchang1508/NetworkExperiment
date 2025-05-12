@@ -195,4 +195,46 @@ write.csv(case_to_do_6_46,'case_to_do_b6_46.csv')
 
 
 
+#########################################################
+########Generate Simulation Files########################
+#########################################################
+setwd('/home/hc654/palmer_scratch/Bernoulli_compareDs/simulation_output/')
+files=list.files()
+temp4_34=files[grep('4_3_4_*',files )]
+temp4_35=files[grep('4_3_5_*',files )]
+temp4_36=files[grep('4_3_6_*',files )]
+temp4_45=files[grep('4_4_5_*',files )]
+temp4_46=files[grep('4_3_6_*',files )]
 
+#########################################################
+########Generate Todo List###############################
+#########################################################
+
+source('/home/hc654/NetworkExperiment/2_simulation_s/0_header.R')
+
+case_to_do_4_34=gsub('4_3_4_Sim_','',temp4_34)
+case_to_do_4_34=gsub('.Rdata','',case_to_do_4_34)
+case_to_do_4_34=setdiff(1:10000,as.numeric(case_to_do_4_34))
+write.csv(case_to_do_4_34,'Sim_to_do_b4_34.csv')
+
+case_to_do_4_35=gsub('4_3_5_Sim_','',temp4_35)
+case_to_do_4_35=gsub('.Rdata','',case_to_do_4_35)
+case_to_do_4_35=setdiff(1:10000,as.numeric(case_to_do_4_35))
+write.csv(case_to_do_4_35,'Sim_to_do_b4_35.csv')
+
+case_to_do_4_36=gsub('4_3_6_Sim_','',temp4_36)
+case_to_do_4_36=gsub('.Rdata','',case_to_do_4_36)
+case_to_do_4_36=setdiff(1:10000,as.numeric(case_to_do_4_36))
+write.csv(case_to_do_4_36,'Sim_to_do_b4_36.csv')
+
+case_to_do_4_45=gsub('4_4_5_Sim_','',temp4_45)
+case_to_do_4_45=gsub('.Rdata','',case_to_do_4_45)
+case_to_do_4_45=setdiff(1:10000,as.numeric(case_to_do_4_45))
+write.csv(case_to_do_4_45,'Sim_to_do_b4_45.csv')
+
+case_to_do_4_46=gsub('4_4_6_Sim_','',temp4_46)
+case_to_do_4_46=gsub('.Rdata','',case_to_do_4_46)
+case_to_do_4_46=setdiff(1:10000,as.numeric(case_to_do_4_46))
+write.csv(case_to_do_4_46,'Sim_to_do_b4_46.csv')
+
+#########################################################

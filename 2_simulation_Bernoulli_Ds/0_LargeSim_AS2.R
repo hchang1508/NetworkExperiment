@@ -6,14 +6,14 @@ input= commandArgs(trailingOnly=TRUE)
 index=as.numeric(input[1])
 expo1=as.numeric(input[2])
 expo2=as.numeric(input[3])
-weight=as.numeric(input[4])
+prob_cases=as.numeric(input[4])
 
 contrast=c(-1,1)
 
 #set random seed
 set.seed(index)
 
-case_to_do=read.csv(paste0('/home/hc654/NetworkExperiment/2_simulation_s/Sim_case_to_do_',expo1,expo2,'.csv'))[,2]
+case_to_do=read.csv(paste0('/home/hc654/NetworkExperiment/2_simulation_Bernoulli_Ds/Sim_',prob_cases,'_',expo1,'_',expo2,'.csv'))[,2]
 index=case_to_do[index]
 #simulation parameters
 nsim=1
@@ -27,7 +27,19 @@ time_start=Sys.time()
 #comp_list=comp_list[-c(7,12,29)] #no exposure mapping for these two  
 #comp_list=comp_list[-7]
 #net_t = get.inducedSubgraph(net,which(memberships %in% comp_list))
-prob=c(0.25,0.25,0.25,0.25)
+if (prob_cases==1){
+  prob=rep(0.25,4)
+}else if ( prob_cases ==2){
+  prob=c(1/5,1/5,3/10,3/10)
+}else if ( prob_cases ==3){
+  prob=c(1/6,1/6,4/12,4/12)
+}else if (prob_cases==4){
+  prob=c(1/7,1/7,5/14,5/14)
+}else if (prob_cases==5){
+  prob=c(1/8,1/8,6/16,6/16)
+}else if (prob_cases==6){
+  prob=c(1/9,2/9,4/12,4/12)
+}
 
 
 #Load treatment probability and FO design matrices
@@ -118,7 +130,7 @@ dict_group<- matrix(as.numeric(dict_group),   ncol = ncol(dict_group))
 print('Checking inconsisntey in id orderings of foso probabilities (no error msg is good)')
 
 
-compare1=compute_FOSO_all_components_sanity_check(net,expo1,expo2 ,id_list,option='Stratified')
+compare1=compute_FOSO_all_components_sanity_check(net,expo1,expo2 ,id_list,option='Bernoulli')
 for (i in 1:nrow(dict_group)){
   
   
@@ -280,7 +292,7 @@ temp = (1:subject_size) [which( (pi0<1e-4)| (pi1<1e-4)) ] #some units who are no
 for (i in 1:nsim){
   
   
-  result=SIM_ONERUN_IMPUTED_AUG20_AS2(status,pol_size,prob,y1,y0,pi1,pi0,index,expo1,expo2,option='Stratified',x,subjects_t=subjects_t,so_AS2=so_AS2)
+  result=SIM_ONERUN_IMPUTED_AUG20_AS2(status,pol_size,prob,y1,y0,pi1,pi0,index,expo1,expo2,option='Bernoulli',x,subjects_t=subjects_t,so_AS2=so_AS2)
   
   est_sim=result[[1]]
   var_sim=result[[2]]
